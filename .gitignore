@@ -1,0 +1,99 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist
+dist-ssr
+build
+coverage
+*.lcov
+
+# Vite
+.vite
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache
+.parcel-cache
+.nyc_output
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_*
+.pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+*.local
+*.tgz
+.pnp.*
+
+# Optional package managers
+.npm
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Framework leftovers (au cas où)
+.next
+.nuxt
+.svelte-kit
+out
+.temp
+.docusaurus
+.serverless/
+
+# Test / reports
+report.*.json
+
+# Runtime
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Bower / legacy
+bower_components
+jspm_packages
+
+# Optional REPL history
+.node_repl_history
+
+# Webpack / other bundlers
+.webpack/
+.fusebox/
+
+# DynamoDB local
+.dynamodb/
