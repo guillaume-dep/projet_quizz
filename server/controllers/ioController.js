@@ -66,7 +66,7 @@ export default class IOController {
 
         if (!gameManager) return;
 
-        if (!gameManager.isHost(socket.id)) { /* The socket is not the host */
+        if (!gameManager.isHost(socket.id)) {
             socket.emit("error", { message: "You are not the host !" });
             return;
         }
@@ -93,8 +93,9 @@ export default class IOController {
         this.#io.to(code).emit("submit_answers", result)
 
         if (gameManager.hasEveryPlayerAnswered()) {
+            setResultState()
             this.#io.to(code).emit("show_results", {
-                scores: gameManager.getScores(),
+                playerScore: gameManager.getScores(), /* [{name, score, domain} */
                 question: gameManager.getCurrentQuestion()
             })
         }

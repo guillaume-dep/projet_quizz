@@ -173,4 +173,14 @@ export default class GameManager {
         this.#game_state = GAME_STATE.RESULT;
     }
 
+    /* ----- Scores ----- */
+
+    getScores() {
+        return [...this.#players_map.values].map(player => ({
+            name: player.name,
+            score: player.score,
+            domain: player.domain
+        })).sort((a, b) => b.score - a.score)
+    }
+
 }
