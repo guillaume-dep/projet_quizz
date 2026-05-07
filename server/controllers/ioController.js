@@ -1,6 +1,6 @@
 import GameManager from "../gameManager.js"
 import { GAME_STATE } from "../utils/gameState.js"
-import { generateCode } from "../utils/utils.js"
+import generateCode from "../utils/utils.js"
 
 /**
  * IOController class to manage the game connections 
@@ -10,9 +10,9 @@ export default class IOController {
     #rooms
     #socket_to_room
 
-    constructor(io, rooms) {
+    constructor(io) {
         this.#io = io
-        this.#rooms = rooms /* Map<code, GameManager> */
+        this.#rooms = new Map() /* Map<code, GameManager> */
         this.#socket_to_room = new Map() /* Map<socket, code>*/
     }
 
@@ -39,6 +39,7 @@ export default class IOController {
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
         this.#rooms.set(code, gameManager)
+
         socket.join(code)
         this.#socket_to_room.set(socket.id, code);
 
