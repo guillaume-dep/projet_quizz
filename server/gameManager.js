@@ -23,6 +23,10 @@ export default class GameManager {
     /* ----- Getter - Setter ----- */
 
     get game_state() { return this.#game_state };
+    get players_map() { return this.#players_map };
+    get players() { return this.#players_map.values() };
+
+
     setHost(socket_id) { this.#host_id = socket_id };
 
     /**
