@@ -1,4 +1,5 @@
-import GameManager from "../gameManager"
+import GameManager from "../gameManager.js"
+import { generateCode } from "../utils/utils.js"
 
 /**
  * IOController class to manage the game connections 
@@ -13,12 +14,18 @@ export default class IOController {
     }
 
     registerSocket(socket) {
-        socket.on("create_game")
-        socket.on("join_game")
-        socket.on("start_game")
-        socket.on("submit_answer")
-        socket.on("request_next_question")
+        this.setupListeners(socket)
     }
+
+    setupListeners(socket) {
+        socket.on("create_game", (player_data) => this.handleCreateGame(socket, player_data))
+        socket.on("join_game", (player_data, code) => this.handleJoinGame(socket, player_data, code))
+        socket.on("start_game", (code) => this.handleStartGame(socket, code))
+        socket.on("submit_answer", (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
+        socket.on("request_next_question", (code) => this.handleNextQuestion(socket, code))
+    }
+
+    /* ----- Creation of the game ----- */
 
     handleCreateGame(socket, player_data) {
 
@@ -33,10 +40,15 @@ export default class IOController {
         socket.emit("game_created", { code }) /* To print out the code */
     }
 
+    /* ----- Player joining the game ----- */
+
     handleJoinGame(socket, player_data, code) {
-        const gameManager = this.#rooms.get(code);
-        if (!gameManager) { /* Code doesn't exist*/
-            socket.emit("error", { message: "Game not found ! Try another code." });
+        const gameManager = getGameOrEmitError(socket, code);
+
+        if (!gameManager) return;
+
+        if (!gameManager.canJoin()) {
+            socket.emit("error", { message: "Game already started ! Be aware next time." });
             return;
         }
 
@@ -44,20 +56,84 @@ export default class IOController {
         socket.join(code);
 
         /* Inform that a player joined */
-        this.io.to(code).emit("player_joined", { players: gameManager.players() });
+        this.#io.to(code).emit("player_joined", { players: gameManager.getPlayers() });
     }
 
-    handleStartGame() {
+    /* ----- Start the game ----- */
 
+    handleStartGame(socket, code) {
+        const gameManager = getGameOrEmitError(socket, code);
+
+        if (!gameManager) return;
+
+        if (!gameManager.isHost(socket.id)) { /* The socket is not the host */
+            socket.emit("error", { message: "You are not the host !" });
+            return;
+        }
+
+        gameManager.startGame(socket.id);
+        this.#io.to(code).emit("game_started");
+        this.#io.to(code).emit("new_question", gameManager.getCurrentQuestion());
     }
 
-    handleSubmitAnswer() {
+    /* ----- Submit an answer of a player ----- */
 
+    handleSubmitAnswer(socket, answerIndex, code) {
+        const gameManager = getGameOrEmitError(socket, code);
+
+        if (!gameManager) return;
+
+        const result = gameManager.submitAnswer(socket.id, answerIndex);
+
+        if (!result.valid) {
+            socket.emit("error", { message: "Invalid answer." });
+            return;
+        }
+
+        this.#io.to(code).emit("submit_answers", result)
+
+        if (gameManager.hasEveryPlayerAnswered()) {
+            this.#io.to(code).emit("show_results", {
+                scores: gameManager.getScores(),
+                question: gameManager.getCurrentQuestion()
+            })
+        }
     }
 
-    handleNextQuestion() {
+    /* ----- Emit the next question ----- */
 
+    handleNextQuestion(socket, code) {
+        const gameManager = getGameOrEmitError(socket, code);
+
+        if (!gameManager) return;
+
+        if (!gameManager.isHost(socket.id)) {
+            socket.emit("error", { message: "You are not the host !" });
+            return;
+        }
+
+        const question = gameManager.getNextQuestion();
+        if (!question) {
+            this.#io.to(code).emit("game_over", gameManager.getScores());
+            this.#rooms.delete(code);
+            return;
+        }
+
+        this.#io.to(code).emit("new_question", question);
     }
 
 
+    /* ----- Error handler ----- */
+
+    getGameOrEmitError(socket, code) {
+        const gameManager = this.#rooms.get(code);
+
+        if (!gameManager) {
+            socket.emit("error", { message: "Game not found ! Try another code." });
+            return null;
+        }
+        return gameManager;
+    }
+}
+    
 }
