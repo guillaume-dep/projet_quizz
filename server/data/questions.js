@@ -14,3 +14,5 @@ const questions = [
         coef: 1
     }
 ];
+
+export default questions;
