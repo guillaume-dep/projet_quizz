@@ -4,8 +4,7 @@ import Player from "./utils/player.js"
 import { GAME_STATE } from "./utils/gameState.js"
 
 /**
- * GameManager class to manage the actions of the client
- * It manages the actions according to the rules of the quizz game
+ * GameManager manages the state according to the rules of the quizz game
  */
 export default class GameManager {
     #game_state;
@@ -20,12 +19,19 @@ export default class GameManager {
         this.#current_question_index = 0;
     }
 
-    /* ----- Getter - Setter ----- */
+    /* ----- State ----- */
 
     get game_state() { return this.#game_state };
-    get players_map() { return this.#players_map };
-    get players() { return this.#players_map.values() };
 
+    /* ----- Players ----- */
+
+    getPlayers() {
+        return [...this.#players_map.values()].map(player => ({
+            name: player.name,
+            score: player.score,
+            domain: player.domain
+        }));
+    }
 
     setHost(socket_id) { this.#host_id = socket_id };
     isHost(socket_id) { return this.#host_id === socket_id }
@@ -41,6 +47,8 @@ export default class GameManager {
 
         this.#players_map.set(socket_id, new Player(name, player_domain))
     }
+
+    /* ----- Game ----- */
 
     /**
      * Start the game if the input comes from the host
@@ -77,7 +85,7 @@ export default class GameManager {
         this.#players_map.forEach(player => player.resetAnswered());
     }
 
-    /* ----- QUESTIONS ----- */
+    /* ----- Questions ----- */
 
     /**
      * @return {Object} question object
@@ -106,6 +114,7 @@ export default class GameManager {
             return null;
         }
 
+        this.resetAnsweredPlayers()
         this.#game_state = GAME_STATE.QUESTION;
 
         return this.getCurrentQuestion();
@@ -155,6 +164,13 @@ export default class GameManager {
      */
     canJoin() {
         return this.#game_state === GAME_STATE.LOBBY
+    }
+
+    /**
+     * Set the game state to RESULT
+     */
+    setResultState() {
+        this.#game_state = GAME_STATE.RESULT;
     }
 
 }
