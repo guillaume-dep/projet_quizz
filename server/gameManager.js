@@ -28,6 +28,7 @@ export default class GameManager {
 
 
     setHost(socket_id) { this.#host_id = socket_id };
+    isHost(socket_id) { return this.#host_id === socket_id }
 
     /**
      * Add a player to the map of players if not already in
@@ -145,6 +146,15 @@ export default class GameManager {
             correct: isCorrect,
             score: player.score
         }
+    }
+
+    /* ----- Connection ----- */
+
+    /**
+     * @return {boolean} true if the game can be joined else false
+     */
+    canJoin() {
+        return this.#game_state === GAME_STATE.LOBBY
     }
 
 }
