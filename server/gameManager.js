@@ -33,7 +33,7 @@ export default class GameManager {
         }));
     }
 
-    getPlayerInfo(socket_id) {
+    getPlayer(socket_id) {
         return this.#players_map.get(socket_id)
     }
 
