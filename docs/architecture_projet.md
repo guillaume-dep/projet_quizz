@@ -27,7 +27,7 @@ Annonces possibles du serveur :
 - `player_joined` : ajout du joueur dans la room associée au code | `joined`
 - `game_started` : début de la partie | `started`
 - `new_question` : envoie la nouvelle question | `question`
-- `show_results` : afficher les résultats à la fin du jeu | `results`
+- `show_results` : afficher les résultats à la fin d'une question | `results`
 - `game_over` : retirer les joueurs de la room | `over`
 
 ---
@@ -38,8 +38,8 @@ Annonces possibles du serveur :
 4. serveur envoie question
 5. joueurs répondent
 6. serveur calcule
-7. boucle
-8. serveur envoie résultats
+7. serveur envoie résultats
+8. boucle
 9. fin
 
 --- 
@@ -47,6 +47,7 @@ Annonces possibles du serveur :
 Points à améliorer :
 - `room` multiples
 - `LOCKED` routes
+- `Question` : ajout d'un objet pour créer des questions
 
 --- 
 
