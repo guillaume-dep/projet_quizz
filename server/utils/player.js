@@ -7,28 +7,28 @@ export default class Player {
     #domain
     #hasAnswered
 
-    constructor(name, score, domain, hasAnswered) {
+    constructor(name, domain) {
         this.#name = name;
-        this.#score = score;
+        this.#score = 0;
         this.#domain = domain;
-        this.hasAnswered = false;
+        this.#hasAnswered = false;
     }
 
     /* ----- Player ----- */
 
-    get name() {
-        return this.#name;
+    get name() { return this.#name; }
+    get score() { return this.#score; }
+    get domain() { return this.#domain; }
+
+    markAnswered() {
+        this.#hasAnswered = true;
     }
 
-    get score() {
-        return this.#score;
+    resetAnswered() {
+        this.#hasAnswered = false;
     }
 
-    get domain() {
-        return this.#domain;
-    }
-
-    get hasAnswered() {
+    hasAnswered() {
         return this.#hasAnswered;
     }
 
@@ -36,23 +36,22 @@ export default class Player {
      * Increment the score of a player
      * @param {Number} value to increment the score with
      */
-    incrementPlayerScore(value) {
-        this.score += value;
+    incrementScore(value) {
+        this.#score += value;
     }
 
     /**
      * Increment the score of a player according to a domain
      * @param {Number} value to increment the score with
-     * @param {string} domain the domain of the question
      * @param {Number} coef the coef of the question
-     * 
+     * @param {string} domain the domain of the question
      */
-    incrementPlayerScoreDomain(value, domain, coef) {
+    incrementScoreDomain(value, coef, domain) {
         if (this.domain === domain) {
-            this.incrementPlayerScore(value);
+            this.incrementScore(value);
             return;
         }
 
-        this.incrementPlayerScore(value * coef)
+        this.incrementScore(value * coef)
     }
 }
