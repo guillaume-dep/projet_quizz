@@ -21,7 +21,7 @@ export default class GameManager {
 
     /* ----- State ----- */
 
-    get game_state() { return this.#game_state };
+    getGameState() { return this.#game_state };
 
     /* ----- Players ----- */
 
@@ -33,8 +33,20 @@ export default class GameManager {
         }));
     }
 
-    removePlayers(socket_id) {
+    getPlayerInfo(socket_id) {
+        return this.#players_map.get(socket_id)
+    }
+
+    removePlayer(socket_id) {
         this.#players_map.delete(socket_id);
+    }
+
+    getNumberOfPlayers() {
+        return this.#players_map.size;
+    }
+
+    getPlayersMap() {
+        return this.#players_map;
     }
 
     setHost(socket_id) { this.#host_id = socket_id };
