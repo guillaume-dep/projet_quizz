@@ -109,6 +109,13 @@ export default class GameManager {
     /* ----- Submitting ----- */
 
     /**
+     * @return {boolean} true if every player has answered else false
+     */
+    hasEveryPlayerAnswered() {
+        return [...this.#players_map.values()].every(player => player.hasAnswered())
+    }
+
+    /**
      * Submit the answer of the player
      * @param {string} socket_id the socket_id of the player
      * @param {Number} answerIndex the index of the answer
