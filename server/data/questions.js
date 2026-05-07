@@ -1,8 +1,10 @@
+import { STUDY_DOMAIN } from "../utils/studyDomain";
+
 const questions = [
     {
         id: 0,
         text: "Quel est le meilleur langage pour programmer ?",
-        theme: "informatique",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
         answers: [
             "PHP",
             "Java",
