@@ -1,0 +1,6 @@
+export const GAME_STATE = {
+    LOBBY: "LOBBY",
+    QUESTION: "QUESTION",
+    RESULT: "RESULT",
+    FINISHED: "FINISHED"
+};
