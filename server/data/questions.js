@@ -9,6 +9,8 @@ const questions = [
             "Kotlin",
             "Haskell"
         ],
-        correctIndex: 0
+        correctIndex: 0,
+        value: 1,
+        coef: 1
     }
 ];
