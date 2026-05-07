@@ -176,7 +176,7 @@ export default class GameManager {
     /* ----- Scores ----- */
 
     getScores() {
-        return [...this.#players_map.values].map(player => ({
+        return [...this.#players_map.values()].map(player => ({
             name: player.name,
             score: player.score,
             domain: player.domain

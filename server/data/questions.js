@@ -1,4 +1,4 @@
-import { STUDY_DOMAIN } from "../utils/studyDomain";
+import { STUDY_DOMAIN } from "../utils/studyDomain.js";
 
 const questions = [
     {

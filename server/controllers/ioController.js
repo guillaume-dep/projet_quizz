@@ -43,7 +43,7 @@ export default class IOController {
     /* ----- Player joining the game ----- */
 
     handleJoinGame(socket, player_data, code) {
-        const gameManager = getGameOrEmitError(socket, code);
+        const gameManager = this.getGameOrEmitError(socket, code);
 
         if (!gameManager) return;
 
@@ -62,7 +62,7 @@ export default class IOController {
     /* ----- Start the game ----- */
 
     handleStartGame(socket, code) {
-        const gameManager = getGameOrEmitError(socket, code);
+        const gameManager = this.getGameOrEmitError(socket, code);
 
         if (!gameManager) return;
 
@@ -79,7 +79,7 @@ export default class IOController {
     /* ----- Submit an answer of a player ----- */
 
     handleSubmitAnswer(socket, answerIndex, code) {
-        const gameManager = getGameOrEmitError(socket, code);
+        const gameManager = this.getGameOrEmitError(socket, code);
 
         if (!gameManager) return;
 
@@ -90,10 +90,10 @@ export default class IOController {
             return;
         }
 
-        this.#io.to(code).emit("submit_answers", result)
+        socket.emit("submit_answers", result)
 
         if (gameManager.hasEveryPlayerAnswered()) {
-            setResultState()
+            gameManager.setResultState()
             this.#io.to(code).emit("show_results", {
                 playerScore: gameManager.getScores(), /* [{name, score, domain} */
                 question: gameManager.getCurrentQuestion()
@@ -104,7 +104,7 @@ export default class IOController {
     /* ----- Emit the next question ----- */
 
     handleNextQuestion(socket, code) {
-        const gameManager = getGameOrEmitError(socket, code);
+        const gameManager = this.getGameOrEmitError(socket, code);
 
         if (!gameManager) return;
 
@@ -135,6 +135,4 @@ export default class IOController {
         }
         return gameManager;
     }
-}
-    
 }
