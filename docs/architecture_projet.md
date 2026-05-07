@@ -50,3 +50,7 @@ Points à améliorer :
 
 --- 
 
+### Communication 
+
+Client → IOController → Game → IOController → Client
+
