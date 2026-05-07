@@ -97,7 +97,7 @@ export default class GameManager {
     /**
      * @return {Object} the next question object if it exists else null
      */
-    nextQuestion() {
+    getNextQuestion() {
         this.#current_question_index += 1;
 
         if (this.#current_question_index >= questions.length) {
