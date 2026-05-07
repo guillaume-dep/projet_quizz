@@ -49,6 +49,10 @@ Points à améliorer :
 - `LOCKED` routes
 - `Question` : ajout d'un objet pour créer des questions
 
+ROOM
+ ├── id (code)
+ ├── sockets (Socket.IO)
+ └── GameManager (logique du jeu)
 --- 
 
 ### Communication 
