@@ -33,6 +33,10 @@ export default class GameManager {
         }));
     }
 
+    removePlayers(socket_id) {
+        this.#players_map.delete(socket_id);
+    }
+
     setHost(socket_id) { this.#host_id = socket_id };
     isHost(socket_id) { return this.#host_id === socket_id }
 
