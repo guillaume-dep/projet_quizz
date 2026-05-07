@@ -5,8 +5,25 @@ import { Server as IOServer } from 'socket.io'
 const server = http.createServer()
 
 /* Canal de communication WebSocket */
-const io = new IOServer(server)
+const io = new IOServer(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"]
+    }
+});
+
 const ioController = new IOController(io)
 io.on('connection', (socket) => ioController.registerSocket(socket))
 
-server.listen(8080)
+io.on("connection", (socket) => {
+    console.log("CONNECT:", socket.id);
+
+    socket.on("disconnect", () => {
+        console.log("DISCONNECT:", socket.id);
+    });
+});
+
+server.listen(8080, () => {
+    console.log("Server running on 8080");
+});
+
