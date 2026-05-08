@@ -45,17 +45,32 @@ Annonces possibles du serveur :
 --- 
 
 Points à améliorer :
-- `room` multiples
 - `LOCKED` routes
 - `Question` : ajout d'un objet pour créer des questions
 
-ROOM
- ├── id (code)
- ├── sockets (Socket.IO)
- └── GameManager (logique du jeu)
 --- 
 
 ### Communication 
 
-Client → IOController → Game → IOController → Client
+React --> IOController --> GameManager --> IOController --> React
 
+### Principe
+
+- React contacte le serveur avec la connexion établie par `socket.js`, connexion persistante
+- Le serveur traite la demande avec `GameManager` 
+- Le serveur renvoie une réponse à React grâce à l'`IOController`.
+- React traite la réponse.
+
+```
+React
+  ↓ emit
+Socket.IO client
+  ↓ WebSocket
+IOController (serveur)
+  ↓ logique
+GameManager
+  ↓ retour
+IOController
+  ↓ emit
+React (socket.on)
+```
