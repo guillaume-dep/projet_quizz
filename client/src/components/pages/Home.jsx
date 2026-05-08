@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {socket} from "../socket/socket.js";
+import {socket} from "../../socket/socket.js";
 import {ROLE} from "../../../../shared/utils/role.js"
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 import ChoiceView from "./homeViews/ChoiceView.jsx";
