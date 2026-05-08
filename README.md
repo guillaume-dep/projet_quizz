@@ -1,9 +1,14 @@
 ## Gestion du projet
 
+### Installation des dépendances, lancement du serveur et de vite
+
 ```bash
 npm install
-npm run dev
+nodemon server/main.js
+npm run dev -- --host 
 ```
+
+- `npm run dev -- --host` : transmettre les arguments et exposer sur le réseau
 
 ### Formatter les fichiers
 
