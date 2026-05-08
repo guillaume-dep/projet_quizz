@@ -16,7 +16,7 @@ const Home = ({setRole}) => {
 
     const [name, setName] = useState("");
     const [domain, setDomain] = useState("");
-    const [gameCode, setGameCode] = useState("")
+    const [inputGameCode, setInputGameCode] = useState("")
     const [mode, setMode] = useState(null)
 
     /* --- Functions --- */
@@ -30,12 +30,12 @@ const Home = ({setRole}) => {
 
     const handleJoinGame = () => {
         setRole(ROLE.PLAYER);
-        console.log("JOIN CODE SENT:", gameCode);
+        console.log("JOIN CODE SENT:", inputGameCode);
         console.log("Pseudo:", name);
         console.log("Domain:", domain);
-        console.log(`Le type de code dans emit : ${typeof (gameCode)}`)
+        console.log(`Le type de code dans emit : ${typeof (inputGameCode)}`)
 
-        socket.emit(SK.JOIN_GAME, {name, domain}, gameCode)
+        socket.emit(SK.JOIN_GAME, {name, domain}, inputGameCode)
     }
 
     return (
@@ -49,10 +49,10 @@ const Home = ({setRole}) => {
                 mode={mode}
                 name={name}
                 domain={domain}
-                gameCode={gameCode}
+                inputGameCode={inputGameCode}
                 setName={setName}
                 setDomain={setDomain}
-                setGameCode={setGameCode}
+                setInputGameCode={setInputGameCode}
                 handleCreateGame={handleCreateGame}
                 handleJoinGame={handleJoinGame}
             />

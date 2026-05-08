@@ -2,10 +2,10 @@ const FormView = ({
     mode,
     name,
     domain,
-    gameCode,
+    inputGameCode,
     setName,
     setDomain,
-    setGameCode,
+    setInputGameCode,
     handleCreateGame,
     handleJoinGame
   
@@ -37,8 +37,8 @@ const FormView = ({
                     placeholder="Code..."
                     required
                     type="text"
-                    value={gameCode}
-                    onChange={(e) => setGameCode(e.target.value)} 
+                    value={inputGameCode}
+                    onChange={(e) => setInputGameCode(e.target.value)} 
                 />
             )}
             </div>
