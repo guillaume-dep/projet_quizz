@@ -20,15 +20,22 @@ const Home = ({setRole}) => {
     const [mode, setMode] = useState(null)
 
     /* --- Functions --- */
-    const handleCreateGame = ({name, domain}) => {
+    const handleCreateGame = () => {
         setRole(ROLE.HOST)
+        console.log("Pseudo host:", name);
+        console.log("Domain host:", domain);
         socket.emit(SK.CREATE_GAME, {name, domain})
 
     }
 
-    const handleJoinGame = ({name, domain, code}) => {
+    const handleJoinGame = () => {
         setRole(ROLE.PLAYER);
-        socket.emit(SK.JOIN_GAME, {name, domain}, code)
+        console.log("JOIN CODE SENT:", gameCode);
+        console.log("Pseudo:", name);
+        console.log("Domain:", domain);
+        console.log(`Le type de code dans emit : ${typeof (gameCode)}`)
+
+        socket.emit(SK.JOIN_GAME, {name, domain}, gameCode)
     }
 
     return (
