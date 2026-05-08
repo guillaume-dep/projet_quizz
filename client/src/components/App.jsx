@@ -4,6 +4,12 @@ import { VIEWS } from "./utils/views.js";
 import { ROLE } from "../../../shared/utils/role.js";
 import { useEffect, useState } from "react";
 
+import {Result} from "./pages/Result.jsx"
+import {Game} from "./pages/Game.jsx"
+import {Lobby} from "./pages/Lobby.jsx"
+import {Home} from "./pages/Home.jsx"
+
+
 /**
  * Every player have their own app which decides the view to display
  */
@@ -22,7 +28,7 @@ const App = () => {
   const [view, setView] = useState(VIEWS.HOME);
 
   /* Global scores of the game */
-  const [score, setScores] = useState([])
+  const [scores, setScores] = useState([])
 
   /* ---------- Routing ---------- */
 
@@ -42,8 +48,10 @@ const App = () => {
       setView(VIEWS.GAME);
     }
 
-    const handleGameOver = () => {
+    const handleGameOver = (scores) => {
+      setScores(scores);
       setView(VIEWS.RESULT);
+
     }
 
     socket.on(SK.GAME_CREATED, handleGameCreated)
@@ -86,8 +94,8 @@ const App = () => {
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({playerInfo}) => {
-      setScores(playerInfo)
+    const handleShowResults = ({playerScore}) => {
+      setScores(playerScore)
     }
 
     socket.on(SK.SHOW_RESULTS, handleShowResults)
@@ -116,16 +124,16 @@ const App = () => {
   const renderView = () => {
     switch(view){
       case VIEWS.HOME:
-        return <Home />
+        return <Home setRole={setRole} setView={setView} />
 
       case VIEWS.LOBBY:
-        return <Lobby />
+        return <Lobby players={players} code={gameCode} role={role} />
 
       case VIEWS.GAME:
-        return <Game />
+        return <Game role={role} gameCode={gameCode} scores={scores} players={players} />
       
       case VIEWS.RESULT:
-        return <Result />
+        return <Result scores={scores} players={players}/>
     }
   }
   return (
