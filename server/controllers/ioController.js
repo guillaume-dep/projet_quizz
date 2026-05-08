@@ -92,7 +92,7 @@ export default class IOController {
         socket.join(code);
         this.#socket_to_room.set(socket.id, code);
 
-        /* Inform that a player joined */
+        /* Inform that a player joined, return the list of player for sync */
         this.#io.to(code).emit(SK.PLAYER_JOINED, { players: gameManager.getPlayers() });
     }
 
