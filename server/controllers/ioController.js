@@ -65,6 +65,7 @@ export default class IOController {
     }
 
     /* ----- Player ----- */
+
     getPlayerFromSocket(socket) {
         const code = this.#socket_to_room.get(socket.id);
         if (!code) return null;
