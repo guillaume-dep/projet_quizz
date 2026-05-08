@@ -106,49 +106,50 @@ export default class IOController {
         if (!gameManager) return;
 
         if (gameManager.isHost(socket.id)) {
-            this.handleHostLeavingGame(socket, code, gameManager);
+            this.handleHostLeavingGame(code, gameManager);
             return;
         }
 
+        const player = gameManager.getPlayer(socket.id);
         gameManager.removePlayer(socket.id);
         switch (gameManager.getGameState()) {
             case GAME_STATE.LOBBY:
-                this.handlePlayerLeavingLobby(socket, code, gameManager);
+                this.handlePlayerLeavingLobby(player, code, gameManager);
                 break;
             case GAME_STATE.QUESTION:
-                this.handlePlayerLeavingQuestion(socket, code, gameManager);
+                this.handlePlayerLeavingQuestion(player, code, gameManager);
                 break;
             case GAME_STATE.RESULT:
-                this.handlePlayerLeavingResult(socket, code, gameManager);
+                this.handlePlayerLeavingResult(player, code, gameManager);
                 break;
         }
 
         this.#socket_to_room.delete(socket.id);
     }
 
-    handleHostLeavingGame(socket, code) {
-        socket.emit(SK.ERROR, { message: "Host disconnected, game over !" });
+    handleHostLeavingGame(code) {
+        this.#io.to(code).emit(SK.ERROR, { message: "Host disconnected, game over !" });
         this.#rooms.delete(code);
     }
 
-    handlePlayerLeavingLobby(socket, code, gameManager) {
+    handlePlayerLeavingLobby(player, code, gameManager) {
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
-            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected from the lobby`,
+            message: `Player ${player.name} has been disconnected from the lobby`,
             players: gameManager.getPlayers()
         });
     }
 
-    handlePlayerLeavingQuestion(socket, code, gameManager) {
+    handlePlayerLeavingQuestion(player, code, gameManager) {
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
-            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the game`,
+            message: `Player ${player.name} has been disconnected during the game`,
             players: gameManager.getPlayers()
         });
         this.handleResultProcess(gameManager, code);
     }
 
-    handlePlayerLeavingResult(socket, code, gameManager) {
+    handlePlayerLeavingResult(player, code, gameManager) {
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
-            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the result`,
+            message: `Player ${player.name} has been disconnected during the result`,
             players: gameManager.getPlayers()
         });
     }
