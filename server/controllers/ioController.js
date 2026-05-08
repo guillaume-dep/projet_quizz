@@ -43,6 +43,7 @@ export default class IOController {
 
         socket.join(code)
         this.#socket_to_room.set(socket.id, code);
+        console.log("log create game")
 
 
         socket.emit(SK.GAME_CREATED, { code }) /* To print out the code */

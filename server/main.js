@@ -7,7 +7,7 @@ const server = http.createServer()
 /* Canal de communication WebSocket */
 const io = new IOServer(server, {
     cors: {
-        /* origin: ["http://localhost:5173", "http://192.168.1.180:5173"] */
+        /*origin: ["http://localhost:5173", "http://192.168.1.180:5173"],*/
         origin: true,
         methods: ["GET", "POST"]
     }

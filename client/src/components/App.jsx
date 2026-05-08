@@ -136,11 +136,13 @@ const App = () => {
         return <Result scores={scores} players={players}/>
     }
   }
+
   return (
     <div className="app">
       {renderView()}
     </div>
   ); 
 }; 
+
 
 export default App;

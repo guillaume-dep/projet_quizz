@@ -23,6 +23,7 @@ const Home = ({setRole}) => {
     const handleCreateGame = ({name, domain}) => {
         setRole(ROLE.HOST)
         socket.emit(SK.CREATE_GAME, {name, domain})
+
     }
 
     const handleJoinGame = ({name, domain, code}) => {
