@@ -1,5 +1,6 @@
 import GameManager from "../gameManager.js"
 import { GAME_STATE } from "../utils/gameState.js"
+import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
 import generateCode from "../utils/utils.js"
 
 /**
@@ -21,12 +22,12 @@ export default class IOController {
     }
 
     setupListeners(socket) {
-        socket.on("create_game", (player_data) => this.handleCreateGame(socket, player_data))
-        socket.on("join_game", (player_data, code) => this.handleJoinGame(socket, player_data, code))
-        socket.on("start_game", (code) => this.handleStartGame(socket, code))
-        socket.on("submit_answer", (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
-        socket.on("request_next_question", (code) => this.handleNextQuestion(socket, code))
-        socket.on("disconnect", () => this.handleDisconnect(socket))
+        socket.on(SK.CREATE_GAME, (player_data) => this.handleCreateGame(socket, player_data))
+        socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
+        socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
+        socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
+        socket.on(SK.NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
+        socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
     /* ----- Creation of the game ----- */
@@ -44,7 +45,7 @@ export default class IOController {
         this.#socket_to_room.set(socket.id, code);
 
 
-        socket.emit("game_created", { code }) /* To print out the code */
+        socket.emit(SK.CREATE_GAME, { code }) /* To print out the code */
     }
 
     /* ----- Start the game ----- */
@@ -54,14 +55,14 @@ export default class IOController {
         if (!gameManager) return;
 
         if (!gameManager.isHost(socket.id)) {
-            socket.emit("error", { message: "You are not the host !" });
+            socket.emit(SK.ERROR, { message: "You are not the host !" });
             return;
         }
 
         gameManager.startGame(socket.id);
         this.#socket_to_room.set(socket.id, code);
-        this.#io.to(code).emit("game_started");
-        this.#io.to(code).emit("new_question", gameManager.getCurrentQuestion());
+        this.#io.to(code).emit(SK.GAME_STARTED);
+        this.#io.to(code).emit(SK.NEW_QUESTION, gameManager.getCurrentQuestion());
     }
 
     /* ----- Player ----- */
@@ -83,7 +84,7 @@ export default class IOController {
         if (!gameManager) return;
 
         if (!gameManager.canJoin()) {
-            socket.emit("error", { message: "Game already started ! Be aware next time." });
+            socket.emit(SK.ERROR, { message: "Game already started ! Be aware next time." });
             return;
         }
 
@@ -92,7 +93,7 @@ export default class IOController {
         this.#socket_to_room.set(socket.id, code);
 
         /* Inform that a player joined */
-        this.#io.to(code).emit("player_joined", { players: gameManager.getPlayers() });
+        this.#io.to(code).emit(SK.PLAYER_JOINED, { players: gameManager.getPlayers() });
     }
 
     /* ----- Players leaving the game ----- */
@@ -126,21 +127,21 @@ export default class IOController {
     }
 
     handleHostLeavingGame(socket, code) {
-        socket.emit("error", { message: "Host disconnected, game over !" });
+        socket.emit(SK.ERROR, { message: "Host disconnected, game over !" });
         this.#rooms.delete(code);
     }
 
     handlePlayerLeavingLobby(socket, code, gameManager) {
-        this.#io.to(code).emit("removed_player", { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected from the lobby` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected from the lobby` });
     }
 
     handlePlayerLeavingQuestion(socket, code, gameManager) {
-        this.#io.to(code).emit("removed_player", { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the game` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the game` });
         this.handleResultProcess(gameManager, code);
     }
 
     handlePlayerLeavingResult(socket, code, gameManager) {
-        this.#io.to(code).emit("removed_player", { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the result` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the result` });
     }
 
     /* ----- Submit an answer of a player ----- */
@@ -152,11 +153,11 @@ export default class IOController {
         const result = gameManager.submitAnswer(socket.id, answerIndex);
 
         if (!result.valid) {
-            socket.emit("error", { message: "Invalid answer." });
+            socket.emit(SK.ERROR, { message: "Invalid answer." });
             return;
         }
 
-        socket.emit("submit_answers", result)
+        socket.emit(SK.SUBMIT_ANSWER, result)
         this.handleResultProcess(gameManager, code);
     }
 
@@ -165,7 +166,7 @@ export default class IOController {
     handleResultProcess(gameManager, code) {
         if (gameManager.hasEveryPlayerAnswered()) {
             gameManager.setResultState()
-            this.#io.to(code).emit("show_results", {
+            this.#io.to(code).emit(SK.SHOW_RESULTS, {
                 playerScore: gameManager.getScores(), /* [{name, score, domain} */
                 question: gameManager.getCurrentQuestion()
             })
@@ -179,18 +180,18 @@ export default class IOController {
         if (!gameManager) return;
 
         if (!gameManager.isHost(socket.id)) {
-            socket.emit("error", { message: "You are not the host !" });
+            socket.emit(SK.ERROR, { message: "You are not the host !" });
             return;
         }
 
         const question = gameManager.getNextQuestion();
         if (!question) {
-            this.#io.to(code).emit("game_over", gameManager.getScores());
+            this.#io.to(code).emit(SK.GAME_OVER, gameManager.getScores());
             this.#rooms.delete(code);
             return;
         }
 
-        this.#io.to(code).emit("new_question", question);
+        this.#io.to(code).emit(SK.NEW_QUESTION, question);
     }
 
 
@@ -200,7 +201,7 @@ export default class IOController {
         const gameManager = this.#rooms.get(code);
 
         if (!gameManager) {
-            socket.emit("error", { message: "Game not found ! Try another code." });
+            socket.emit(SK.ERROR, { message: "Game not found ! Try another code." });
             return null;
         }
         return gameManager;
