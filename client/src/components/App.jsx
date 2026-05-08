@@ -124,7 +124,7 @@ const App = () => {
   const renderView = () => {
     switch(view){
       case VIEWS.HOME:
-        return <Home setRole={setRole} setView={setView} />
+        return <Home setRole={setRole} />
 
       case VIEWS.LOBBY:
         return <Lobby players={players} code={gameCode} role={role} />
