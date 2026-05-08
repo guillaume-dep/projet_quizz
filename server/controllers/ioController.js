@@ -40,11 +40,14 @@ export default class IOController {
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
         this.#rooms.set(code, gameManager)
+        console.log("Creation of the game :")
+        console.log("Rooms", this.#rooms)
 
         socket.join(code)
         this.#socket_to_room.set(socket.id, code);
-        console.log("Game created !")
 
+        console.log("Game created !")
+        console.log(`Code : ${code}`)
 
         socket.emit(SK.GAME_CREATED, { code }) /* To print out the code */
     }
@@ -83,6 +86,7 @@ export default class IOController {
     /* ----- Player joining the game ----- */
 
     handleJoinGame(socket, player_data, code) {
+        console.log("Currently joining the game", socket.id)
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
 
@@ -90,6 +94,7 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "Game already started ! Be aware next time." });
             return;
         }
+
         console.log(`Game joined by ${socket.id}`)
 
 
@@ -222,6 +227,7 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "Game not found ! Try another code." });
             return null;
         }
+
         return gameManager;
     }
 }
