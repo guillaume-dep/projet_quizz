@@ -22,7 +22,7 @@ const App = () => {
   const [players, setPlayers] = useState([])
 
   /* The code of the game which the player is in */
-  const [gameCode, setGameCode] = useState(null);
+  const [gameCode, setGameCode] = useState("");
 
   /* View to display */
   const [view, setView] = useState(VIEWS.HOME);
@@ -41,6 +41,7 @@ const App = () => {
   useEffect(() => {
     const handleGameCreated = ({code}) => {
       setView(VIEWS.LOBBY);
+      console.log(`Code depuis app : ${code}`)
       setGameCode(code);
     }
 
@@ -127,7 +128,7 @@ const App = () => {
         return <Home setRole={setRole} />
 
       case VIEWS.LOBBY:
-        return <Lobby players={players} code={gameCode} role={role} />
+        return <Lobby players={players} gameCode={gameCode} role={role} />
 
       case VIEWS.GAME:
         return <Game role={role} gameCode={gameCode} scores={scores} players={players} />

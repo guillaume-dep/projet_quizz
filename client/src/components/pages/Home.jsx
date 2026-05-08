@@ -56,7 +56,7 @@ const Home = ({setRole}) => {
                 handleCreateGame={handleCreateGame}
                 handleJoinGame={handleJoinGame}
             />
-
+            
             }
         </div>
     )
