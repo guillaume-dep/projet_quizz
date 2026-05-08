@@ -43,7 +43,7 @@ export default class IOController {
 
         socket.join(code)
         this.#socket_to_room.set(socket.id, code);
-        console.log("log create game")
+        console.log("Game created !")
 
 
         socket.emit(SK.GAME_CREATED, { code }) /* To print out the code */
@@ -59,6 +59,8 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "You are not the host !" });
             return;
         }
+        console.log("Game Started !")
+
 
         gameManager.startGame(socket.id);
         this.#socket_to_room.set(socket.id, code);
@@ -88,6 +90,8 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "Game already started ! Be aware next time." });
             return;
         }
+        console.log(`Game joined by ${socket.id}`)
+
 
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
         socket.join(code);
@@ -162,6 +166,9 @@ export default class IOController {
         if (!gameManager) return;
 
         const result = gameManager.submitAnswer(socket.id, answerIndex);
+
+        console.log(`Answer sent by ${socket.id}`)
+
 
         if (!result.valid) {
             socket.emit(SK.ERROR, { message: "Invalid answer." });
