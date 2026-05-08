@@ -110,6 +110,7 @@ export default class IOController {
             return;
         }
 
+        gameManager.removePlayer(socket.id);
         switch (gameManager.getGameState()) {
             case GAME_STATE.LOBBY:
                 this.handlePlayerLeavingLobby(socket, code, gameManager);
@@ -122,7 +123,6 @@ export default class IOController {
                 break;
         }
 
-        gameManager.removePlayer(socket.id);
         this.#socket_to_room.delete(socket.id);
     }
 
@@ -132,16 +132,25 @@ export default class IOController {
     }
 
     handlePlayerLeavingLobby(socket, code, gameManager) {
-        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected from the lobby` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, {
+            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected from the lobby`,
+            players: gameManager.getPlayers()
+        });
     }
 
     handlePlayerLeavingQuestion(socket, code, gameManager) {
-        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the game` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, {
+            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the game`,
+            players: gameManager.getPlayers()
+        });
         this.handleResultProcess(gameManager, code);
     }
 
     handlePlayerLeavingResult(socket, code, gameManager) {
-        this.#io.to(code).emit(SK.PLAYER_REMOVED, { message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the result` });
+        this.#io.to(code).emit(SK.PLAYER_REMOVED, {
+            message: `Player ${gameManager.getPlayer(socket.id).name} has been disconnected during the result`,
+            players: gameManager.getPlayers()
+        });
     }
 
     /* ----- Submit an answer of a player ----- */
