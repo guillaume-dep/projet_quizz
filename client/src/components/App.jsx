@@ -4,10 +4,10 @@ import { VIEWS } from "./utils/views.js";
 import { ROLE } from "../../../shared/utils/role.js";
 import { useEffect, useState } from "react";
 
-import {Result} from "./pages/Result.jsx"
-import {Game} from "./pages/Game.jsx"
-import {Lobby} from "./pages/Lobby.jsx"
-import {Home} from "./pages/Home.jsx"
+import Result from "./pages/Result.jsx"
+import Game from "./pages/Game.jsx"
+import Lobby from "./pages/Lobby.jsx"
+import Home from "./pages/Home.jsx"
 
 
 /**
