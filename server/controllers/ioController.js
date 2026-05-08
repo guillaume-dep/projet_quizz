@@ -26,7 +26,7 @@ export default class IOController {
         socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
         socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
-        socket.on(SK.NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
+        socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -45,7 +45,7 @@ export default class IOController {
         this.#socket_to_room.set(socket.id, code);
 
 
-        socket.emit(SK.CREATE_GAME, { code }) /* To print out the code */
+        socket.emit(SK.GAME_CREATED, { code }) /* To print out the code */
     }
 
     /* ----- Start the game ----- */
@@ -62,7 +62,7 @@ export default class IOController {
         gameManager.startGame(socket.id);
         this.#socket_to_room.set(socket.id, code);
         this.#io.to(code).emit(SK.GAME_STARTED);
-        this.#io.to(code).emit(SK.NEW_QUESTION, gameManager.getCurrentQuestion());
+        this.#io.to(code).emit(SK.QUESTION_SENT, gameManager.getCurrentQuestion());
     }
 
     /* ----- Player ----- */
@@ -157,7 +157,7 @@ export default class IOController {
             return;
         }
 
-        socket.emit(SK.SUBMIT_ANSWER, result)
+        socket.emit(SK.SUBMITTED_ANSWER, result)
         this.handleResultProcess(gameManager, code);
     }
 
@@ -191,7 +191,7 @@ export default class IOController {
             return;
         }
 
-        this.#io.to(code).emit(SK.NEW_QUESTION, question);
+        this.#io.to(code).emit(SK.QUESTION_SENT, question);
     }
 
 
