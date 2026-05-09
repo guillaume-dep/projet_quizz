@@ -13,7 +13,7 @@ const questions = [
         ],
         correctIndex: 0,
         value: 1,
-        coef: 1
+        coef: 2
     }
 ];
 
