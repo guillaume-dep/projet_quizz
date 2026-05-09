@@ -86,7 +86,7 @@ export default class IOController {
     /* ----- Player joining the game ----- */
 
     handleJoinGame(socket, player_data, code) {
-        console.log("Currently joining the game", socket.id)
+        console.log("Currently trying to join a game", socket.id)
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
 
@@ -138,7 +138,8 @@ export default class IOController {
     }
 
     handleHostLeavingGame(code) {
-        this.#io.to(code).emit(SK.ERROR, { message: "Host disconnected, game over !" });
+        this.#io.to(code).emit(SK.HOST_LEFT, { message: "Host disconnected, game over !" });
+        console.log("Host disconnected, game over !")
         this.#rooms.delete(code);
     }
 
