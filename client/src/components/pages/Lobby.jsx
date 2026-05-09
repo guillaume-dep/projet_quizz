@@ -1,6 +1,14 @@
 import { useState } from "react";
+import { ROLE } from "../../../../shared/utils/role.js";
+import { socket } from "../../socket/socket.js";
+import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 
 const Lobby = ({ players, gameCode, role }) => {
+
+    const handleStartGame = () => {
+        socket.emit(SK.START_GAME, gameCode);
+    };
+
     return (
         <div>
             <h1>Lobby</h1>
@@ -17,8 +25,8 @@ const Lobby = ({ players, gameCode, role }) => {
                 ))}
             </div>
 
-            {role === "HOST" && (
-                <button>Start game</button>
+            {role === ROLE.HOST && (
+                <button onClick={(handleStartGame)}>Start game</button>
             )}
         </div>
     );
