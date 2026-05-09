@@ -30,6 +30,9 @@ const App = () => {
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
+  /* Error message to show from the server */
+  const [errorMessage, setErrorMessage] = useState("");
+
   /* ---------- Routing ---------- */
 
   /* ----- Game ----- */
@@ -128,6 +131,7 @@ const App = () => {
   useEffect(() => {
     const handleError = ({ message }) => {
       console.error(message);
+      setErrorMessage(message)
     };
 
     socket.on(SK.ERROR, handleError)
@@ -142,13 +146,13 @@ const App = () => {
   const renderView = () => {
     switch (view) {
       case VIEWS.HOME:
-        return <Home setRole={setRole} />
+        return <Home setRole={setRole} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
 
       case VIEWS.LOBBY:
         return <Lobby players={players} gameCode={gameCode} role={role} />
 
       case VIEWS.GAME:
-        return <Game role={role} gameCode={gameCode} scores={scores} players={players} />
+        return <Game role={role} gameCode={gameCode} scores={scores} players={players} errorMessage={errorMessage} />
 
       case VIEWS.RESULT:
         return <Result scores={scores} players={players} />

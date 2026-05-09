@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ROLE } from "../../../../shared/utils/role.js";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
@@ -10,15 +9,15 @@ const Lobby = ({ players, gameCode, role }) => {
     };
 
     return (
-        <div>
-            <h1>Lobby</h1>
+        <div className="lobby">
+            <h1 className="title">Lobby</h1>
 
-            <div>
+            <div className="gameCode">
                 Code de la partie :
                 <strong>{gameCode}</strong>
             </div>
 
-            <div>
+            <div className="players">
                 Joueurs :
                 {players.map((p, i) => (
                     <div key={i}>{p.name}</div>
@@ -26,7 +25,7 @@ const Lobby = ({ players, gameCode, role }) => {
             </div>
 
             {role === ROLE.HOST && (
-                <button onClick={(handleStartGame)}>Start game</button>
+                <button className="start_game_button" onClick={(handleStartGame)}>Start game</button>
             )}
         </div>
     );

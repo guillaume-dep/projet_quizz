@@ -9,7 +9,9 @@ const FormView = ({
     setDomain,
     setInputGameCode,
     handleCreateGame,
-    handleJoinGame
+    handleJoinGame,
+    errorMessage,
+    setErrorMessage
 
 }) => {
 
@@ -25,6 +27,11 @@ const FormView = ({
 
     const handleSetDomain = (event) => {
         setDomain(event.target.value)
+    }
+
+    const handleSetInputGameCode = (event) => {
+        setInputGameCode(event.target.value)
+        setErrorMessage("")
     }
 
     return (
@@ -62,8 +69,14 @@ const FormView = ({
                     required
                     type="text"
                     value={inputGameCode}
-                    onChange={(e) => setInputGameCode(e.target.value)}
+                    onChange={handleSetInputGameCode}
                 />
+            )}
+
+            {errorMessage && (
+                <div className="error_message">
+                    {errorMessage}
+                </div>
             )}
 
             <div className="buttonBloc">

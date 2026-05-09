@@ -10,7 +10,7 @@ import FormView from "./homeViews/FormView.jsx";
  * You can choose between joining or creating a game
  * Then you have to enter your information 
  */
-const Home = ({ setRole }) => {
+const Home = ({ setRole, errorMessage, setErrorMessage }) => {
 
     /* --- Data of the home page --- */
 
@@ -39,7 +39,7 @@ const Home = ({ setRole }) => {
 
     return (
         <div className="home">
-            <span>Home</span>
+            <h1 className="title">Home</h1>
             {!mode ? (
                 <ChoiceView setMode={setMode} />
             ) :
@@ -54,8 +54,9 @@ const Home = ({ setRole }) => {
                     setInputGameCode={setInputGameCode}
                     handleCreateGame={handleCreateGame}
                     handleJoinGame={handleJoinGame}
+                    errorMessage={errorMessage}
+                    setErrorMessage={setErrorMessage}
                 />
-
             }
         </div>
     )
