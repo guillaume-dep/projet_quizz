@@ -72,8 +72,9 @@ const App = () => {
   /* ----- Player - Host ----- */
 
   useEffect(() => {
-    const handlePlayerJoined = ({ players }) => {
+    const handlePlayerJoined = ({ players, code }) => {
       setView(VIEWS.LOBBY);
+      setGameCode(code)
       setPlayers(players);
     }
 
