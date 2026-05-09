@@ -25,7 +25,6 @@ const Home = ({setRole}) => {
         console.log("Pseudo host:", name);
         console.log("Domain host:", domain);
         socket.emit(SK.CREATE_GAME, {name, domain})
-
     }
 
     const handleJoinGame = () => {
