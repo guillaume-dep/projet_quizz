@@ -33,6 +33,10 @@ const App = () => {
   /* Error message to show from the server */
   const [errorMessage, setErrorMessage] = useState("");
 
+  /* Current question */
+  const [question, setQuestion] = useState(null);
+
+
   /* ---------- Routing ---------- */
 
   /* ----- Game ----- */
@@ -49,7 +53,11 @@ const App = () => {
       setGameCode(code);
     }
 
-    const handleGameStarted = () => {
+    const handleGameStarted = (questionFromServer) => {
+      console.log("Nous sommes sur l'écran de partie")
+      setQuestion(questionFromServer);
+      const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
+      console.log(`Question reçu dans game start: ${text}`)
       setView(VIEWS.GAME);
     }
 
@@ -113,6 +121,22 @@ const App = () => {
     }
   }, [])
 
+  /* ----- Question ----- */
+
+  useEffect(() => {
+    const handleQuestionSent = (questionFromServer) => {
+      setQuestion(questionFromServer);
+      const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
+      console.log(`Question reçu dans question: ${text}`)
+    }
+
+    socket.on(SK.QUESTION_SENT, handleQuestionSent);
+
+    return () => {
+      socket.off(SK.QUESTION_SENT, handleQuestionSent)
+    }
+  }, []);
+
   /* ----- Results ----- */
 
   useEffect(() => {
@@ -153,7 +177,15 @@ const App = () => {
         return <Lobby players={players} gameCode={gameCode} role={role} />
 
       case VIEWS.GAME:
-        return <Game role={role} gameCode={gameCode} scores={scores} players={players} errorMessage={errorMessage} />
+        return <Game
+          role={role}
+          gameCode={gameCode}
+          scores={scores}
+          players={players}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+          question={question}
+        />
 
       case VIEWS.RESULT:
         return <Result scores={scores} players={players} />
