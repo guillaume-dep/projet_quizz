@@ -1,4 +1,4 @@
-import {socket} from "../socket/socket.js";
+import { socket } from "../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
 import { ROLE } from "../../../shared/utils/role.js";
@@ -13,7 +13,7 @@ import Home from "./pages/Home.jsx"
 /**
  * Every player have their own app which decides the view to display
  */
-const App = () => { 
+const App = () => {
 
   /* The role of the player, either host or player*/
   const [role, setRole] = useState(null);
@@ -39,7 +39,7 @@ const App = () => {
   That's why there's no dependencies ([])
   */
   useEffect(() => {
-    const handleGameCreated = ({code}) => {
+    const handleGameCreated = ({ code }) => {
       setView(VIEWS.LOBBY);
       console.log(`Code depuis app : ${code}`)
       setGameCode(code);
@@ -59,7 +59,7 @@ const App = () => {
     socket.on(SK.GAME_STARTED, handleGameStarted)
     socket.on(SK.GAME_OVER, handleGameOver)
 
-    
+
     return () => {
       /* Turning off the listening after the game is create (only for this socket) */
       socket.off(SK.GAME_CREATED, handleGameCreated);
@@ -69,33 +69,49 @@ const App = () => {
     }
   }, [])
 
-  /* ----- Player ----- */
+  /* ----- Player - Host ----- */
 
   useEffect(() => {
-    const handlePlayerJoined = ({players}) => {
+    const handlePlayerJoined = ({ players }) => {
+      setView(VIEWS.LOBBY);
       setPlayers(players);
     }
 
-    const handlePlayerLeft = ({message, players}) => {
+    const handlePlayerLeft = ({ message, players }) => {
       setPlayers(players);
       console.log(message);
     }
 
+    const handleHostLeft = ({ message }) => {
+      console.log(message);
+
+      setPlayers([]);
+      setScores([]);
+      setGameCode("");
+      setRole(null);
+
+      setView(VIEWS.HOME);
+    }
+
     socket.on(SK.PLAYER_JOINED, handlePlayerJoined)
     socket.on(SK.PLAYER_REMOVED, handlePlayerLeft)
+    socket.on(SK.HOST_LEFT, handleHostLeft)
+
 
 
     return () => {
       socket.off(SK.PLAYER_JOINED, handlePlayerJoined)
       socket.off(SK.PLAYER_REMOVED, handlePlayerLeft)
+      socket.off(SK.HOST_LEFT, handleHostLeft)
+
 
     }
   }, [])
-  
+
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({playerScore}) => {
+    const handleShowResults = ({ playerScore }) => {
       setScores(playerScore)
     }
 
@@ -110,7 +126,7 @@ const App = () => {
 
   useEffect(() => {
     const handleError = ({ message }) => {
-            console.error(message);
+      console.error(message);
     };
 
     socket.on(SK.ERROR, handleError)
@@ -119,11 +135,11 @@ const App = () => {
       socket.off(SK.ERROR, handleError);
     }
   }, [])
-  
+
   /* ----- View ----- */
 
   const renderView = () => {
-    switch(view){
+    switch (view) {
       case VIEWS.HOME:
         return <Home setRole={setRole} />
 
@@ -132,9 +148,9 @@ const App = () => {
 
       case VIEWS.GAME:
         return <Game role={role} gameCode={gameCode} scores={scores} players={players} />
-      
+
       case VIEWS.RESULT:
-        return <Result scores={scores} players={players}/>
+        return <Result scores={scores} players={players} />
     }
   }
 
@@ -142,8 +158,8 @@ const App = () => {
     <div className="app">
       {renderView()}
     </div>
-  ); 
-}; 
+  );
+};
 
 
 export default App;
