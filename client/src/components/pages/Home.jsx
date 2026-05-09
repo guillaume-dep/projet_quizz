@@ -1,6 +1,6 @@
 import { useState } from "react";
-import {socket} from "../../socket/socket.js";
-import {ROLE} from "../../../../shared/utils/role.js"
+import { socket } from "../../socket/socket.js";
+import { ROLE } from "../../../../shared/utils/role.js"
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 import ChoiceView from "./homeViews/ChoiceView.jsx";
 import FormView from "./homeViews/FormView.jsx";
@@ -10,7 +10,7 @@ import FormView from "./homeViews/FormView.jsx";
  * You can choose between joining or creating a game
  * Then you have to enter your information 
  */
-const Home = ({setRole}) => {
+const Home = ({ setRole }) => {
 
     /* --- Data of the home page --- */
 
@@ -24,7 +24,7 @@ const Home = ({setRole}) => {
         setRole(ROLE.HOST)
         console.log("Pseudo host:", name);
         console.log("Domain host:", domain);
-        socket.emit(SK.CREATE_GAME, {name, domain})
+        socket.emit(SK.CREATE_GAME, { name, domain })
     }
 
     const handleJoinGame = () => {
@@ -34,28 +34,28 @@ const Home = ({setRole}) => {
         console.log("Domain:", domain);
         console.log(`Le type de code dans emit : ${typeof (inputGameCode)}`)
 
-        socket.emit(SK.JOIN_GAME, {name, domain}, inputGameCode)
+        socket.emit(SK.JOIN_GAME, { name, domain }, inputGameCode)
     }
 
     return (
         <div className="home">
             <span>Home</span>
             {!mode ? (
-                <ChoiceView setMode={setMode}/>
-            ) : 
-            
-            <FormView 
-                mode={mode}
-                name={name}
-                domain={domain}
-                inputGameCode={inputGameCode}
-                setName={setName}
-                setDomain={setDomain}
-                setInputGameCode={setInputGameCode}
-                handleCreateGame={handleCreateGame}
-                handleJoinGame={handleJoinGame}
-            />
-            
+                <ChoiceView setMode={setMode} />
+            ) :
+
+                <FormView
+                    mode={mode}
+                    name={name}
+                    domain={domain}
+                    inputGameCode={inputGameCode}
+                    setName={setName}
+                    setDomain={setDomain}
+                    setInputGameCode={setInputGameCode}
+                    handleCreateGame={handleCreateGame}
+                    handleJoinGame={handleJoinGame}
+                />
+
             }
         </div>
     )
