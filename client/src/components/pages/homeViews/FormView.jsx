@@ -10,6 +10,19 @@ const FormView = ({
     handleJoinGame
   
 }) => {
+
+    const isNameValid = name.trim().length > 0;
+    const isDomainValid = domain.trim().length > 0;
+    const isInputGameCodeValid = inputGameCode.trim().length == 4 ;
+
+    const handleSetName = (event) => {
+        setName(event.target.value)
+    }
+
+    const handleSetDomain = (event) => {
+        setDomain(event.target.value)
+    }
+
     return (
         <div className="formView">
             <div className="inputBloc">
@@ -19,7 +32,7 @@ const FormView = ({
                 required
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)} 
+                onChange={handleSetName} 
                 />
 
             <input 
@@ -28,7 +41,7 @@ const FormView = ({
                 required
                 type="text"
                 value={domain}
-                onChange={(e) => setDomain(e.target.value)} 
+                onChange={handleSetDomain} 
                 />
             
             {mode === "join" && (
@@ -44,8 +57,8 @@ const FormView = ({
             </div>
 
             <div className="buttonBloc">
-                {mode === "create" && <button onClick={handleCreateGame}>Create</button>}
-                {mode === "join" && <button onClick={handleJoinGame}>Join</button>}
+                {mode === "create" && <button onClick={handleCreateGame} disabled={!(isNameValid && isDomainValid)}>Create game</button>}
+                {mode === "join" && <button onClick={handleJoinGame} disabled={!(isNameValid && isDomainValid && isInputGameCodeValid)}>Join game</button>}
             </div>
 
         </div>
