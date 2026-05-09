@@ -9,6 +9,7 @@ const Lobby = ({ players, gameCode, role }) => {
     )
 
     const handleStartGame = () => {
+        console.log("Demande début de la partie dans lobby", gameCode)
         socket.emit(SK.START_GAME, gameCode);
     };
 
