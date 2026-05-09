@@ -40,7 +40,7 @@ export default class IOController {
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
         this.#rooms.set(code, gameManager)
-        console.log("Creation of the game :")
+        console.log("\n Creation of the game :")
         console.log("Rooms", this.#rooms)
 
         socket.join(code)
@@ -62,7 +62,7 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "You are not the host !" });
             return;
         }
-        console.log("Game Started !")
+        console.log(`Game ${code} Started !`)
 
 
         gameManager.startGame(socket.id);
@@ -95,7 +95,7 @@ export default class IOController {
             return;
         }
 
-        console.log(`Game joined by ${socket.id}`)
+        console.log(`Game ${code} joined by ${socket.id}`)
 
 
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
@@ -103,7 +103,7 @@ export default class IOController {
         this.#socket_to_room.set(socket.id, code);
 
         /* Inform that a player joined, return the list of player for sync */
-        this.#io.to(code).emit(SK.PLAYER_JOINED, { players: gameManager.getPlayers() });
+        this.#io.to(code).emit(SK.PLAYER_JOINED, { players: gameManager.getPlayers(), code });
     }
 
     /* ----- Players leaving the game ----- */
@@ -139,11 +139,12 @@ export default class IOController {
 
     handleHostLeavingGame(code) {
         this.#io.to(code).emit(SK.HOST_LEFT, { message: "Host disconnected, game over !" });
-        console.log("Host disconnected, game over !")
+        console.log(`Host disconnected, game ${code} over !`)
         this.#rooms.delete(code);
     }
 
     handlePlayerLeavingLobby(player, code, gameManager) {
+        console.log(`Player ${player.name} has been disconnected from the lobby ${code}`)
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
             message: `Player ${player.name} has been disconnected from the lobby`,
             players: gameManager.getPlayers()
@@ -151,6 +152,7 @@ export default class IOController {
     }
 
     handlePlayerLeavingQuestion(player, code, gameManager) {
+        console.log(`Player ${player.name} has been disconnected during the game ${code}`)
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
             message: `Player ${player.name} has been disconnected during the game`,
             players: gameManager.getPlayers()
@@ -159,6 +161,7 @@ export default class IOController {
     }
 
     handlePlayerLeavingResult(player, code, gameManager) {
+        console.log(`Player ${player.name} has been disconnected during the result ${code}`)
         this.#io.to(code).emit(SK.PLAYER_REMOVED, {
             message: `Player ${player.name} has been disconnected during the result`,
             players: gameManager.getPlayers()
