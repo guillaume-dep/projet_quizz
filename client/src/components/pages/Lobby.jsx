@@ -4,6 +4,10 @@ import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 
 const Lobby = ({ players, gameCode, role }) => {
 
+    const playersMap = players.map((p, i) => (
+        <div key={i}>{p.name.trim()} {"- " + p.domain.trim().toLowerCase()}</div>)
+    )
+
     const handleStartGame = () => {
         socket.emit(SK.START_GAME, gameCode);
     };
@@ -19,9 +23,8 @@ const Lobby = ({ players, gameCode, role }) => {
 
             <div className="players">
                 Joueurs :
-                {players.map((p, i) => (
-                    <div key={i}>{p.name}</div>
-                ))}
+                {playersMap}
+
             </div>
 
             {role === ROLE.HOST && (

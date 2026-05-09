@@ -45,6 +45,7 @@ const App = () => {
     const handleGameCreated = ({ code }) => {
       setView(VIEWS.LOBBY);
       console.log(`Code depuis app : ${code}`)
+      console.log("Host is joining the game !")
       setGameCode(code);
     }
 

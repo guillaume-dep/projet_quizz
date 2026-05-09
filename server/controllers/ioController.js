@@ -50,6 +50,8 @@ export default class IOController {
         console.log(`Code : ${code}`)
 
         socket.emit(SK.GAME_CREATED, { code }) /* To print out the code */
+        this.#io.to(code).emit(SK.PLAYER_JOINED, { players: gameManager.getPlayers(), code });
+
     }
 
     /* ----- Start the game ----- */
