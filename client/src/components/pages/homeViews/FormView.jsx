@@ -8,12 +8,12 @@ const FormView = ({
     setInputGameCode,
     handleCreateGame,
     handleJoinGame
-  
+
 }) => {
 
     const isNameValid = name.trim().length > 0;
     const isDomainValid = domain.trim().length > 0;
-    const isInputGameCodeValid = inputGameCode.trim().length == 4 ;
+    const isInputGameCodeValid = inputGameCode.trim().length == 4;
 
     const handleSetName = (event) => {
         setName(event.target.value)
@@ -26,34 +26,34 @@ const FormView = ({
     return (
         <div className="formView">
             <div className="inputBloc">
-            <input 
-                className="input"
-                placeholder="Pseudo..."
-                required
-                type="text"
-                value={name}
-                onChange={handleSetName} 
-                />
-
-            <input 
-                className="input"
-                placeholder="Domaine..."
-                required
-                type="text"
-                value={domain}
-                onChange={handleSetDomain} 
-                />
-            
-            {mode === "join" && (
-                <input 
+                <input
                     className="input"
-                    placeholder="Code..."
+                    placeholder="Pseudo..."
                     required
                     type="text"
-                    value={inputGameCode}
-                    onChange={(e) => setInputGameCode(e.target.value)} 
+                    value={name}
+                    onChange={handleSetName}
                 />
-            )}
+
+                <input
+                    className="input"
+                    placeholder="Domaine..."
+                    required
+                    type="text"
+                    value={domain}
+                    onChange={handleSetDomain}
+                />
+
+                {mode === "join" && (
+                    <input
+                        className="input"
+                        placeholder="Code..."
+                        required
+                        type="text"
+                        value={inputGameCode}
+                        onChange={(e) => setInputGameCode(e.target.value)}
+                    />
+                )}
             </div>
 
             <div className="buttonBloc">
