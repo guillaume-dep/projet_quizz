@@ -189,7 +189,7 @@ const App = () => {
         />
 
       case VIEWS.RESULT:
-        return <Result scores={scores} players={players} />
+        return <Result question={question} gameCode={gameCode} scores={scores} />
     }
   }
 
