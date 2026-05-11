@@ -17,7 +17,7 @@ const FormView = ({
 
     const isNameValid = name.trim().length > 0;
     const isDomainValid = domain.trim().length > 0;
-    const isInputGameCodeValid = inputGameCode.trim().length == 4;
+    const isInputGameCodeValid = /^\d{4}$/.test(inputGameCode.trim());
 
     const domainOptions = Object.values(STUDY_DOMAIN);
 
@@ -45,32 +45,37 @@ const FormView = ({
                 onChange={handleSetName}
             />
 
-            <select
-                className="select"
-                placeholder="Domaine..."
-                required
-                type="text"
-                value={domain}
-                onChange={handleSetDomain}>
-                <option value="" disabled>Choisissez un domaine...</option>
-                {domainOptions.map(domainOption => (
-                    <option key={domainOption} value={domainOption}>
-                        {domainOption.toLocaleLowerCase()}
-                    </option>
-                ))
-                }
-
-            </select>
-
             {mode === "join" && (
-                <input
-                    className="input"
-                    placeholder="Code..."
-                    required
-                    type="text"
-                    value={inputGameCode}
-                    onChange={handleSetInputGameCode}
-                />
+
+                <div>
+                    <select
+                        className="select"
+                        placeholder="Domaine..."
+                        required
+                        type="text"
+                        value={domain}
+                        onChange={handleSetDomain}>
+                        <option value="" disabled>Choisissez un domaine...</option>
+                        {domainOptions.map(domainOption => (
+                            <option key={domainOption} value={domainOption}>
+                                {domainOption.toLocaleLowerCase()}
+                            </option>
+                        ))
+                        }
+
+                    </select>
+
+                    <input
+                        className="input"
+                        placeholder="Code..."
+                        required
+                        type="text"
+                        value={inputGameCode}
+                        onChange={handleSetInputGameCode}
+                        maxLength={4}
+                    />
+                </div>
+
             )}
 
             {errorMessage && (
@@ -80,7 +85,7 @@ const FormView = ({
             )}
 
             <div className="buttonBloc">
-                {mode === "create" && <button onClick={handleCreateGame} disabled={!(isNameValid && isDomainValid)}>Create game</button>}
+                {mode === "create" && <button onClick={handleCreateGame} disabled={!(isNameValid)}>Create game</button>}
                 {mode === "join" && <button onClick={handleJoinGame} disabled={!(isNameValid && isDomainValid && isInputGameCodeValid)}>Join game</button>}
             </div>
 
