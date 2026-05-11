@@ -1,4 +1,5 @@
-const Result = (scores, players) => {
+const Result = (gameCode, scores) => {
+
 
 }
 
