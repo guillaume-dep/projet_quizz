@@ -25,4 +25,6 @@ export const SOCKET_EVENTS = {
     GAME_OVER: "game_over",
 
     ERROR: "error",
+    REQUEST_SYNC_STATE: "request_sync_state",
+    SYNC_STATE: "sync_state"
 };
