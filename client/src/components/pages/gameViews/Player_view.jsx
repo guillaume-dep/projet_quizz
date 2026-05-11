@@ -1,12 +1,7 @@
-import { socket } from "../../../socket/socket.js";
-import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
-import { ROLE } from "../../../../../shared/utils/role.js";
-import { useState, useEffect } from "react";
-
 const Player_view = ({ question, hasAnswered, onAnswer }) => {
+    if (!question) return null;
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
-
 
     const handleClick = (event) => {
         if (hasAnswered) return;
