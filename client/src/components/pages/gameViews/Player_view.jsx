@@ -7,6 +7,7 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
         if (hasAnswered) return;
 
         const index = Number(event.target.value);
+        console.log("Envoie de ma réponse : ", index)
         onAnswer(index)
     }
     const renderButtons = () => {
