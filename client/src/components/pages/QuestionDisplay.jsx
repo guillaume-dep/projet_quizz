@@ -1,4 +1,4 @@
-const QuestionDisplay = ({ gameCode, question, onNext }) => {
+const QuestionDisplay = ({ question }) => {
 
     /* ----- Question ----- */
 
@@ -18,6 +18,7 @@ const QuestionDisplay = ({ gameCode, question, onNext }) => {
             {theme}
             <br />
             {text}
+            <br />
             {renderAnswers()}
         </div>)
 
