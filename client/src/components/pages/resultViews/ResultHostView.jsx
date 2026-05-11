@@ -19,7 +19,7 @@ const ResultHostView = ({ question, gameCode, isLastQuestion }) => {
                 <button onClick={handleNewQuestion} className="button">{resultOrNextQuestion}</button>
             </div>
             <div>Voici les réponses des questions : </div>
-            <QuestionDisplay question={question} />
+            <QuestionDisplay question={question} showResults={true} selectedAnswer={question.correctIndex} />
         </div>
     )
 }

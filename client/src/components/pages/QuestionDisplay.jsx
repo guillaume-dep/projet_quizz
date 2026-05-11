@@ -1,11 +1,22 @@
-const QuestionDisplay = ({ question }) => {
+import "../../style/ResultCss.css"
+
+const QuestionDisplay = ({ question, showResults, selectedAnswer }) => {
 
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
 
+
+    const setClassName = (index) => {
+        if (!showResults) return `answer ${colors[index]}`
+        if (index === correctIndex) return `answer correct`;
+        if (selectedAnswer === index && index !== correctIndex) return `answer wrong`;
+
+        return `answer faded`;
+    }
+
     const renderAnswers = () => {
         return answers.map((answer, index) => (
-            <div key={index} className={`answer ${colors[index]}`}>
+            <div key={index} className={setClassName(index)}>
                 {answer}
             </div>
         ));
@@ -13,10 +24,9 @@ const QuestionDisplay = ({ question }) => {
 
     return (
         <div className="QuestionDisplay">
-            {theme}
-            <br />
-            {text}
-            <br />
+            <h3>{theme}</h3>
+            <div>{text}</div>
+
             {renderAnswers()}
         </div>)
 
