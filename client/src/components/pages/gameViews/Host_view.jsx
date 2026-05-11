@@ -7,7 +7,7 @@ const Host_view = ({ question, gameCode }) => {
 
     const handleShowResults = () => {
         console.log("Demande de la nouvelle question !")
-        socket.emit(SK.SHOW_RESULTS, gameCode);
+        socket.emit(SK.REQUEST_SHOW_RESULTS, gameCode);
     }
 
     return (
