@@ -15,7 +15,7 @@ const Host_view = ({ question, gameCode }) => {
             <div className="buttonBloc">
                 <button className="getResult" onClick={handleShowResults}>result</button>
             </div>
-            <QuestionDisplay gameCode={gameCode} question={question} />
+            <QuestionDisplay question={question} />
         </div>
 
     )
