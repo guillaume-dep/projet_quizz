@@ -7,6 +7,7 @@ import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
 import Lobby from "./pages/Lobby.jsx"
 import Home from "./pages/Home.jsx"
+import FinalResult from "./pages/FinalResult.jsx";
 
 
 /**
@@ -39,6 +40,8 @@ const App = () => {
   /* Current question */
   const [question, setQuestion] = useState(null);
 
+  /* Last question or not */
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
 
   /* ---------- Routing ---------- */
 
@@ -66,8 +69,7 @@ const App = () => {
 
     const handleGameOver = (scores) => {
       setScores(scores);
-      setView(VIEWS.RESULT);
-
+      setView(VIEWS.FINAL_RESULT);
     }
 
     socket.on(SK.GAME_CREATED, handleGameCreated)
@@ -145,8 +147,9 @@ const App = () => {
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({ playerScore }) => {
+    const handleShowResults = ({ playerScore, isLastQuestionFromServer }) => {
       setScores(playerScore)
+      setIsLastQuestion(isLastQuestionFromServer)
       setView(VIEWS.RESULT)
       console.log("Vu des résultats")
     }
@@ -224,7 +227,16 @@ const App = () => {
         />
 
       case VIEWS.RESULT:
-        return <Result role={role} question={question} gameCode={gameCode} answer={answer} />
+        return <Result
+          role={role}
+          question={question}
+          gameCode={gameCode}
+          answer={answer}
+          isLastQuestion={isLastQuestion}
+        />
+
+      case VIEWS.FINAL_RESULT:
+        return <FinalResult scores={scores} />
     }
   }
 
