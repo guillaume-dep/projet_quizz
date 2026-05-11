@@ -3,7 +3,6 @@ import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
 import { ROLE } from "../../../shared/utils/role.js";
 import { useEffect, useState } from "react";
-
 import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
 import Lobby from "./pages/Lobby.jsx"
@@ -190,7 +189,7 @@ const App = () => {
         />
 
       case VIEWS.RESULT:
-        return <Result question={question} gameCode={gameCode} scores={scores} />
+        return <Result role={role} question={question} gameCode={gameCode} scores={scores} />
     }
   }
 
