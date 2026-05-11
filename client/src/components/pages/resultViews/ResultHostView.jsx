@@ -12,13 +12,12 @@ const ResultHostView = ({ question, gameCode }) => {
     }
 
     return (
-        <div className="Result">
+        <div className="ResultHostView">
             <div className="buttonBloc">
                 <button onClick={handleNewQuestion} className="button">Next Question</button>
             </div>
+            <div>Voici les réponses des questions : </div>
             <QuestionDisplay question={question} />
-
-
         </div>
     )
 }
