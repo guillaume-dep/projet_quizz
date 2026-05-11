@@ -1,0 +1,17 @@
+.answer {
+    padding: 10px;
+}
+
+.correct {
+    background: green;
+    color: white;
+}
+
+.wrong {
+    background: red;
+    color: white;
+}
+
+.faded {
+    opacity: 0.4;
+}
