@@ -1,4 +1,7 @@
-const QuestionDisplay = ({ question }) => {
+const QuestionDisplay = ({ gameCode, question, onNext }) => {
+
+    /* ----- Question ----- */
+
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
 
@@ -16,9 +19,6 @@ const QuestionDisplay = ({ question }) => {
             <br />
             {text}
             {renderAnswers()}
-            <div className="buttonBloc">
-                <button className="nextQuestion">next</button>
-            </div>
         </div>)
 
 }
