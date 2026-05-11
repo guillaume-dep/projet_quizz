@@ -3,22 +3,17 @@ import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 import { ROLE } from "../../../../../shared/utils/role.js";
 import { useState, useEffect } from "react";
 
-const Player_view = ({ question, gameCode, hasAnswered, setHasAnswered }) => {
+const Player_view = ({ question, hasAnswered, onAnswer }) => {
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
 
 
-    /* Double verification so the client can't spam (there's also a server verification) */
-    const handleAnswer = (event) => {
+    const handleClick = (event) => {
         if (hasAnswered) return;
 
-        setHasAnswered(true)
-
-        let answerIndex = Number(event.target.value)
-        console.log(`Envoie de la réponse depuis Player_view : ${answerIndex}`)
-        socket.emit(SK.SUBMIT_ANSWER, answerIndex, gameCode)
+        const index = Number(event.target.value);
+        onAnswer(index)
     }
-
     const renderButtons = () => {
         return answers.map((answer, index) => (
             <button
@@ -26,7 +21,7 @@ const Player_view = ({ question, gameCode, hasAnswered, setHasAnswered }) => {
                 key={index}
                 disabled={hasAnswered}
                 className={`answer-btn ${colors[index]}`}
-                onClick={handleAnswer}
+                onClick={handleClick}
             >
                 {answer}
             </button>
