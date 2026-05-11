@@ -129,7 +129,7 @@ export default class GameManager {
      */
     getNextQuestion() {
 
-        if (this.isGameFinished()) {
+        if (this.isLastQuestion()) {
             this.endGame();
             return null;
         }
@@ -141,7 +141,7 @@ export default class GameManager {
         return this.getCurrentQuestion();
     }
 
-    isGameFinished() {
+    isLastQuestion() {
         return this.#current_question_index >= this.#numberOfQuestionsToPlayWith - 1;
     }
 

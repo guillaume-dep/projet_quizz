@@ -6,7 +6,7 @@ const ResultPlayerView = ({ answer }) => {
     return (
         <div className="ResultPlayerView">
             <h2>{answer.correct ? "Right answer !" : "Bad answer !"}</h2>
-            <p>Points won : {answer.score} </p>
+            <p>Actual number of points : {answer.score} </p>
         </div>
     )
 }
