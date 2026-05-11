@@ -9,5 +9,8 @@ export const VIEWS = {
     GAME: "GAME",
 
     /* Game result view */
-    RESULT: "RESULT"
+    RESULT: "RESULT",
+
+    /* Final result view */
+    FINAL_RESULT: "FINAL_RESULT"
 }
