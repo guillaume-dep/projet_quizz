@@ -5,7 +5,6 @@ import { ROLE } from "../../../../shared/utils/role.js";
 import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
-import { use } from "react";
 
 const Game = ({ role, gameCode, scores, errorMessage, setErrorMessage, question, setQuestion }) => {
 
@@ -43,20 +42,9 @@ const Game = ({ role, gameCode, scores, errorMessage, setErrorMessage, question,
 
     /* If there's a new question we have to state back to false the hasAnswered field */
     useEffect(() => {
-        const handleQuestionSent = (question) => {
-            console.log("Nouvelle question le joueur peut répondre !")
-            setQuestion(question)
-            setAnswer(null)
-            setHasAnswered(false);
-        }
-
-        socket.on(SK.QUESTION_SENT, handleQuestionSent);
-
-        return () => {
-            socket.off(SK.QUESTION_SENT, handleQuestionSent)
-        }
-
-    }, [])
+        setAnswer(null);
+        setHasAnswered(false);
+    }, [question]);
 
     /* ----- Render ----- */
 
