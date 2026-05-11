@@ -27,6 +27,7 @@ export default class IOController {
         socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
+        socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -196,19 +197,27 @@ export default class IOController {
         }
 
         socket.emit(SK.SUBMITTED_ANSWER, result)
-        this.handleResultProcess(gameManager, code);
+
+        if (gameManager.hasEveryPlayerAnswered()) {
+            this.handleShowResults(gameManager, code);
+        }
     }
 
     /* ----- Result ----- */
 
-    handleResultProcess(gameManager, code) {
-        if (gameManager.hasEveryPlayerAnswered()) {
-            gameManager.setResultState()
-            this.#io.to(code).emit(SK.SHOW_RESULTS, {
-                playerScore: gameManager.getScores(), /* [{name, score, domain} */
-                question: gameManager.getCurrentQuestion()
-            })
-        }
+    handleRequestShowResults(socket, code) {
+        const gameManager = this.getGameOrEmitError(socket, code);
+        if (!gameManager) return;
+        if (!gameManager.isHost(socket.id)) return;
+        this.handleShowResults(gameManager, code);
+    }
+
+    handleShowResults(gameManager, code) {
+        gameManager.setResultState()
+        this.#io.to(code).emit(SK.SHOWN_RESULTS, {
+            playerScore: gameManager.getScores(), /* [{name, score, domain} */
+            question: gameManager.getCurrentQuestion()
+        })
     }
 
     /* ----- Emit the next question ----- */

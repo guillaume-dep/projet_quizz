@@ -20,7 +20,8 @@ export const SOCKET_EVENTS = {
     SUBMIT_ANSWER: "submit_answer",
     SUBMITTED_ANSWER: "submitted_answer",
 
-    SHOW_RESULTS: "show_results",
+    REQUEST_SHOW_RESULTS: "request_show_results",
+    SHOWN_RESULTS: "shown_results",
     GAME_OVER: "game_over",
 
     ERROR: "error",
