@@ -1,5 +1,5 @@
 /* Imports */
-import questions from "./data/questions.js"
+/* import questions from "./data/questions.js" */
 import Player from "./utils/player.js"
 import { GAME_STATE } from "./utils/gameState.js"
 
@@ -11,12 +11,17 @@ export default class GameManager {
     #host_id;
     #players_map;
     #current_question_index;
+    #questions;
+    #numberOfQuestionsToPlayWith
 
-    constructor() {
+    constructor(questions, numberOfQuestionsToPlayWith) {
         this.#game_state = GAME_STATE.LOBBY;
         this.#host_id = null; /* socket_id */
+        this.#questions = questions;
         this.#players_map = new Map(); /* Map<socket_id, Player> */
         this.#current_question_index = 0;
+        this.#numberOfQuestionsToPlayWith = Math.min(numberOfQuestionsToPlayWith ?? questions.length, questions.length);
+
     }
 
     /* ----- State ----- */
@@ -107,7 +112,7 @@ export default class GameManager {
      * @return {Object} question object
      */
     getCurrentQuestion() {
-        return questions[this.#current_question_index]
+        return this.#questions[this.#current_question_index]
     }
 
     /**
@@ -123,17 +128,21 @@ export default class GameManager {
      * @return {Object} the next question object if it exists else null
      */
     getNextQuestion() {
-        this.#current_question_index += 1;
 
-        if (this.#current_question_index >= questions.length) {
+        if (this.isGameFinished()) {
             this.endGame();
             return null;
         }
 
+        this.#current_question_index += 1;
         this.resetAnsweredPlayers()
         this.#game_state = GAME_STATE.QUESTION;
 
         return this.getCurrentQuestion();
+    }
+
+    isGameFinished() {
+        return this.#current_question_index >= this.#numberOfQuestionsToPlayWith - 1;
     }
 
     /* ----- Submitting ----- */
