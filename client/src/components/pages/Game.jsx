@@ -6,12 +6,9 @@ import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
 
-const Game = ({ role, gameCode, scores, errorMessage, setErrorMessage, question, setQuestion }) => {
+const Game = ({ role, gameCode, setAnswer, scores, errorMessage, setErrorMessage, question, setQuestion }) => {
 
     const isPlayer = role === ROLE.PLAYER;
-
-    /* An index between 0-numberOfAnswers */
-    const [answer, setAnswer] = useState(null);
 
     /* Useful to know if a player hasAnswered */
     const [hasAnswered, setHasAnswered] = useState(false);
