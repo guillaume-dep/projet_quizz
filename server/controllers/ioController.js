@@ -180,6 +180,11 @@ export default class IOController {
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
 
+        if (gameManager.isHost(socket.id)) {
+            socket.emit(SK.ERROR, { message: "Host cannot answer !" })
+            return;
+        }
+
         const result = gameManager.submitAnswer(socket.id, answerIndex);
 
         console.log(`Answer sent by ${socket.id}`)
