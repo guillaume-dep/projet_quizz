@@ -26,6 +26,10 @@ const App = () => {
   /* View to display */
   const [view, setView] = useState(VIEWS.HOME);
 
+
+  /* Answer of the player, an index between 0 - numberOfAnswers */
+  const [answer, setAnswer] = useState(null);
+
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
@@ -124,6 +128,8 @@ const App = () => {
 
   useEffect(() => {
     const handleQuestionSent = (questionFromServer) => {
+      setView(VIEWS.GAME)
+      setAnswer(null);
       setQuestion(questionFromServer);
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
       console.log(`Question reçu dans question: ${text}`)
@@ -142,6 +148,7 @@ const App = () => {
     const handleShowResults = ({ playerScore }) => {
       setScores(playerScore)
       setView(VIEWS.RESULT)
+      console.log("Vu des résultats")
     }
 
     socket.on(SK.SHOWN_RESULTS, handleShowResults)
@@ -166,6 +173,33 @@ const App = () => {
     }
   }, [])
 
+  /* ----- Sync ----- */
+
+  /*
+  useEffect(() => {
+    socket.emit(SK.REQUEST_SYNC_STATE, gameCode);
+
+    socket.on(SK.SYNC_STATE, (data) => {
+      setPlayers(data.players);
+      setScores(data.scores);
+      setQuestion(data.question);
+
+      switch (data.state) {
+        case "LOBBY":
+          setView(VIEWS.LOBBY);
+          break;
+        case "QUESTION":
+          setView(VIEWS.GAME);
+          break;
+        case "RESULT":
+          setView(VIEWS.RESULT);
+          break;
+      }
+    });
+
+    return () => socket.off("SYNC_STATE");
+  }, [gameCode]); */
+
   /* ----- View ----- */
 
   const renderView = () => {
@@ -181,6 +215,7 @@ const App = () => {
           role={role}
           gameCode={gameCode}
           scores={scores}
+          setAnswer={setAnswer}
           players={players}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
@@ -189,7 +224,7 @@ const App = () => {
         />
 
       case VIEWS.RESULT:
-        return <Result role={role} question={question} gameCode={gameCode} scores={scores} />
+        return <Result role={role} question={question} gameCode={gameCode} answer={answer} />
     }
   }
 

@@ -1,4 +1,5 @@
 import GameManager from "../gameManager.js"
+import questions from "./data/questions.js"
 import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
 import generateCode from "../utils/utils.js"
@@ -28,6 +29,7 @@ export default class IOController {
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
+        /* socket.on(SK.REQUEST_SYNC_STATE, (code) => this.handleSync(socket, code)) */
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -36,7 +38,7 @@ export default class IOController {
     handleCreateGame(socket, player_data) {
 
         const code = generateCode();
-        const gameManager = new GameManager()
+        const gameManager = new GameManager(questions, 2) /* A changer par des valeurs en input */
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
@@ -217,7 +219,6 @@ export default class IOController {
         console.log("Envoie des résultats de la question, partie : ", code)
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playerScore: gameManager.getScores(), /* [{name, score, domain} */
-            question: gameManager.getCurrentQuestion() /* inutile ? */
         })
     }
 
@@ -255,4 +256,20 @@ export default class IOController {
 
         return gameManager;
     }
+
+    /* ----- Sync ----- */
+
+    /*
+    handleSync(socket, code) {
+        const gameManager = this.#rooms.get(code);
+        if (!gameManager) return;
+
+        socket.emit("SYNC_STATE", {
+            state: gameManager.getGameState(),
+            question: gameManager.getCurrentQuestion(),
+            players: gameManager.getPlayers(),
+            scores: gameManager.getScores(),
+        });
+    }
+    */
 }
