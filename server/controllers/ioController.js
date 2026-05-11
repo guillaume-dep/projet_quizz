@@ -214,6 +214,7 @@ export default class IOController {
 
     handleShowResults(gameManager, code) {
         gameManager.setResultState()
+        console.log("Envoie des résultats de la question, partie : ", code)
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playerScore: gameManager.getScores(), /* [{name, score, domain} */
             question: gameManager.getCurrentQuestion()
