@@ -185,6 +185,7 @@ const App = () => {
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
           question={question}
+          setQuestion={setQuestion}
         />
 
       case VIEWS.RESULT:
