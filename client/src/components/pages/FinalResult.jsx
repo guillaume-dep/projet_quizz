@@ -1,6 +1,3 @@
-
-import { ROLE } from "../../../../shared/utils/role.js";
-
 const FinalResult = ({ scores }) => {
 
     const renderFinalResult = scores
