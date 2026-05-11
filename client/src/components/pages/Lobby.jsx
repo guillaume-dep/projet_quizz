@@ -5,7 +5,7 @@ import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 const Lobby = ({ players, gameCode, role }) => {
 
     const playersMap = players.map((p, i) => (
-        <div key={i}>{p.name.trim()} {"- " + p.domain.trim().toLowerCase()}</div>)
+        <div key={i}>{p.name.trim()} {p.domain.trim().toLowerCase()}</div>)
     )
 
     const handleStartGame = () => {
