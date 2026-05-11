@@ -8,17 +8,11 @@ const Host_view = ({ question, hasAnswered, onAnswer }) => {
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
 
-    const renderButtons = () => {
+    const renderAnswers = () => {
         return answers.map((answer, index) => (
-            <button
-                value={index}
-                key={index}
-                disabled={hasAnswered}
-                className={`answer-btn ${colors[index]}`}
-                onClick={onAnswer}
-            >
+            <div className={`answer ${colors[index]}`}>
                 {answer}
-            </button>
+            </div>
         ));
     }
 
@@ -28,7 +22,7 @@ const Host_view = ({ question, hasAnswered, onAnswer }) => {
             <br />
             {text}
             <br />
-            {renderButtons()}
+            {renderAnswers()}
         </div>
 
     )
