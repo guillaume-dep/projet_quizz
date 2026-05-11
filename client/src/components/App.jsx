@@ -142,12 +142,13 @@ const App = () => {
   useEffect(() => {
     const handleShowResults = ({ playerScore }) => {
       setScores(playerScore)
+      setView(VIEWS.RESULT)
     }
 
-    socket.on(SK.SHOW_RESULTS, handleShowResults)
+    socket.on(SK.SHOWN_RESULTS, handleShowResults)
 
     return () => {
-      socket.off(SK.SHOW_RESULTS, handleShowResults);
+      socket.off(SK.SHOWN_RESULTS, handleShowResults);
     }
   }, [])
 
