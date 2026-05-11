@@ -25,7 +25,7 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
     }
 
     return (
-        <div>
+        <div className="Player_view">
             {text}
             <br />
             {renderButtons()}

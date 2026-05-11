@@ -1,7 +1,5 @@
 const QuestionDisplay = ({ question }) => {
 
-    /* ----- Question ----- */
-
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = ["red", "blue", "green", "yellow"];
 
@@ -14,7 +12,7 @@ const QuestionDisplay = ({ question }) => {
     }
 
     return (
-        <div>
+        <div className="QuestionDisplay">
             {theme}
             <br />
             {text}
