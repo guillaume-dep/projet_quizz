@@ -6,14 +6,14 @@ import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 const Host_view = ({ question, gameCode }) => {
 
     const handleShowResults = () => {
-        console.log("Demande de la nouvelle question !")
+        console.log("Demande des résultats de la question !")
         socket.emit(SK.REQUEST_SHOW_RESULTS, gameCode);
     }
 
     return (
         <div>
             <div className="buttonBloc">
-                <button className="nextQuestion" onClick={handleShowResults}>result</button>
+                <button className="getResult" onClick={handleShowResults}>result</button>
             </div>
             <QuestionDisplay gameCode={gameCode} question={question} />
         </div>
