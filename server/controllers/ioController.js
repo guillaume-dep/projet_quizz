@@ -45,7 +45,7 @@ export default class IOController {
     handleCreateGame(socket, player_data) {
 
         const code = generateCode();
-        const gameManager = new GameManager(questions, 2) /* A changer par des valeurs en input */
+        const gameManager = new GameManager(questions, 5) /* A changer par des valeurs en input */
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
@@ -85,6 +85,11 @@ export default class IOController {
         const { id, text, theme, answers, correctIndex, value, coef } = gameManager.getCurrentQuestion();
         console.log(`Question : ${text}`)
         this.#io.to(code).emit(SK.QUESTION_SENT, gameManager.getCurrentQuestion());
+        this.#io.to(code).emit(SK.ANSWER_PROGRESS, {
+            numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
+            numberOfPlayer: gameManager.getNumberOfPlayers()
+        });
+
     }
 
     /* ----- Player ----- */
@@ -206,11 +211,20 @@ export default class IOController {
             return;
         }
 
+        console.log(result)
+        const numberOfPlayer = gameManager.getNumberOfPlayers()
+        const numberOfPlayerNotAnswered = gameManager.getNumberPlayersNotAnswered()
         socket.emit(SK.SUBMITTED_ANSWER, result)
+        console.log("number of players  :", numberOfPlayer)
+        console.log("number of players that have to answer :", numberOfPlayerNotAnswered)
 
+        this.#io.to(code).emit(SK.ANSWER_PROGRESS, { numberOfPlayerNotAnswered, numberOfPlayer })
+
+        /*
         if (gameManager.hasEveryPlayerAnswered()) {
             this.handleShowResults(gameManager, code);
         }
+        */
     }
 
     /* ----- Result ----- */

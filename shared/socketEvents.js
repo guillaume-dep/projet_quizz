@@ -18,6 +18,7 @@ export const SOCKET_EVENTS = {
     QUESTION_SENT: "question_sent",
 
     SUBMIT_ANSWER: "submit_answer",
+    ANSWER_PROGRESS: "answer_progress",
     SUBMITTED_ANSWER: "submitted_answer",
 
     REQUEST_SHOW_RESULTS: "request_show_results",

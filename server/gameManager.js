@@ -163,6 +163,13 @@ export default class GameManager {
     /* ----- Submitting ----- */
 
     /**
+     * @return {Number} remaining number of player to play
+    */
+    getNumberPlayersNotAnswered() {
+        return [...this.#players_map.values()].reduce((acc, player) => (!player.hasAnswered()) ? acc += 1 : acc, 0)
+    }
+
+    /**
      * @return {boolean} true if every player has answered else false
      */
     hasEveryPlayerAnswered() {
