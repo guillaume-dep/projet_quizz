@@ -37,7 +37,6 @@ export default class IOController {
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
-        socket.on(SK.REQUEST_SYNC_STATE, (code) => this.handleSync(socket, code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
