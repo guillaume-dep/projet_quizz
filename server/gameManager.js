@@ -141,6 +141,21 @@ export default class GameManager {
         return this.getCurrentQuestion();
     }
 
+    /**
+     * Mark as answered every player that haven't answered
+     */
+    markAnsweredEveryPlayer() {
+        this.#players_map.forEach((player) => {
+            if (!player.hasAnswered()) {
+                player.markAnswered();
+            }
+        })
+    }
+
+    /**
+     * Return true if last question else false
+     * @returns {boolean}
+     */
     isLastQuestion() {
         return this.#current_question_index >= this.#numberOfQuestionsToPlayWith - 1;
     }
