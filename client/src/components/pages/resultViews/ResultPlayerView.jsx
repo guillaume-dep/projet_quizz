@@ -1,12 +1,25 @@
 const ResultPlayerView = ({ answer }) => {
 
-    if (answer === null) return;
+    console.log("Reponse du joueur : ", answer)
 
-    console.log("Reponse du joueur : ", answer.correct)
+    const renderAnswer = () => {
+        if (answer === null) {
+            return "No answer given !"
+        }
+        return answer.correct ? "Right answer !" : "Bad answer !"
+    }
+
+    const renderScore = () => {
+        if (answer === null) {
+            return "0 point"
+        }
+        return `Actual number of points : ${answer.score}`
+    }
+
     return (
         <div className="ResultPlayerView">
-            <h2>{answer.correct ? "Right answer !" : "Bad answer !"}</h2>
-            <p>Actual number of points : {answer.score} </p>
+            <h2>{renderAnswer()}</h2>
+            <p>{renderScore()}</p>
         </div>
     )
 }
