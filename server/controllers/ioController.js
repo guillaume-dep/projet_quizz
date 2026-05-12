@@ -23,13 +23,21 @@ export default class IOController {
     }
 
     setupListeners(socket) {
+        /*
+        socket.on(SK.CONNECT, () => {
+            const code = this.#socket_to_room.get(socket.id);
+            if (code) {
+                this.handleSync(socket, code);
+            }
+        });
+        */
         socket.on(SK.CREATE_GAME, (player_data) => this.handleCreateGame(socket, player_data))
         socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
         socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
-        /* socket.on(SK.REQUEST_SYNC_STATE, (code) => this.handleSync(socket, code)) */
+        socket.on(SK.REQUEST_SYNC_STATE, (code) => this.handleSync(socket, code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -147,6 +155,7 @@ export default class IOController {
     }
 
     handleHostLeavingGame(code) {
+        console.log(`Emitting HOST_LEFT to room ${code}`);
         this.#io.to(code).emit(SK.HOST_LEFT, { message: "Host disconnected, game over !" });
         console.log(`Host disconnected, game ${code} over !`)
         this.#rooms.delete(code);
@@ -237,7 +246,7 @@ export default class IOController {
         const question = gameManager.getNextQuestion();
         if (!question) {
             this.#io.to(code).emit(SK.GAME_OVER, gameManager.getScores());
-            this.#rooms.delete(code);
+            /* this.#rooms.delete(code); */
             return;
         }
 
@@ -257,20 +266,4 @@ export default class IOController {
 
         return gameManager;
     }
-
-    /* ----- Sync ----- */
-
-    /*
-    handleSync(socket, code) {
-        const gameManager = this.#rooms.get(code);
-        if (!gameManager) return;
-
-        socket.emit("SYNC_STATE", {
-            state: gameManager.getGameState(),
-            question: gameManager.getCurrentQuestion(),
-            players: gameManager.getPlayers(),
-            scores: gameManager.getScores(),
-        });
-    }
-    */
 }
