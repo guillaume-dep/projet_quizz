@@ -242,6 +242,8 @@ export default class IOController {
             return;
         }
 
+        gameManager.markAnsweredEveryPlayer();
+
         const question = gameManager.getNextQuestion();
         if (!question) {
             this.#io.to(code).emit(SK.GAME_OVER, gameManager.getScores());
