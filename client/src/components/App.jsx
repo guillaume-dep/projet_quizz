@@ -2,6 +2,7 @@ import { socket } from "../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
 import { ROLE } from "../../../shared/utils/role.js";
+import { GAME_STATE } from "../../../server/utils/gameState.js";
 import { useEffect, useState } from "react";
 import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
@@ -101,7 +102,7 @@ const App = () => {
     }
 
     const handleHostLeft = ({ message }) => {
-      console.log(message);
+      console.log("HOST_LEFT reçu :", message);
 
       setPlayers([]);
       setScores([]);
@@ -175,33 +176,6 @@ const App = () => {
       socket.off(SK.ERROR, handleError);
     }
   }, [])
-
-  /* ----- Sync ----- */
-
-  /*
-  useEffect(() => {
-    socket.emit(SK.REQUEST_SYNC_STATE, gameCode);
-
-    socket.on(SK.SYNC_STATE, (data) => {
-      setPlayers(data.players);
-      setScores(data.scores);
-      setQuestion(data.question);
-
-      switch (data.state) {
-        case "LOBBY":
-          setView(VIEWS.LOBBY);
-          break;
-        case "QUESTION":
-          setView(VIEWS.GAME);
-          break;
-        case "RESULT":
-          setView(VIEWS.RESULT);
-          break;
-      }
-    });
-
-    return () => socket.off("SYNC_STATE");
-  }, [gameCode]); */
 
   /* ----- View ----- */
 
