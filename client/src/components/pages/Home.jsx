@@ -5,6 +5,9 @@ import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 import ChoiceView from "./homeViews/ChoiceView.jsx";
 import FormView from "./homeViews/FormView.jsx";
 
+/* CSS */
+import styles from "../../style/home.module.css";
+
 /**
  * Display the home of the game
  * You can choose between joining or creating a game
@@ -38,26 +41,28 @@ const Home = ({ setRole, errorMessage, setErrorMessage }) => {
     }
 
     return (
-        <div className="home">
-            <h1 className="title">Home</h1>
-            {!mode ? (
-                <ChoiceView setMode={setMode} />
-            ) :
+        <div className={styles.home}>
+            <h1 className={styles.title}>Home</h1>
+            <div className={styles.container}>
+                {!mode ? (
+                    <ChoiceView setMode={setMode} />
+                ) :
 
-                <FormView
-                    mode={mode}
-                    name={name}
-                    domain={domain}
-                    inputGameCode={inputGameCode}
-                    setName={setName}
-                    setDomain={setDomain}
-                    setInputGameCode={setInputGameCode}
-                    handleCreateGame={handleCreateGame}
-                    handleJoinGame={handleJoinGame}
-                    errorMessage={errorMessage}
-                    setErrorMessage={setErrorMessage}
-                />
-            }
+                    <FormView
+                        mode={mode}
+                        name={name}
+                        domain={domain}
+                        inputGameCode={inputGameCode}
+                        setName={setName}
+                        setDomain={setDomain}
+                        setInputGameCode={setInputGameCode}
+                        handleCreateGame={handleCreateGame}
+                        handleJoinGame={handleJoinGame}
+                        errorMessage={errorMessage}
+                        setErrorMessage={setErrorMessage}
+                    />
+                }
+            </div>
         </div>
     )
 }
