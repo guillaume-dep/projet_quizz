@@ -22,15 +22,23 @@ const App = () => {
   /* Players in game */
   const [players, setPlayers] = useState([])
 
+  /* Number of answers */
+  const [answerProgress, setAnswerProgress] = useState({
+    remaining: 0,
+    total: 0
+  });
+
   /* The code of the game which the player is in */
   const [gameCode, setGameCode] = useState("");
 
   /* View to display */
   const [view, setView] = useState(VIEWS.HOME);
 
-
   /* Answer of the player, an index between 0 - numberOfAnswers */
   const [answer, setAnswer] = useState(null);
+
+  /* Useful to know if a player hasAnswered */
+  const [hasAnswered, setHasAnswered] = useState(false);
 
   /* Global scores of the game */
   const [scores, setScores] = useState([])
@@ -145,12 +153,28 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleProgress = ({ numberOfPlayerNotAnswered, numberOfPlayer }) => {
+      console.log("ANSWER_PROGRESS reçu :", numberOfPlayerNotAnswered, numberOfPlayer);
+      setAnswerProgress({
+        remaining: numberOfPlayerNotAnswered,
+        total: numberOfPlayer
+      });
+    };
+
+    socket.on(SK.ANSWER_PROGRESS, handleProgress);
+
+    return () => {
+      socket.off(SK.ANSWER_PROGRESS, handleProgress);
+    };
+  }, []);
+
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({ playerScore, isLastQuestionFromServer }) => {
+    const handleShowResults = ({ playerScore, isLastQuestion }) => {
       setScores(playerScore)
-      setIsLastQuestion(isLastQuestionFromServer)
+      setIsLastQuestion(isLastQuestion)
       setView(VIEWS.RESULT)
       console.log("Vu des résultats")
     }
@@ -190,14 +214,12 @@ const App = () => {
       case VIEWS.GAME:
         return <Game
           role={role}
+          hasAnswered={hasAnswered}
+          setHasAnswered={setHasAnswered}
           gameCode={gameCode}
-          scores={scores}
+          answerProgress={answerProgress}
           setAnswer={setAnswer}
-          players={players}
-          errorMessage={errorMessage}
-          setErrorMessage={setErrorMessage}
           question={question}
-          setQuestion={setQuestion}
         />
 
       case VIEWS.RESULT:

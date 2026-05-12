@@ -6,12 +6,9 @@ import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
 
-const Game = ({ role, gameCode, setAnswer, scores, errorMessage, setErrorMessage, question, setQuestion }) => {
+const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAnswered, question }) => {
 
     const isPlayer = role === ROLE.PLAYER;
-
-    /* Useful to know if a player hasAnswered */
-    const [hasAnswered, setHasAnswered] = useState(false);
 
     /* When a player answer, we submit it */
     const onAnswer = (answerIndex) => {
@@ -25,9 +22,9 @@ const Game = ({ role, gameCode, setAnswer, scores, errorMessage, setErrorMessage
 
     /* Useful to retrieve the result from an answer */
     useEffect(() => {
-        const handleSubmittedAnswer = (answerFromServer) => {
-            console.log("Reponse reçu du serveur à la question :", answerFromServer);
-            setAnswer(answerFromServer)
+        const handleSubmittedAnswer = (result) => {
+            console.log("Reponse reçu du serveur à la question : ", result);
+            setAnswer(result)
         }
 
         socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
@@ -58,6 +55,7 @@ const Game = ({ role, gameCode, setAnswer, scores, errorMessage, setErrorMessage
             return <Host_view
                 question={question}
                 gameCode={gameCode}
+                answerProgress={answerProgress}
             />
         }
 

@@ -9,10 +9,10 @@ import { ROLE } from "../../../../../shared/utils/role.js";
 const ResultHostView = ({ question, gameCode, isLastQuestion }) => {
     const handleNewQuestion = () => {
         socket.emit(SK.REQUEST_NEW_QUESTION, gameCode)
-        console.log("Est le dernière question :", isLastQuestion)
     }
 
     const resultOrNextQuestion = (!isLastQuestion) ? "next question" : "final result";
+    console.log(isLastQuestion)
 
     return (
         <div className="ResultHostView">

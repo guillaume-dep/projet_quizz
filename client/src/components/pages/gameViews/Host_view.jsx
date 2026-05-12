@@ -3,7 +3,7 @@ import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 
 
-const Host_view = ({ question, gameCode }) => {
+const Host_view = ({ question, gameCode, answerProgress }) => {
 
     const handleShowResults = () => {
         console.log("Demande des résultats de la question !")
@@ -12,6 +12,7 @@ const Host_view = ({ question, gameCode }) => {
 
     return (
         <div className="Host_view">
+            <div>Nombre de joueurs qui doivent encore répondre : {answerProgress.remaining - 1} / {answerProgress.total - 1}</div>
             <div className="buttonBloc">
                 <button className="getResult" onClick={handleShowResults}>result</button>
             </div>
