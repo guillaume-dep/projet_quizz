@@ -1,0 +1,75 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--space-1);
+    background-color: var(--whiteText);
+    color: var(--blackText);
+
+    font-size: var(--text-xs);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.footerSection {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Desktop layout */
+.footerTop {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--space-1);
+}
+
+/* Section texte */
+.footer h4 {
+    font-size: var(--text-md);
+    margin: 0;
+    font-weight: 600;
+}
+
+.footer p {
+    margin: 0;
+    font-size: var(--text-xs);
+    opacity: 0.8;
+}
+
+/* Mobile-only block */
+.footerSectionOnlyMobile {
+    display: none;
+    text-align: center;
+}
+
+/* Footer bottom (optionnel si tu le gardes) */
+.footerBottom {
+    text-align: center;
+    margin-top: var(--space-1);
+
+    font-size: var(--text-xs);
+    opacity: 0.6;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .footer {
+        padding: var(--space-2);
+    }
+
+    /* cacher tout par défaut */
+    .footerSection {
+        display: none;
+    }
+
+    /* ré-afficher uniquement la section centrale */
+    .footerSection:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        font-size: var(--text-xs);
+        opacity: 0.7;
+    }
+}

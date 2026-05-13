@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 :root {
     --bg: #5448C8;
     /* #0D1321 */
     --blackPanel: #222E50;
     --whitePanel: #F7EBE8;
+    --footerPanel: #F6E4F6;
     --whiteText: #FFFECB;
     --blackText: #1A1423;
 
@@ -29,9 +32,61 @@
     --radius-lg: 12px;
 }
 
+:root {
+    --font-main: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --font-title: 'Poppins', system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-md: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.75rem;
+    --text-2xl: 2.25rem;
+}
+
+h1 {
+    font-size: var(--text-2xl);
+    font-family: var(--font-title);
+}
+
+h2 {
+    font-size: var(--text-xl);
+}
+
+h3 {
+    font-size: var(--text-lg);
+}
+
+button {
+    font-size: var(--text-md);
+    font-family: var(--font-main);
+}
+
+@media (max-width: 768px) {
+    :root {
+        --text-2xl: 1.75rem;
+        --text-xl: 1.25rem;
+        --text-lg: 1.1rem;
+    }
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+
 body {
     margin: 0;
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-main);
+    font-size: var(--text-md);
     background-color: var(--bg);
     color: var(--whiteText);
+}
+
+* {
+    box-sizing: border-box;
 }
