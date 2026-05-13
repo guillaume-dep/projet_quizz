@@ -1,3 +1,37 @@
-:root{
-    
+:root {
+    --bg: #5448C8;
+    /* #0D1321 */
+    --blackPanel: #222E50;
+    --whitePanel: #F7EBE8;
+    --whiteText: #FFFECB;
+    --blackText: #1A1423;
+
+    --succcess: #32936F;
+    --error: #ED474A;
+
+    /* #FD151B */
+    --choice1: #CC2936;
+    --choice2: #058ED9;
+    --choice3: #1A936F;
+    --choice4: #FFC857
+}
+
+:root {
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 2rem;
+}
+
+:root {
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--whiteText);
 }
