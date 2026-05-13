@@ -1,5 +1,5 @@
 import { STUDY_DOMAIN } from "../../../../../server/utils/studyDomain";
-import { VIEWS } from "../../utils/views";
+import styles from "../../../style/formView.module.css";
 
 const FormView = ({
     mode,
@@ -14,7 +14,6 @@ const FormView = ({
     errorMessage,
     setErrorMessage,
     setMode
-
 }) => {
 
     const isNameValid = name.trim().length > 0;
@@ -24,17 +23,17 @@ const FormView = ({
     const domainOptions = Object.values(STUDY_DOMAIN);
 
     const handleSetName = (event) => {
-        setName(event.target.value)
-    }
+        setName(event.target.value);
+    };
 
     const handleSetDomain = (event) => {
-        setDomain(event.target.value)
-    }
+        setDomain(event.target.value);
+    };
 
     const handleSetInputGameCode = (event) => {
-        setInputGameCode(event.target.value)
-        setErrorMessage("")
-    }
+        setInputGameCode(event.target.value);
+        setErrorMessage("");
+    };
 
     const handleReturnToHome = () => {
         setMode(null);
@@ -42,67 +41,139 @@ const FormView = ({
         setInputGameCode("");
         setName("");
         setDomain("");
-    }
+    };
 
-    return (
-        <div className="formView">
+    const renderJoinFields = () => {
+        if (mode !== "join") return null;
 
-            <button onClick={handleReturnToHome}>Retour</button>
-            <input
-                className="input"
-                placeholder="Pseudo..."
-                required
-                type="text"
-                value={name}
-                onChange={handleSetName}
-            />
+        return (
+            <>
+                <div className={styles.coolinput}>
+                    <label className={styles.label}>Domaine</label>
 
-            {mode === "join" && (
-
-                <div>
                     <select
-                        className="select"
-                        placeholder="Domaine..."
-                        required
-                        type="text"
+                        className={styles.select}
                         value={domain}
-                        onChange={handleSetDomain}>
-                        <option value="" disabled>Choisissez un domaine...</option>
-                        {domainOptions.map(domainOption => (
-                            <option key={domainOption} value={domainOption}>
-                                {domainOption.toLocaleLowerCase()}
-                            </option>
-                        ))
-                        }
+                        onChange={handleSetDomain}
+                    >
+                        <option value="" disabled>
+                            Choisissez un domaine...
+                        </option>
 
+                        {domainOptions.map((domainOption) => (
+                            <option
+                                key={domainOption}
+                                value={domainOption}
+                            >
+                                {domainOption.toLowerCase()}
+                            </option>
+                        ))}
                     </select>
+                </div>
+
+                <div className={styles.coolinput}>
+                    <label className={styles.label}>Code</label>
 
                     <input
-                        className="input"
-                        placeholder="Code..."
-                        required
+                        className={styles.input}
                         type="text"
+                        placeholder="Code à 4 chiffres..."
+                        maxLength={4}
                         value={inputGameCode}
                         onChange={handleSetInputGameCode}
-                        maxLength={4}
                     />
                 </div>
+            </>
+        );
+    };
 
-            )}
+    const renderSubmitButton = () => {
+        if (mode === "create") {
+            return (
+                <button
+                    onClick={handleCreateGame}
+                    disabled={!isNameValid}
+                    className={styles.submitButton}
+                >
+                    Create game
+                </button>
+            );
+        }
 
-            {errorMessage && (
-                <div className="error_message">
-                    {errorMessage}
-                </div>
-            )}
+        if (mode === "join") {
+            return (
+                <button
+                    className={styles.submitButton}
+                    onClick={handleJoinGame}
+                    disabled={!(
+                        isNameValid &&
+                        isDomainValid &&
+                        isInputGameCodeValid
+                    )}
+                >
+                    Join game
+                </button>
+            );
+        }
 
-            <div className="buttonBloc">
-                {mode === "create" && <button onClick={handleCreateGame} disabled={!(isNameValid)}>Create game</button>}
-                {mode === "join" && <button onClick={handleJoinGame} disabled={!(isNameValid && isDomainValid && isInputGameCodeValid)}>Join game</button>}
+        return null;
+    };
+
+    const renderError = () => {
+        if (!errorMessage) return null;
+
+        return (
+            <div className={styles.error_message}>
+                {errorMessage}
+            </div>
+        );
+    };
+
+    return (
+        <div className={styles.formView}>
+
+            <button
+                className={styles.backButton}
+                onClick={handleReturnToHome}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className={styles.backIcon}
+                >
+                    <path d="M8.83 6a30.23 30.23 0 0 0-5.62 5.406A.949.949 0 0 0 3 12m5.83 6a30.233 30.233 0 0 1-5.62-5.406A.949.949 0 0 1 3 12m0 0h18" />
+                </svg>
+
+                Retour
+            </button>
+
+            <div className={styles.coolinput}>
+                <label className={styles.label}>Pseudo</label>
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="..."
+                    value={name}
+                    onChange={handleSetName}
+                />
+            </div>
+
+            {renderJoinFields()}
+
+            {renderError()}
+
+            <div className={styles.buttonBloc}>
+                {renderSubmitButton()}
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 export default FormView;

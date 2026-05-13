@@ -1,0 +1,159 @@
+.formView {
+    width: 100%;
+    max-width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    padding: var(--space-4);
+
+    background: var(--whitePanel);
+    color: var(--blackText);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.backButton {
+    align-self: flex-start;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+
+    padding: var(--space-1) var(--space-2);
+
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+
+    color: var(--blackText);
+
+    font-size: var(--text-sm);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.backButton:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.backIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.coolinput {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.label {
+    position: relative;
+    top: 0.5rem;
+
+    width: fit-content;
+
+    margin-left: var(--space-2);
+
+    padding: 0 var(--space-1);
+
+    background: var(--whitePanel);
+
+    color: var(--bg);
+
+    font-size: var(--text-xs);
+    font-weight: 700;
+}
+
+.input,
+.select {
+    width: 100%;
+
+    padding: var(--space-2);
+
+    border: 2px solid var(--choice2);
+    border-radius: var(--radius-md);
+
+    background: var(--whitePanel);
+    color: var(--blackText);
+
+    font-size: var(--text-sm);
+
+    outline: none;
+
+    transition: border-color 0.2s ease;
+}
+
+.input:focus,
+.select:focus {
+    border-color: var(--bg);
+}
+
+.buttonBloc {
+    display: flex;
+    justify-content: center;
+
+    margin-top: var(--space-2);
+}
+
+.submitButton {
+    min-width: 180px;
+
+    padding: var(--space-2) var(--space-4);
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background: var(--bg);
+    color: var(--whiteText);
+
+    font-size: var(--text-md);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: var(--error);
+
+    font-size: var(--text-xs);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .formView {
+        width: 100%;
+        padding: var(--space-3);
+    }
+
+    .submitButton {
+        width: 100%;
+    }
+}
