@@ -9,7 +9,11 @@ import Game from "./pages/Game.jsx"
 import Lobby from "./pages/Lobby.jsx"
 import Home from "./pages/Home.jsx"
 import FinalResult from "./pages/FinalResult.jsx";
+import Footer from "../components/pages/Footer.jsx";
 
+
+/* CSS */
+import styles from "../style/app.module.css";
 
 /**
  * Every player have their own app which decides the view to display
@@ -237,8 +241,11 @@ const App = () => {
   }
 
   return (
-    <div className="app">
-      {renderView()}
+    <div className={styles.app}>
+      <div className={styles.content}>
+        {renderView()}
+      </div>
+      <Footer />
     </div>
   );
 };
