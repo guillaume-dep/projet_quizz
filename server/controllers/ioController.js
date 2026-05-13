@@ -33,6 +33,7 @@ export default class IOController {
         */
         socket.on(SK.CREATE_GAME, (player_data) => this.handleCreateGame(socket, player_data))
         socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
+        socket.on(SK.REQUEST_LEAVE_GAME, (code) => this.handleLeaveGame(socket, code))
         socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
@@ -129,6 +130,29 @@ export default class IOController {
 
     /* ----- Players leaving the game ----- */
 
+    removePlayerFromGame(socket, code) {
+        const gameManager = this.#rooms.get(code);
+        if (!gameManager) return null;
+
+        const player = gameManager.getPlayer(socket.id);
+        if (!player) return null;
+
+        gameManager.removePlayer(socket.id);
+        socket.leave(code);
+        this.#socket_to_room.delete(socket.id);
+
+        return { gameManager, player };
+    }
+
+    afterPlayerRemoval(gameManager, code) {
+        if (gameManager.getGameState() === GAME_STATE.QUESTION) {
+            this.#io.to(code).emit(SK.ANSWER_PROGRESS, {
+                numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
+                numberOfPlayer: gameManager.getNumberOfPlayers()
+            });
+        }
+    }
+
     handleDisconnect(socket) {
         const code = this.#socket_to_room.get(socket.id);
         if (!code) return;
@@ -136,26 +160,20 @@ export default class IOController {
         const gameManager = this.#rooms.get(code);
         if (!gameManager) return;
 
-        if (gameManager.isHost(socket.id)) {
-            this.handleHostLeavingGame(code, gameManager);
+        const isHost = gameManager.isHost(socket.id);
+
+        const result = this.removePlayerFromGame(socket, code);
+        if (!result) return;
+
+        const { player } = result;
+
+        if (isHost) {
+            this.handleHostLeavingGame(code);
             return;
         }
 
-        const player = gameManager.getPlayer(socket.id);
-        gameManager.removePlayer(socket.id);
-        switch (gameManager.getGameState()) {
-            case GAME_STATE.LOBBY:
-                this.handlePlayerLeavingLobby(player, code, gameManager);
-                break;
-            case GAME_STATE.QUESTION:
-                this.handlePlayerLeavingQuestion(player, code, gameManager);
-                break;
-            case GAME_STATE.RESULT:
-                this.handlePlayerLeavingResult(player, code, gameManager);
-                break;
-        }
-
-        this.#socket_to_room.delete(socket.id);
+        this.handleLeavingGameState(player, code, gameManager);
+        this.afterPlayerRemoval(gameManager, code)
     }
 
     handleHostLeavingGame(code) {
@@ -179,7 +197,7 @@ export default class IOController {
             message: `Player ${player.name} has been disconnected during the game`,
             players: gameManager.getPlayers()
         });
-        this.handleResultProcess(gameManager, code);
+        /* this.handleResultProcess(gameManager, code); */
     }
 
     handlePlayerLeavingResult(player, code, gameManager) {
@@ -188,6 +206,29 @@ export default class IOController {
             message: `Player ${player.name} has been disconnected during the result`,
             players: gameManager.getPlayers()
         });
+    }
+
+    handleLeavingGameState(player, code, gameManager){
+        switch (gameManager.getGameState()) {
+            case GAME_STATE.LOBBY:
+                this.handlePlayerLeavingLobby(player, code, gameManager);
+                break;
+            case GAME_STATE.QUESTION:
+                this.handlePlayerLeavingQuestion(player, code, gameManager);
+                break;
+            case GAME_STATE.RESULT:
+                this.handlePlayerLeavingResult(player, code, gameManager);
+                break;
+        }
+    }
+
+    handleLeaveGame(socket, code) {
+        const result = this.removePlayerFromGame(socket, code);
+        if (!result) return;
+
+        const { gameManager, player } = result;
+        this.handleLeavingGameState(player, code, gameManager)
+        this.afterPlayerRemoval(gameManager, code)
     }
 
     /* ----- Submit an answer of a player ----- */

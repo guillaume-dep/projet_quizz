@@ -128,16 +128,35 @@ const App = () => {
     socket.on(SK.PLAYER_REMOVED, handlePlayerLeft)
     socket.on(SK.HOST_LEFT, handleHostLeft)
 
-
-
     return () => {
       socket.off(SK.PLAYER_JOINED, handlePlayerJoined)
       socket.off(SK.PLAYER_REMOVED, handlePlayerLeft)
       socket.off(SK.HOST_LEFT, handleHostLeft)
-
-
     }
   }, [])
+
+  const handleLeaveGame = (gameCode) => {
+    socket.emit(SK.REQUEST_LEAVE_GAME, gameCode);
+
+    setQuestion(null);
+    setPlayers([]);
+    setScores([]);
+    setAnswer(null);
+    setHasAnswered(false);
+    setIsLastQuestion(false);
+
+    setView(VIEWS.HOME);
+    setGameCode("");
+  };
+
+  const renderButton = () => {
+    if (view !== VIEWS.HOME) {
+      return <button
+        className={styles.leaveButton}
+        onClick={() => handleLeaveGame(gameCode)}
+      >Quitter </button>
+    }
+  }
 
   /* ----- Question ----- */
 
@@ -210,7 +229,12 @@ const App = () => {
   const renderView = () => {
     switch (view) {
       case VIEWS.HOME:
-        return <Home setRole={setRole} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
+        return <Home
+          setRole={setRole}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+          setView={setView}
+        />
 
       case VIEWS.LOBBY:
         return <Lobby players={players} gameCode={gameCode} role={role} />
@@ -245,6 +269,7 @@ const App = () => {
       <div className={styles.content}>
         {renderView()}
       </div>
+      {renderButton()}
       <Footer />
     </div>
   );
