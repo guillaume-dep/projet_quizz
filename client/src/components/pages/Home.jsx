@@ -42,7 +42,12 @@ const Home = ({ setRole, errorMessage, setErrorMessage }) => {
 
     return (
         <div className={styles.home}>
-            <h1 className={styles.title}>Quiz Game</h1>
+            <div className={styles.titleContainer}>
+                <h1 className={styles.title}>Quiz Game</h1>
+                <h2 className={styles.underTitle}>Create or join a game !</h2>
+            </div>
+
+
             <div className={styles.container}>
                 {!mode ? (
                     <ChoiceView setMode={setMode} />
