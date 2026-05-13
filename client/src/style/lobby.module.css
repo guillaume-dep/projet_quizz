@@ -1,0 +1,204 @@
+/*
+Sur ordinateur : 
+
+bloc principal horizontale avec le pseudo du host ; Game of PSEUDO 
+à côté un PIPE | avec code de la partie [CODE]
+
+en dessous de tout cela : 
+
+un bloc avec les joueurs connectés et leurs pseudos (sur ordi une grid) avec au dessus de cette grid le nombre de joueur de la partie.
+
+tout en bas au centre un bouton Start game.
+
+Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs connectés avec leur pseudo mais en colonne pas en grid.
+*/
+
+.lobby {
+    width: 100%;
+    max-width: 1000px;
+
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: var(--space-4);
+
+    color: var(--whiteText);
+}
+
+/* ---------- TOP ---------- */
+
+.topBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-2);
+
+    margin-bottom: var(--space-4);
+}
+
+.gameTitle {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.separator {
+    opacity: 0.5;
+    font-size: 1.5rem;
+}
+
+.gameCode {
+    padding: var(--space-1) var(--space-2);
+
+    border-radius: var(--radius-md);
+
+    background: var(--whitePanel);
+    color: var(--blackText);
+
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.titleGameCode{
+    color: var(--blackText);
+
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* ---------- PLAYERS ---------- */
+
+.playersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    flex: 1;
+}
+
+.playersHeader {
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    opacity: 0.9;
+}
+
+.playersGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: var(--space-2);
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    padding: var(--space-2);
+
+    background: var(--whitePanel);
+    color: var(--blackText);
+
+    border-radius: var(--radius-md);
+}
+
+.playerCard:nth-child(1)::after {
+    content: "HOST";
+
+    display: inline-block;
+
+    font-size: var(--text-xs);
+    font-weight: 700;
+
+    color: var(--bg);
+}
+
+.playerName {
+    font-weight: 700;
+    font-size: var(--text-md);
+}
+
+.playerDomain {
+    font-size: var(--text-sm);
+    opacity: 0.7;
+}
+
+/* ---------- BUTTON ---------- */
+
+.startButtonContainer {
+    display: flex;
+    justify-content: center;
+
+    margin-top: var(--space-4);
+}
+
+.startButton {
+    padding: var(--space-2) var(--space-4);
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background: var(--whitePanel);
+    color: var(--bg);
+
+    font-size: var(--text-xl);
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease;
+}
+
+.startButton:hover {
+    transform: translateY(-2px);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+
+    .lobby {
+        padding: var(--space-3);
+    }
+
+    .topBar {
+        justify-content: center;
+    }
+
+    .gameTitle,
+    .separator {
+        display: none;
+    }
+
+    .gameCode {
+        display: flex;
+        flex-direction: column-reverse;
+        width: 30%;
+        text-align: center;
+
+        font-size: 1.5rem;
+    }
+
+    .gameCode .titleGameCode {
+        font-size: var(--text-xs);
+        color: var(--blackText);
+        font-style: italic;
+    }
+
+    .playersGrid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .playerCard {
+        width: 100%;
+    }
+
+    .startButton {
+        width: 100%;
+    }
+}

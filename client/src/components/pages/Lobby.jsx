@@ -1,38 +1,75 @@
 import { ROLE } from "../../../../shared/utils/role.js";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
-import styles from "../../style/lobby.module.css"
-
+import styles from "../../style/lobby.module.css";
 
 const Lobby = ({ players, gameCode, role }) => {
 
-    const playersMap = players.map((p, i) => (
-        <div key={i}>{p.name.trim()} {p.domain.trim().toLowerCase()}</div>)
-    )
+    const host = players[0];
+
+    const renderPlayers = () => {
+        return players.map((player, index) => (
+            <div key={index} className={styles.playerCard}>
+                <span className={styles.playerName}>
+                    {player.name.trim().toLowerCase()}
+                </span>
+
+                <span className={styles.playerDomain}>
+                    {player.domain?.trim().toLowerCase()}
+                </span>
+            </div>
+        ));
+    };
+
+    const renderStartButton = () => {
+        if (role !== ROLE.HOST) return null;
+
+        return (
+            <div className={styles.startButtonContainer}>
+                <button
+                    className={styles.startButton}
+                    onClick={handleStartGame}
+                >
+                    Start game
+                </button>
+            </div>
+        );
+    };
 
     const handleStartGame = () => {
-        console.log("Demande début de la partie dans lobby", gameCode)
         socket.emit(SK.START_GAME, gameCode);
     };
 
     return (
-        <div className="lobby">
-            <h1 className="title">Lobby</h1>
+        <div className={styles.lobby}>
 
-            <div className="gameCode">
-                Code de la partie :
-                <strong>{gameCode}</strong>
+            <div className={styles.topBar}>
+                <div className={styles.gameTitle}>
+                    Game of {host?.name}
+                </div>
+
+                <div className={styles.separator}>|</div>
+
+                <div className={styles.gameCode}>
+                    <span className={styles.titleGameCode}>Game code </span>
+                    {gameCode}
+                </div>
             </div>
 
-            <div className="players">
-                Joueurs :
-                {playersMap}
+            <div className={styles.playersContainer}>
+
+                <div className={styles.playersHeader}>
+                    {players.length} player{players.length > 1 ? "s" : ""}
+                </div>
+
+                <div className={styles.playersGrid}>
+                    {renderPlayers()}
+                </div>
 
             </div>
 
-            {role === ROLE.HOST && (
-                <button className="start_game_button" onClick={(handleStartGame)}>Start game</button>
-            )}
+            {renderStartButton()}
+
         </div>
     );
 };
