@@ -17,15 +17,15 @@
 
 .title {
     font-size: var(--text-2xl);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
     font-weight: 700;
     letter-spacing: 0.05em;
 }
 
 .underTitle {
-    font-size: var(--text-xl);
+    font-size: var(--text-md);
     margin-bottom: var(--space-3);
-    font-weight: 550;
+    font-weight: 40;
     letter-spacing: 0.05em;
 }
 
@@ -54,9 +54,16 @@
         font-size: var(--text-2xl);
     }
 
+    .underTitle {
+        font-size: var(--text-xs);
+        margin-bottom: var(--space-3);
+        font-weight: 40;
+        letter-spacing: 0.05em;
+    }
+
     .container {
         padding: var(--space-3);
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-md);
         width: 100%;
     }
 }

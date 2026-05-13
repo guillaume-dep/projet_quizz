@@ -44,7 +44,9 @@ const Home = ({ setRole, errorMessage, setErrorMessage }) => {
         <div className={styles.home}>
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>Quiz Game</h1>
-                <h2 className={styles.underTitle}>Create or join a game !</h2>
+                <h2 className={styles.underTitle}>
+                    Create or join a game to see who will be the smartest.
+                </h2>
             </div>
 
 

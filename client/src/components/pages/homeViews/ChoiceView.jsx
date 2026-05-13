@@ -1,6 +1,8 @@
-const ChoiceView = ({setMode}) => {
+import styles from "../../../style/choiceView.module.css"
+
+const ChoiceView = ({ setMode }) => {
     return (
-        <div>
+        <div className={styles.choiceView}>
             <button onClick={() => setMode("create")}>Create</button>
             <button onClick={() => setMode("join")}>Join</button>
         </div>

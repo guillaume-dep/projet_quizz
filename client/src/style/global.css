@@ -3,7 +3,7 @@
 :root {
     --bg: #5448C8;
     /* #0D1321 */
-    --blackPanel: #222E50;
+    --blackPanel: #1e2842;
     --whitePanel: #F7EBE8;
     --footerPanel: #F6E4F6;
     --whiteText: #FFFECB;
@@ -16,7 +16,7 @@
     --choice1: #CC2936;
     --choice2: #058ED9;
     --choice3: #1A936F;
-    --choice4: #FFC857
+    --choice4: #FFC857;
 }
 
 :root {
