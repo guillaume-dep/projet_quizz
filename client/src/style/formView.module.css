@@ -125,6 +125,7 @@
     font-weight: 600;
 
     cursor: pointer;
+    width: 100%;
 
     transition:
         transform 0.15s ease,
