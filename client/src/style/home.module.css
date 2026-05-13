@@ -5,9 +5,10 @@
     align-items: center;
 
     padding: 2rem;
-    background-color: #0f172a;
-    /* fond sombre propre */
-    color: white;
+    background-color: var(--bg);
+
+    color: var(--whiteText);
+    border-radius: 8px;
 }
 
 .title {
@@ -18,15 +19,18 @@
 }
 
 .container {
-    width: 100%;
+    width: 80%;
+    height: 10rem;
     max-width: 600px;
 
     display: flex;
+    align-items: center;
+
     flex-direction: column;
     gap: 1.5rem;
 
-    padding: 1.5rem;
-    background: #1e293b;
+    padding: 1rem;
+    background: var(--whitePanel);
     border-radius: 12px;
 }
 
