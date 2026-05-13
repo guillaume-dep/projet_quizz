@@ -1,4 +1,5 @@
 import { STUDY_DOMAIN } from "../../../../../server/utils/studyDomain";
+import { VIEWS } from "../../utils/views";
 
 const FormView = ({
     mode,
@@ -11,7 +12,8 @@ const FormView = ({
     handleCreateGame,
     handleJoinGame,
     errorMessage,
-    setErrorMessage
+    setErrorMessage,
+    setView
 
 }) => {
 
@@ -34,8 +36,14 @@ const FormView = ({
         setErrorMessage("")
     }
 
+    const handleReturnToHome = () => {
+        setView(VIEWS.HOME);
+    }
+
     return (
         <div className="formView">
+
+            <button onClick={handleReturnToHome}>Retour</button>
             <input
                 className="input"
                 placeholder="Pseudo..."

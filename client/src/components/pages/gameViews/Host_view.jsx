@@ -3,7 +3,7 @@ import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 
 
-const Host_view = ({ question, gameCode, answerProgress }) => {
+const Host_view = ({ question, gameCode, answerProgress, setView }) => {
 
     const handleShowResults = () => {
         console.log("Demande des résultats de la question !")

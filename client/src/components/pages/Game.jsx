@@ -6,7 +6,7 @@ import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
 
-const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAnswered, question }) => {
+const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAnswered, question, setView }) => {
 
     const isPlayer = role === ROLE.PLAYER;
 
@@ -56,6 +56,7 @@ const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAn
                 question={question}
                 gameCode={gameCode}
                 answerProgress={answerProgress}
+                setView={setView}
             />
         }
 

@@ -13,7 +13,7 @@ import styles from "../../style/home.module.css";
  * You can choose between joining or creating a game
  * Then you have to enter your information 
  */
-const Home = ({ setRole, errorMessage, setErrorMessage }) => {
+const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
 
     /* --- Data of the home page --- */
 
@@ -52,7 +52,9 @@ const Home = ({ setRole, errorMessage, setErrorMessage }) => {
 
             <div className={styles.container}>
                 {!mode ? (
-                    <ChoiceView setMode={setMode} />
+                    <ChoiceView
+                        setMode={setMode}
+                    />
                 ) :
 
                     <FormView
@@ -67,6 +69,7 @@ const Home = ({ setRole, errorMessage, setErrorMessage }) => {
                         handleJoinGame={handleJoinGame}
                         errorMessage={errorMessage}
                         setErrorMessage={setErrorMessage}
+                        setView={setView}
                     />
                 }
             </div>
