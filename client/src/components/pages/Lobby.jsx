@@ -21,6 +21,10 @@ const Lobby = ({ players, gameCode, role }) => {
         ));
     };
 
+    const handleStartGame = () => {
+        socket.emit(SK.START_GAME, gameCode);
+    };
+
     const renderStartButton = () => {
         if (role !== ROLE.HOST) return null;
 
@@ -29,6 +33,7 @@ const Lobby = ({ players, gameCode, role }) => {
                 <button
                     className={styles.startButton}
                     onClick={handleStartGame}
+                    disabled={players.length < 2}
                 >
                     Start game
                 </button>
@@ -36,9 +41,7 @@ const Lobby = ({ players, gameCode, role }) => {
         );
     };
 
-    const handleStartGame = () => {
-        socket.emit(SK.START_GAME, gameCode);
-    };
+   
 
     return (
         <div className={styles.lobby}>

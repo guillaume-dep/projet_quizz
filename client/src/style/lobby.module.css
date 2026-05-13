@@ -157,6 +157,11 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     transform: translateY(-2px);
 }
 
+.startButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 /* ---------- MOBILE ---------- */
 
 @media (max-width: 768px) {

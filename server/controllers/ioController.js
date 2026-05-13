@@ -67,6 +67,12 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "You are not the host !" });
             return;
         }
+
+        if (gameManager.getNumberOfPlayers() < 2){
+            socket.emit(SK.ERROR, { message: "Wait for other players to join !" });
+            return;
+        }
+
         console.log(`Game ${code} Started !`)
 
 
