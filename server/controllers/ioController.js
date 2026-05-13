@@ -23,14 +23,6 @@ export default class IOController {
     }
 
     setupListeners(socket) {
-        /*
-        socket.on(SK.CONNECT, () => {
-            const code = this.#socket_to_room.get(socket.id);
-            if (code) {
-                this.handleSync(socket, code);
-            }
-        });
-        */
         socket.on(SK.CREATE_GAME, (player_data) => this.handleCreateGame(socket, player_data))
         socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
         socket.on(SK.REQUEST_LEAVE_GAME, (code) => this.handleLeaveGame(socket, code))
@@ -223,12 +215,21 @@ export default class IOController {
     }
 
     handleLeaveGame(socket, code) {
+        const gameManager = this.#rooms.get(code);
+        if (!gameManager) return;
+
+        if (gameManager.isHost(socket.id)) {
+            this.removePlayerFromGame(socket, code);
+            this.handleHostLeavingGame(code);
+            return;
+        }
+
         const result = this.removePlayerFromGame(socket, code);
         if (!result) return;
 
-        const { gameManager, player } = result;
-        this.handleLeavingGameState(player, code, gameManager)
-        this.afterPlayerRemoval(gameManager, code)
+        const { gameManager: gm, player } = result;
+        this.handleLeavingGameState(player, code, gm);
+        this.afterPlayerRemoval(gm, code);
     }
 
     /* ----- Submit an answer of a player ----- */
