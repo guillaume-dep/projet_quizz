@@ -13,7 +13,7 @@ const FormView = ({
     handleJoinGame,
     errorMessage,
     setErrorMessage,
-    setView
+    setMode
 
 }) => {
 
@@ -37,7 +37,11 @@ const FormView = ({
     }
 
     const handleReturnToHome = () => {
-        setView(VIEWS.HOME);
+        setMode(null);
+        setErrorMessage("");
+        setInputGameCode("");
+        setName("");
+        setDomain("");
     }
 
     return (

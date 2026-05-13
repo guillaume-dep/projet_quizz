@@ -69,7 +69,7 @@ const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
                         handleJoinGame={handleJoinGame}
                         errorMessage={errorMessage}
                         setErrorMessage={setErrorMessage}
-                        setView={setView}
+                        setMode={setMode}
                     />
                 }
             </div>
