@@ -8,12 +8,12 @@
 
     padding: var(--space-4);
 
-    background: var(--whitePanel);
+    background: var(--onWhitePanel);
     color: var(--blackText);
 
     border-radius: var(--radius-lg);
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .backButton {
@@ -71,7 +71,7 @@
 
     padding: 0 var(--space-1);
 
-    background: var(--whitePanel);
+    background: var(--onWhitePanel);
 
     color: var(--bg);
 
@@ -88,7 +88,7 @@
     border: 2px solid var(--greyText);
     border-radius: var(--radius-md);
 
-    background: var(--whitePanel);
+    background: var(--onWhitePanel);
     color: var(--blackText);
 
     font-size: var(--text-md);

@@ -1,6 +1,8 @@
 import { ROLE } from "../../../../shared/utils/role.js";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
+import styles from "../../style/lobby.module.css"
+
 
 const Lobby = ({ players, gameCode, role }) => {
 
