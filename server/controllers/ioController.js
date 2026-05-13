@@ -68,7 +68,7 @@ export default class IOController {
             return;
         }
 
-        if (gameManager.getNumberOfPlayers() < 2){
+        if (!gameManager.canStart()){
             socket.emit(SK.ERROR, { message: "Wait for other players to join !" });
             return;
         }

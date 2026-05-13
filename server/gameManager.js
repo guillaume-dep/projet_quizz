@@ -83,6 +83,14 @@ export default class GameManager {
     }
 
     /**
+     * Return if the game can start
+     * @return {boolean} true if it can else false
+     */
+    canStart(){
+        return this.getNumberOfPlayers() >= 2;
+    }
+
+    /**
      * End the game if the input comes from the host
      * Modify the state of the game to : FINISHED
      */
