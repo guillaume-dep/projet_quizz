@@ -35,21 +35,6 @@
     opacity: 0.8;
 }
 
-/* Mobile-only block */
-.footerSectionOnlyMobile {
-    display: none;
-    text-align: center;
-}
-
-/* Footer bottom (optionnel si tu le gardes) */
-.footerBottom {
-    text-align: center;
-    margin-top: var(--space-1);
-
-    font-size: var(--text-xs);
-    opacity: 0.6;
-}
-
 /* MOBILE */
 @media (max-width: 768px) {
 
