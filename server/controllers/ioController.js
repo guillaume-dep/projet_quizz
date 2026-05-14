@@ -68,7 +68,7 @@ export default class IOController {
             return;
         }
 
-        if (!gameManager.canStart()){
+        if (!gameManager.canStart()) {
             socket.emit(SK.ERROR, { message: "Wait for other players to join !" });
             return;
         }
@@ -78,12 +78,16 @@ export default class IOController {
 
         gameManager.startGame(socket.id);
         this.#socket_to_room.set(socket.id, code);
-        this.#io.to(code).emit(SK.GAME_STARTED, gameManager.getCurrentQuestion());
+        this.#io.to(code).emit(SK.GAME_STARTED, { questionFromServer: gameManager.getCurrentQuestion(), totalNumberQuestion: gameManager.getNumberOfQuestions() });
 
         console.log(`Envoie de la première question à ${code}`)
         const { id, text, theme, answers, correctIndex, value, coef } = gameManager.getCurrentQuestion();
         console.log(`Question : ${text}`)
-        this.#io.to(code).emit(SK.QUESTION_SENT, gameManager.getCurrentQuestion());
+        this.#io.to(code).emit(SK.QUESTION_SENT, {
+            questionFromServer: gameManager.getCurrentQuestion(),
+            questionIndex: gameManager.getCurrentQuestionIndex(),
+        });
+
         this.#io.to(code).emit(SK.ANSWER_PROGRESS, {
             numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
             numberOfPlayer: gameManager.getNumberOfPlayers()
@@ -206,7 +210,7 @@ export default class IOController {
         });
     }
 
-    handleLeavingGameState(player, code, gameManager){
+    handleLeavingGameState(player, code, gameManager) {
         switch (gameManager.getGameState()) {
             case GAME_STATE.LOBBY:
                 this.handlePlayerLeavingLobby(player, code, gameManager);
@@ -263,8 +267,8 @@ export default class IOController {
         const numberOfPlayer = gameManager.getNumberOfPlayers()
         const numberOfPlayerNotAnswered = gameManager.getNumberPlayersNotAnswered()
         socket.emit(SK.SUBMITTED_ANSWER, result)
-        console.log("number of players  :", numberOfPlayer)
-        console.log("number of players that have to answer :", numberOfPlayerNotAnswered)
+        console.log("number of players  :", numberOfPlayer - 1)
+        console.log("number of players that have to answer :", numberOfPlayerNotAnswered - 1)
 
         this.#io.to(code).emit(SK.ANSWER_PROGRESS, { numberOfPlayerNotAnswered, numberOfPlayer })
 
@@ -289,7 +293,8 @@ export default class IOController {
         console.log("Envoie des résultats de la question, partie : ", code)
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playerScore: gameManager.getScores(), /* [{name, score, domain} */
-            isLastQuestion: gameManager.isLastQuestion()
+            isLastQuestion: gameManager.isLastQuestion(),
+            questionIndex: gameManager.getCurrentQuestionIndex()
         })
     }
 
@@ -313,7 +318,12 @@ export default class IOController {
             return;
         }
 
-        this.#io.to(code).emit(SK.QUESTION_SENT, question);
+        this.#io.to(code).emit(SK.QUESTION_SENT, {
+            questionFromServer: question,
+            questionIndex: gameManager.getCurrentQuestionIndex(),
+            numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
+            numberOfPlayer: gameManager.getNumberOfPlayers()
+        });
     }
 
 

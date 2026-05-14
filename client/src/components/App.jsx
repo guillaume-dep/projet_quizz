@@ -10,7 +10,6 @@ import Lobby from "./pages/Lobby.jsx"
 import Home from "./pages/Home.jsx"
 import FinalResult from "./pages/FinalResult.jsx";
 import Footer from "../components/pages/Footer.jsx";
-import leaveIcon from "../images/se-deconnecter.png";
 
 /* CSS */
 import styles from "../style/app.module.css";
@@ -53,6 +52,11 @@ const App = () => {
   /* Current question */
   const [question, setQuestion] = useState(null);
 
+  /* CurrentIndex question */
+  const [questionNumber, setQuestionNumber] = useState(0)
+
+  const [totalQuestion, setTotalQuestion] = useState(null)
+
   /* Last question or not */
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
@@ -72,9 +76,10 @@ const App = () => {
       setGameCode(code);
     }
 
-    const handleGameStarted = (questionFromServer) => {
+    const handleGameStarted = ({ questionFromServer, totalNumberQuestion }) => {
       console.log("Nous sommes sur l'écran de partie")
       setQuestion(questionFromServer);
+      setTotalQuestion(totalNumberQuestion);
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
       console.log(`Question reçu dans game start: ${text}`)
       setView(VIEWS.GAME);
@@ -93,7 +98,6 @@ const App = () => {
     return () => {
       /* Turning off the listening after the game is create (only for this socket) */
       socket.off(SK.GAME_CREATED, handleGameCreated);
-
       socket.off(SK.GAME_STARTED, handleGameStarted);
       socket.off(SK.GAME_OVER, handleGameOver);
     }
@@ -120,6 +124,8 @@ const App = () => {
       setScores([]);
       setGameCode("");
       setRole(null);
+      setQuestionNumber(0);
+      setTotalQuestion(null);
 
       setView(VIEWS.HOME);
     }
@@ -177,10 +183,16 @@ const App = () => {
   /* ----- Question ----- */
 
   useEffect(() => {
-    const handleQuestionSent = (questionFromServer) => {
+    const handleQuestionSent = ({ questionFromServer, questionIndex, numberOfPlayerNotAnswered, numberOfPlayer }) => {
       setView(VIEWS.GAME)
       setAnswer(null);
       setQuestion(questionFromServer);
+      setQuestionNumber(questionIndex)
+      setAnswerProgress({
+        remaining: numberOfPlayerNotAnswered,
+        total: numberOfPlayer
+      })
+
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
       console.log(`Question reçu dans question: ${text}`)
     }
@@ -273,6 +285,9 @@ const App = () => {
           gameCode={gameCode}
           answer={answer}
           isLastQuestion={isLastQuestion}
+          questionNumber={questionNumber}
+          totalQuestion={totalQuestion}
+
         />
 
       case VIEWS.FINAL_RESULT:

@@ -49,11 +49,14 @@
 /* ---------- RESULTS ---------- */
 
 .correct {
-    color: var(--bg)
+    color: var(--whiteText);
+    background-color: var(--success);
 }
 
 .wrong {
     color: var(--blackText);
+    background-color: var(--error);
+
 }
 
 .faded {

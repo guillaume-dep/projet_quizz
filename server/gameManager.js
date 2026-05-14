@@ -86,7 +86,7 @@ export default class GameManager {
      * Return if the game can start
      * @return {boolean} true if it can else false
      */
-    canStart(){
+    canStart() {
         return this.getNumberOfPlayers() >= 2;
     }
 
@@ -121,6 +121,13 @@ export default class GameManager {
      */
     getCurrentQuestion() {
         return this.#questions[this.#current_question_index]
+    }
+
+    /**
+     * @return {Number} question number
+     */
+    getCurrentQuestionIndex() {
+        return this.#current_question_index;
     }
 
     /**
@@ -166,6 +173,14 @@ export default class GameManager {
      */
     isLastQuestion() {
         return this.#current_question_index >= this.#numberOfQuestionsToPlayWith - 1;
+    }
+
+    /**
+     * Return the number of questions
+     * @returns {boolean}
+     */
+    getNumberOfQuestions() {
+        return this.#numberOfQuestionsToPlayWith;
     }
 
     /* ----- Submitting ----- */

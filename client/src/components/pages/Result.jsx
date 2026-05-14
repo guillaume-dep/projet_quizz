@@ -6,12 +6,18 @@ import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents.js";
 import { ROLE } from "../../../../shared/utils/role.js";
 
-const Result = ({ role, question, gameCode, answer, isLastQuestion }) => {
+const Result = ({ role, question, gameCode, answer, isLastQuestion, questionNumber, totalQuestion }) => {
 
     const renderView = () => {
         if (role === ROLE.HOST) {
             console.log("Affichage résultat du host")
-            return <ResultHostView question={question} gameCode={gameCode} isLastQuestion={isLastQuestion} />
+            return <ResultHostView
+                question={question}
+                gameCode={gameCode}
+                isLastQuestion={isLastQuestion}
+                questionNumber={questionNumber}
+                totalQuestion={totalQuestion}
+            />
         }
 
         console.log("Affichage résultat du player")
