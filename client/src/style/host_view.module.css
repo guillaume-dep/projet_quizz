@@ -80,7 +80,7 @@
 }
 
 .resultButton button:hover {
-    transition: t;
+    transform: scale(0.95);
 }
 
 .progressBloc {

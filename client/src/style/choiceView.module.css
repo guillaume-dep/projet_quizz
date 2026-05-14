@@ -24,16 +24,12 @@
     background-color: var(--whitePanel);
     color: var(--blackText);
 
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.20s ease, opacity 0.20s ease;
 }
 
 .choiceView button:hover {
-    transform: translateY(-2px);
+    transform: scale(0.97);
     opacity: 0.9;
-}
-
-.choiceView button:active {
-    transform: translateY(0px);
 }
 
 .choiceView button:first-child {

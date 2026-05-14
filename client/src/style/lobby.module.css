@@ -158,10 +158,6 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     transition: transform 0.15s ease;
 }
 
-.startButton:hover {
-    transform: translateY(-2px);
-}
-
 .startButton:disabled {
     opacity: 0.4;
     cursor: not-allowed;
