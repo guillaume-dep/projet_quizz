@@ -1,0 +1,75 @@
+.answersGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: var(--space-3);
+
+    width: 100%;
+}
+
+/* ---------- ANSWERS ---------- */
+
+.answerCard {
+    min-height: 160px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-3);
+
+    border-radius: var(--radius-lg);
+
+    color: var(--whiteText);
+
+    font-size: var(--text-xl);
+    font-weight: 700;
+
+    text-align: center;
+}
+
+/* ---------- COLORS ---------- */
+
+.red {
+    background: var(--choice1);
+}
+
+.blue {
+    background: var(--choice2);
+}
+
+.green {
+    background: var(--choice3);
+}
+
+.yellow {
+    background: var(--choice4);
+}
+
+/* ---------- RESULTS ---------- */
+
+.correct {
+    color: var(--bg)
+}
+
+.wrong {
+    color: var(--blackText);
+}
+
+.faded {
+    opacity: 0.3;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+
+    .answersGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .answerCard {
+        min-height: 100px;
+        font-size: var(--text-lg);
+    }
+}

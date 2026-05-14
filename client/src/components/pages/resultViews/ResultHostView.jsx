@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 import { ROLE } from "../../../../../shared/utils/role.js";
+import styles from "../../../style/resultHostView.module.css"
+
 
 const ResultHostView = ({ question, gameCode, isLastQuestion }) => {
     const handleNewQuestion = () => {

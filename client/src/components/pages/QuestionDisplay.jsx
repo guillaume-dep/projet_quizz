@@ -1,32 +1,46 @@
-import "../../style/ResultCss.css"
+import styles from "../../style/questionDisplay.module.css"
 
 const QuestionDisplay = ({ question, showResults, selectedAnswer }) => {
 
     const { id, text, theme, answers, correctIndex, value, coef } = question;
-    const colors = ["red", "blue", "green", "yellow"];
+    const colors = [
+        styles.red,
+        styles.blue,
+        styles.green,
+        styles.yellow
+    ];
 
 
-    const setClassName = (index) => {
-        if (!showResults) return `answer ${colors[index]}`
-        if (index === correctIndex) return `answer correct`;
-        if (selectedAnswer === index && index !== correctIndex) return `answer wrong`;
+    const setAnswerClass = (index) => {
 
-        return `answer faded`;
-    }
+        if (!showResults) {
+            return `${styles.answerCard} ${colors[index]}`;
+        }
+
+        if (index === correctIndex) {
+            return `${styles.answerCard} ${styles.correct}`;
+        }
+
+        if (
+            selectedAnswer === index &&
+            index !== correctIndex
+        ) {
+            return `${styles.answerCard} ${styles.wrong}`;
+        }
+
+        return `${styles.answerCard} ${styles.faded}`;
+    };
 
     const renderAnswers = () => {
         return answers.map((answer, index) => (
-            <div key={index} className={setClassName(index)}>
+            <div key={index} className={setAnswerClass(index)}>
                 {answer}
             </div>
         ));
     }
 
     return (
-        <div className="QuestionDisplay">
-            <h3>{theme}</h3>
-            <div>{text}</div>
-
+        <div className={styles.answersGrid}>
             {renderAnswers()}
         </div>)
 

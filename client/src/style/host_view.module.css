@@ -1,0 +1,145 @@
+.hostView {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-4);
+}
+
+/* ---------- TOP CONTAINER (Bloc 1) ---------- */
+.topContainer {
+    display: flex;
+    gap: var(--space-2);
+    align-items: stretch;
+    /* Étire les enfants pour qu'ils aient la même hauteur */
+}
+
+/* ---------- QUESTION CONTAINER (Bloc 2) ---------- */
+.questionContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+/* Bloc (3) : Thème */
+.themeBloc {
+    display: flex;
+    width: fit-content;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+    background: var(--choice1);
+    color: var(--whiteText);
+    font-weight: 700;
+
+}
+
+/* Bloc (4) : Question */
+.questionBloc {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--whitePanel);
+    color: var(--blackText);
+    font-size: var(--text-xl);
+    font-weight: 700;
+}
+
+/* ---------- SIDE PANEL (Bloc 5) ---------- */
+.sidePanel {
+    display: flex;
+    flex-direction: column;
+    /* Horizontal */
+    align-items: stretch;
+    /* Centre verticalement les éléments */
+    gap: var(--space-2);
+}
+
+.resultButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+
+    width: 100%;
+    padding: var(--space-3);
+
+    border: none;
+    border-radius: var(--radius-lg);
+
+    background: var(--blackPanel);
+    color: var(--whiteText);
+
+    font-size: var(--text-lg);
+    font-weight: 700;
+
+    cursor: pointer;
+    flex: 1;
+    /* Prend toute la largeur disponible */
+}
+
+.resultButton button:hover {
+    transition: t;
+}
+
+.progressBloc {
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--whitePanel);
+    color: var(--blackText);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    flex: 1;
+}
+
+.progressBloc span {
+    font-size: var(--text-md);
+    opacity: 0.7;
+}
+
+.progressBloc,
+.resultButton {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+}
+
+.icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+    .hostView {
+        padding: var(--space-3);
+    }
+
+    .topContainer {
+        flex-direction: column;
+    }
+
+    .sidePanel {
+        flex-direction: row;
+        /* Passe en ligne sur mobile */
+        width: 100%;
+    }
+
+    .progressBloc,
+    .resultButton {
+        flex: 1;
+    }
+
+    .questionBloc {
+        font-size: var(--text-xl);
+    }
+}

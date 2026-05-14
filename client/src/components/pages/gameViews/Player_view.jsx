@@ -1,3 +1,5 @@
+import styles from "../../../style/player_view.module.css"
+
 const Player_view = ({ question, hasAnswered, onAnswer }) => {
     if (!question) return null;
     const { id, text, theme, answers, correctIndex, value, coef } = question;

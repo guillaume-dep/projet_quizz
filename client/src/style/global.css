@@ -11,8 +11,8 @@
     --blackText: #4e396c;
     --greyText: #b1b1b1;
 
-    --succcess: #32936F;
-    --error: #ED474A;
+    --succcess: #64B77B;
+    --error: #CC3D6A;
 
     /* #FD151B */
     --choice1: #CC2936;
@@ -64,6 +64,11 @@ h3 {
 button {
     font-size: var(--text-md);
     font-family: var(--font-main);
+    transition: transform 0.20s ease;
+}
+
+button:hover {
+    transform: scale(0.95);
 }
 
 @media (max-width: 768px) {
