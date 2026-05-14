@@ -31,7 +31,8 @@ const ResultHostView = ({ question, gameCode, isLastQuestion, questionNumber, to
                 <div className={styles.sidePanel}>
 
                     <div className={styles.progressBloc}>
-                        {questionNumber + 1} <span> / {totalQuestion}</span>
+                        {questionNumber + 1} <span> / {totalQuestion} questions</span>
+
                     </div>
 
                     <button
