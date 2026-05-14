@@ -59,14 +59,14 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     color: var(--blackText);
 
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: var(--text-xl);
 }
 
-.titleGameCode{
+.titleGameCode {
     color: var(--blackText);
 
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: var(--text-xl);
 }
 
 /* ---------- PLAYERS ---------- */
@@ -132,19 +132,24 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
 .startButtonContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     margin-top: var(--space-4);
 }
 
 .startButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: var(--space-2) var(--space-4);
+    width: 100%;
 
     border: none;
     border-radius: var(--radius-md);
 
     background: var(--whitePanel);
     color: var(--bg);
-
+    gap: var(--space-1);
     font-size: var(--text-xl);
     font-weight: 700;
 
@@ -160,6 +165,13 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
 .startButton:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
 }
 
 /* ---------- MOBILE ---------- */
@@ -181,7 +193,7 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
 
     .gameCode {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         width: 30%;
         text-align: center;
 
@@ -189,7 +201,7 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     }
 
     .gameCode .titleGameCode {
-        font-size: var(--text-xs);
+        font-size: var(--text-sm);
         color: var(--blackText);
         font-style: italic;
     }
