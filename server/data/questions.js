@@ -29,6 +29,19 @@ const questions = [
         correctIndex: 0,
         value: 1,
         coef: 1
+    },
+
+    {
+        id: 1,
+        text: "Aujourd'hui fait il beau ?",
+        theme: STUDY_DOMAIN.PSYCHOLOGIE,
+        answers: [
+            "Vrai",
+            "Faux",
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 1
     }
 ];
 
