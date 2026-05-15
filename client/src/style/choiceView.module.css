@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    min-width: 0;
 
     gap: var(--space-3);
 
@@ -10,13 +12,13 @@
 }
 
 .choiceView button {
-    width: min(370px, 80%);
+    width: min(500px, 100%);
     padding: var(--space-3);
 
     border: none;
     border-radius: var(--radius-md);
 
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     font-weight: 600;
 
     cursor: pointer;
@@ -56,7 +58,7 @@
     }
 
     .choiceView button {
-        width: 90%;
+        width: 100%;
         font-size: var(--text-xl);
         padding: var(--space-3);
     }

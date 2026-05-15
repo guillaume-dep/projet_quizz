@@ -33,7 +33,7 @@ const questions = [
 
     {
         id: 1,
-        text: "Aujourd'hui fait il beau ?",
+        text: "Aujourd'hui fait il beau                  ?",
         theme: STUDY_DOMAIN.PSYCHOLOGIE,
         answers: [
             "Vrai",

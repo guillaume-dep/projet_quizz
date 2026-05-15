@@ -16,6 +16,7 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
 .lobby {
     width: 100%;
     max-width: 1000px;
+    margin: 0 auto;
 
     min-height: 70vh;
 
@@ -24,8 +25,6 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     justify-content: space-between;
 
     padding: var(--space-4);
-
-    color: var(--whiteText);
 }
 
 /* ---------- TOP ---------- */

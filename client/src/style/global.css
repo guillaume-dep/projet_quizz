@@ -92,6 +92,8 @@ body {
     font-size: var(--text-md);
     background-color: var(--bg);
     color: var(--whiteText);
+    width: 100%;
+    overflow-x: hidden;
 }
 
 * {

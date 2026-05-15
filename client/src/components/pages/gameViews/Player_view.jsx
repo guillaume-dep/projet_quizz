@@ -35,12 +35,17 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
 
     return (
         <div className={styles.player_view}>
-            <div className={styles.btnBloc} >
+
+            <div className={styles.questionBloc}>
+                {text}
+            </div>
+
+            <div className={styles.btnBloc}>
                 {renderButtons()}
             </div>
-        </div>
 
-    )
+        </div>
+    );
 }
 
 export default Player_view;
