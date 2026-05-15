@@ -2,8 +2,14 @@ import styles from "../../../style/player_view.module.css"
 
 const Player_view = ({ question, hasAnswered, onAnswer }) => {
     if (!question) return null;
+
     const { id, text, theme, answers, correctIndex, value, coef } = question;
-    const colors = ["red", "blue", "green", "yellow"];
+    const colors = [
+        styles.red,
+        styles.blue,
+        styles.green,
+        styles.yellow
+    ];
 
     const handleClick = (event) => {
         if (hasAnswered) return;
@@ -18,19 +24,20 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
                 value={index}
                 key={index}
                 disabled={hasAnswered}
-                className={`answer-btn ${colors[index]}`}
+                className={`${styles.answerBtn} ${colors[index]}`}
                 onClick={handleClick}
             >
-                {answer}
+                <span>{answer}</span>
             </button>
         ));
     }
 
+
     return (
-        <div className="Player_view">
-            {text}
-            <br />
-            {renderButtons()}
+        <div className={styles.player_view}>
+            <div className={styles.btnBloc} >
+                {renderButtons()}
+            </div>
         </div>
 
     )

@@ -23,7 +23,12 @@
 }
 
 .underTitle {
-    font-size: var(--text-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: var(--text-lg);
     margin-bottom: var(--space-3);
     font-weight: 40;
     letter-spacing: 0.05em;
@@ -43,6 +48,11 @@
     background: var(--whitePanel);
 
     border-radius: var(--radius-md);
+}
+
+.cerveau {
+    width: 32px;
+    height: 32px;
 }
 
 @media (max-width: 768px) {
@@ -65,5 +75,10 @@
         padding: var(--space-3);
         border-radius: var(--radius-md);
         width: 100%;
+    }
+
+    .cerveau {
+        width: 20px;
+        height: 20px;
     }
 }

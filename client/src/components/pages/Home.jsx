@@ -4,7 +4,7 @@ import { ROLE } from "../../../../shared/utils/role.js"
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 import ChoiceView from "./homeViews/ChoiceView.jsx";
 import FormView from "./homeViews/FormView.jsx";
-
+import cerveau from '../../images/cerveau.png';
 /* CSS */
 import styles from "../../style/home.module.css";
 
@@ -44,9 +44,15 @@ const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
         <div className={styles.home}>
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>Quiz Game</h1>
-                <h2 className={styles.underTitle}>
-                    Create or join a game to see who will be the smartest.
-                </h2>
+                <div className={styles.underTitle}>
+                    Create or join a game to see who will be the smartest
+                    <img
+                        src={cerveau}
+                        alt="Icône du quiz (cerveau)"
+                        title="Quiz icônes"
+                        className={styles.cerveau}
+                    />
+                </div>
             </div>
 
 
