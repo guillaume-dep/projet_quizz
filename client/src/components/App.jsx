@@ -18,9 +18,9 @@ import styles from "../style/app.module.css";
  */
 const App = () => {
 
-  /* ========================= */
-  /* PWA INSTALL STATE (NEW) - AI MADE   */
-  /* ========================= */
+  /* ================================== */
+  /* PWA INSTALL STATE (NEW) - AI MADE  */
+  /* ================================== */
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [canInstall, setCanInstall] = useState(false);
 
@@ -49,7 +49,6 @@ const App = () => {
   }, []);
 
   /* ========================= */
-
 
   /* The role of the player, either host or player*/
   const [role, setRole] = useState(null);
@@ -294,6 +293,8 @@ const App = () => {
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
           setView={setView}
+          canInstall={canInstall}
+          handleInstall={handleInstall}
         />
 
       case VIEWS.LOBBY:
@@ -330,28 +331,7 @@ const App = () => {
   return (
     <motion.div
       className={styles.app}
-
     >
-      {canInstall && (
-        <button
-          onClick={handleInstall}
-          style={{
-            position: "fixed",
-            bottom: 20,
-            right: 20,
-            padding: "10px 14px",
-            borderRadius: 8,
-            border: "none",
-            background: "#4f46e5",
-            color: "white",
-            fontWeight: 600,
-            zIndex: 9999
-          }}
-        >
-          Installer l’app
-        </button>
-      )}
-
       <div className={styles.content}>
         {renderView()}
       </div>

@@ -15,7 +15,7 @@ import styles from "../../style/home.module.css";
  * You can choose between joining or creating a game
  * Then you have to enter your information 
  */
-const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
+const Home = ({ setRole, canInstall, handleInstall, errorMessage, setErrorMessage, setView }) => {
 
     /* --- Data of the home page --- */
 
@@ -68,6 +68,8 @@ const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
                 {!mode ? (
                     <ChoiceView
                         setMode={setMode}
+                        canInstall={canInstall}
+                        handleInstall={handleInstall}
                     />
                 ) :
 
