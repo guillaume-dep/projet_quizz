@@ -10,6 +10,12 @@ npm run dev -- --host
 
 - `npm run dev -- --host` : transmettre les arguments et exposer sur le réseau
 
+### Exposer le front avec `ngrok`:
+
+```bash
+ngrok http 5173
+```
+
 ### Formatter les fichiers
 
 ```bash

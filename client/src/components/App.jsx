@@ -19,7 +19,7 @@ import styles from "../style/app.module.css";
 const App = () => {
 
   /* ========================= */
-  /* PWA INSTALL STATE (NEW)   */
+  /* PWA INSTALL STATE (NEW) - AI MADE   */
   /* ========================= */
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [canInstall, setCanInstall] = useState(false);
