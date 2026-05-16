@@ -18,6 +18,39 @@ import styles from "../style/app.module.css";
  */
 const App = () => {
 
+  /* ========================= */
+  /* PWA INSTALL STATE (NEW)   */
+  /* ========================= */
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [canInstall, setCanInstall] = useState(false);
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice;
+
+    console.log("Install result:", choice);
+
+    setDeferredPrompt(null);
+    setCanInstall(false);
+  };
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setCanInstall(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  /* ========================= */
+
+
   /* The role of the player, either host or player*/
   const [role, setRole] = useState(null);
 
@@ -299,6 +332,26 @@ const App = () => {
       className={styles.app}
 
     >
+      {canInstall && (
+        <button
+          onClick={handleInstall}
+          style={{
+            position: "fixed",
+            bottom: 20,
+            right: 20,
+            padding: "10px 14px",
+            borderRadius: 8,
+            border: "none",
+            background: "#4f46e5",
+            color: "white",
+            fontWeight: 600,
+            zIndex: 9999
+          }}
+        >
+          Installer l’app
+        </button>
+      )}
+
       <div className={styles.content}>
         {renderView()}
       </div>

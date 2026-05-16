@@ -1,29 +1,30 @@
-import http from 'http'
-import IOController from './controllers/ioController.js'
-import { Server as IOServer } from 'socket.io'
+import http from 'http';
+import IOController from './controllers/ioController.js';
+import { Server as IOServer } from 'socket.io';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const server = http.createServer()
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const app = express();
 
-/* Canal de communication WebSocket */
+app.use(express.static(path.join(__dirname, '../dist')));
+
+const server = http.createServer(app); // ← app ici
+
 const io = new IOServer(server, {
     cors: {
-        /*origin: ["http://localhost:5173", "http://192.168.1.180:5173"],*/
         origin: true,
         methods: ["GET", "POST"]
     }
 });
 
-const ioController = new IOController(io)
+const ioController = new IOController(io);
 io.on('connection', (socket) => {
-    ioController.registerSocket(socket)
+    ioController.registerSocket(socket);
     console.log("CONNECT:", socket.id);
-
-    socket.on("disconnect", () => {
-        console.log("DISCONNECT:", socket.id);
-    })
 });
 
 server.listen(8080, () => {
     console.log("Server running on 8080");
 });
-
