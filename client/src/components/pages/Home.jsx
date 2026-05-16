@@ -5,6 +5,8 @@ import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 import ChoiceView from "./homeViews/ChoiceView.jsx";
 import FormView from "./homeViews/FormView.jsx";
 import cerveau from '../../images/cerveau.png';
+import { motion } from "framer-motion"
+
 /* CSS */
 import styles from "../../style/home.module.css";
 
@@ -41,7 +43,13 @@ const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
     }
 
     return (
-        <div className={styles.home}>
+        <motion.div
+            className={styles.home}
+            initial={{ opacity: 0, y: -30 }} /* start at -30 invisible*/
+            animate={{ opacity: 1, y: 0 }} /* end at 0 visible*/
+            exit={{ opacity: 0, y: 30 }} /* end at 30 invisble */
+            transition={{ duration: 0.4 }}
+        >
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>Quiz Game</h1>
                 <div className={styles.underTitle}>
@@ -81,7 +89,7 @@ const Home = ({ setRole, errorMessage, setErrorMessage, setView }) => {
             </div>
 
 
-        </div>
+        </motion.div>
     )
 }
 

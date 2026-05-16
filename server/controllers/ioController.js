@@ -38,7 +38,7 @@ export default class IOController {
     handleCreateGame(socket, player_data) {
 
         const code = generateCode();
-        const gameManager = new GameManager(questions, 5) /* A changer par des valeurs en input */
+        const gameManager = new GameManager(questions, questions.length) /* A changer par des valeurs en input */
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, player_data.name, player_data.domain);

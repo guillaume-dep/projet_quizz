@@ -1,8 +1,7 @@
 import { socket } from "../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
-import { ROLE } from "../../../shared/utils/role.js";
-import { GAME_STATE } from "../../../server/utils/gameState.js";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
@@ -296,13 +295,16 @@ const App = () => {
   }
 
   return (
-    <div className={styles.app}>
+    <motion.div
+      className={styles.app}
+
+    >
       <div className={styles.content}>
         {renderView()}
       </div>
       {renderButton()}
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
