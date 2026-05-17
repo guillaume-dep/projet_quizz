@@ -54,7 +54,8 @@ const FormView = ({
     }
 
     const handleSetNbQuestions = (event) => {
-        setNbQuestions(Number(event.target.value))
+        let value = Number(event.target.value)
+        setNbQuestions(value)
     }
 
     const renderJoinFields = () => {
@@ -176,8 +177,9 @@ const FormView = ({
 
                     <input
                         type="number"
-                        min="1"
-                        max="15"
+                        min={1}
+                        max={15}
+                        step={1}
                         placeholder="Number of questions..."
                         value={nbQuestions}
                         onChange={handleSetNbQuestions}

@@ -38,9 +38,12 @@ const Home = ({ setRole,
         console.log("Pseudo host:", name);
         console.log("Domain host:", domain);
         console.log("Difficulty:", difficulty)
-        console.log("Number of questions:", nbQuestions)
 
-        socket.emit(SK.CREATE_GAME, { name, domain, difficulty, nbQuestions })
+        let nbQuestionsValid = Number(nbQuestions)
+        nbQuestionsValid = Math.max(1, Math.min(20, nbQuestionsValid));
+        console.log("Number of questions:", nbQuestionsValid);
+
+        socket.emit(SK.CREATE_GAME, { name, domain, difficulty, nbQuestionsValid })
     }
 
     const handleJoinGame = () => {
