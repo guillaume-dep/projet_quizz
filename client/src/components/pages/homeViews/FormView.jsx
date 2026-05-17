@@ -16,7 +16,9 @@ const FormView = ({
     setErrorMessage,
     setMode,
     difficulty,
-    setDifficulty
+    setDifficulty,
+    nbQuestions,
+    setNbQuestions
 }) => {
 
     const isNameValid = name.trim().length > 0;
@@ -48,6 +50,10 @@ const FormView = ({
 
     const handleSetDifficulty = (event) => {
         setDifficulty(event.target.value)
+    }
+
+    const handleSetNbQuestions = (event) => {
+        setNbQuestions(Number(event.target.value))
     }
 
     const renderJoinFields = () => {
@@ -158,6 +164,21 @@ const FormView = ({
         }
     }
 
+    const renderNbQuestionBtn = () => {
+        if (mode === "create") {
+            return (
+                <input
+                    type="number"
+                    min="1"
+                    max="15"
+                    value={nbQuestions}
+                    onChange={handleSetNbQuestions}
+                    className={styles.nbQuestionsInput}
+                />
+            )
+        }
+    }
+
     const renderError = () => {
         if (!errorMessage) return null;
 
@@ -208,6 +229,7 @@ const FormView = ({
             {renderError()}
 
             {renderDifficultyBtn()}
+            {renderNbQuestionBtn()}
             <div className={styles.buttonBloc}>
                 {renderSubmitButton()}
             </div>

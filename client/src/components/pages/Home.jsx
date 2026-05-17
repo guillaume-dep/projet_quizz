@@ -30,6 +30,7 @@ const Home = ({ setRole,
     const [domain, setDomain] = useState("");
     const [inputGameCode, setInputGameCode] = useState("")
     const [mode, setMode] = useState(null)
+    const [nbQuestions, setNbQuestions] = useState(10);
 
     /* --- Functions --- */
     const handleCreateGame = () => {
@@ -37,7 +38,9 @@ const Home = ({ setRole,
         console.log("Pseudo host:", name);
         console.log("Domain host:", domain);
         console.log("Difficulty:", difficulty)
-        socket.emit(SK.CREATE_GAME, { name, domain, difficulty })
+        console.log("Number of questions:", nbQuestions)
+
+        socket.emit(SK.CREATE_GAME, { name, domain, difficulty, nbQuestions })
     }
 
     const handleJoinGame = () => {
@@ -96,6 +99,8 @@ const Home = ({ setRole,
                         setMode={setMode}
                         difficulty={difficulty}
                         setDifficulty={setDifficulty}
+                        nbQuestions={nbQuestions}
+                        setNbQuestions={setNbQuestions}
                     />
                 }
             </div>

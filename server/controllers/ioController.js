@@ -37,11 +37,12 @@ export default class IOController {
 
     handleCreateGame(socket, player_data) {
 
+        const { name, domain, difficulty } = player_data;
         const code = generateCode();
-        const gameManager = new GameManager(questions, questions.length) /* A changer par des valeurs en input */
+        const gameManager = new GameManager(questions, questions.length)
 
         gameManager.setHost(socket.id);
-        gameManager.addPlayer(socket.id, player_data.name, player_data.domain);
+        gameManager.addPlayer(socket.id, name, domain);
         this.#rooms.set(code, gameManager)
         console.log("\n Creation of the game :")
         console.log("Rooms", this.#rooms)
