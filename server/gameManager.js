@@ -2,6 +2,7 @@
 /* import questions from "./data/questions.js" */
 import Player from "./utils/player.js"
 import { GAME_STATE } from "./utils/gameState.js"
+import { DIFFICULTY } from "../client/src/components/utils/difficulty.js";
 
 /**
  * GameManager manages the state according to the rules of the quizz game
@@ -12,16 +13,29 @@ export default class GameManager {
     #players_map;
     #current_question_index;
     #questions;
-    #numberOfQuestionsToPlayWith
+    #numberOfQuestionsToPlayWith;
+    #difficulty;
 
-    constructor(questions, numberOfQuestionsToPlayWith) {
+    constructor(questions, numberOfQuestionsToPlayWith, difficulty) {
         this.#game_state = GAME_STATE.LOBBY;
-        this.#host_id = null; /* socket_id */
-        this.#questions = questions;
-        this.#players_map = new Map(); /* Map<socket_id, Player> */
-        this.#current_question_index = 0;
-        this.#numberOfQuestionsToPlayWith = Math.min(numberOfQuestionsToPlayWith ?? questions.length, questions.length);
+        this.#host_id = null;
 
+        const safeNbQuestions = Math.min(
+            numberOfQuestionsToPlayWith ?? questions.length,
+            questions.length
+        );
+
+        const filteredQuestions = questions.filter(
+            (q) => q.difficulty === difficulty
+        );
+
+        this.#questions = filteredQuestions.slice(0, safeNbQuestions);
+
+        this.#players_map = new Map();
+        this.#current_question_index = 0;
+
+        this.#numberOfQuestionsToPlayWith = safeNbQuestions;
+        this.#difficulty = difficulty;
     }
 
     /* ----- State ----- */
@@ -180,7 +194,7 @@ export default class GameManager {
      * @returns {boolean}
      */
     getNumberOfQuestions() {
-        return this.#numberOfQuestionsToPlayWith;
+        return this.#questions.length
     }
 
     /* ----- Submitting ----- */
