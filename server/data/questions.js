@@ -1,3 +1,4 @@
+import { DIFFICULTY } from "../../client/src/components/utils/difficulty.js";
 import { STUDY_DOMAIN } from "../utils/studyDomain.js";
 
 const questions = [
@@ -13,7 +14,8 @@ const questions = [
         ],
         correctIndex: 0,
         value: 1,
-        coef: 2
+        coef: 2,
+        difficulty: DIFFICULTY.EASY
     },
 
     {
@@ -28,169 +30,41 @@ const questions = [
         ],
         correctIndex: 0,
         value: 1,
-        coef: 1
+        coef: 1,
+        difficulty: DIFFICULTY.EASY
     },
 
     {
         id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
+        text: "Quel est le meilleur langage pour déprimer ?",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
         answers: [
-            "Vrai",
-            "Faux",
+            "Python",
+            "C++",
+            "PHP",
+            "COQ"
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         value: 1,
-        coef: 1
+        coef: 1,
+        difficulty: DIFFICULTY.MEDIUM
     },
 
     {
         id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
+        text: "Quel est le meilleur langage pour le backend ?",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
         answers: [
-            "Vrai",
-            "Faux",
+            "Java",
+            "Javascript",
+            "PHP",
+            "Pyhton"
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         value: 1,
-        coef: 1
+        coef: 1,
+        difficulty: DIFFICULTY.HARD
     },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
-
-    {
-        id: 1,
-        text: "Aujourd'hui fait il beau                  ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: [
-            "Vrai",
-            "Faux",
-        ],
-        correctIndex: 0,
-        value: 1,
-        coef: 1
-    },
-
 ];
 
 export default questions;
