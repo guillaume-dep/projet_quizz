@@ -150,6 +150,52 @@
     text-align: center;
 }
 
+.radioGroup {
+    display: flex;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.btnDifficulty {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: #aaa;
+    background: transparent;
+    transition: 0.2s ease;
+    position: relative;
+}
+
+.btnDifficulty:hover {
+    filter: brightness(1.1);
+    border-radius: var(--radius-md);
+}
+
+.btnDifficulty:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.easy {
+    background-color: var(--choice3);
+    color: var(--whiteText)
+}
+
+.medium {
+    background-color: var(--choice4);
+    color: var(--whiteText)
+}
+
+.hard {
+    background-color: var(--choice1);
+    color: var(--whiteText)
+}
+
+
 @media (max-width: 768px) {
     .formView {
         width: 100%;

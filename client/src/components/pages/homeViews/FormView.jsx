@@ -63,7 +63,7 @@ const FormView = ({
         return (
             <>
                 <div className={styles.coolinput}>
-                    <label className={styles.label}>Domaine</label>
+                    <label className={styles.label}>Domain</label>
 
                     <select
                         className={styles.select}
@@ -71,7 +71,7 @@ const FormView = ({
                         onChange={handleSetDomain}
                     >
                         <option value="" disabled>
-                            Choisissez un domaine...
+                            Choice a domain...
                         </option>
 
                         {domainOptions.map((domainOption) => (
@@ -91,7 +91,7 @@ const FormView = ({
                     <input
                         className={styles.input}
                         type="text"
-                        placeholder="Code à 4 chiffres..."
+                        placeholder="4 numbers code..."
                         maxLength={4}
                         value={inputGameCode}
                         onChange={handleSetInputGameCode}
@@ -134,50 +134,59 @@ const FormView = ({
     };
 
     const renderDifficultyBtn = () => {
-        if (mode === "create") {
-            return (
-                <>
-                    <button
-                        className={styles.btnDifficulty}
-                        onClick={handleSetDifficulty}
-                        value={DIFFICULTY.EASY}
-                        disabled={difficulty !== null}
-                        required>
-                        Easy
-                    </button>
+        if (mode !== "create") return null;
 
-                    <button
-                        className={styles.btnDifficulty}
-                        onClick={handleSetDifficulty}
-                        value={DIFFICULTY.MEDIUM}
-                        disabled={difficulty !== null}>
-                        Medium
-                    </button>
+        return (
+            <div className={styles.radioGroup}>
+                <button
+                    className={`${styles.btnDifficulty} ${styles.easy}`}
+                    onClick={handleSetDifficulty}
+                    value={DIFFICULTY.EASY}
+                    disabled={difficulty !== null}
+                >
+                    Easy
+                </button>
 
-                    <button
-                        className={styles.btnDifficulty}
-                        onClick={handleSetDifficulty}
-                        value={DIFFICULTY.HARD}
-                        disabled={difficulty !== null}>
-                        Hard
-                    </button>
-                </>
-            )
-        }
-    }
+                <button
+                    className={`${styles.btnDifficulty} ${styles.medium}`}
+                    onClick={handleSetDifficulty}
+                    value={DIFFICULTY.MEDIUM}
+                    disabled={difficulty !== null}
+                >
+                    Medium
+                </button>
+
+                <button
+                    className={`${styles.btnDifficulty} ${styles.hard}`}
+                    onClick={handleSetDifficulty}
+                    value={DIFFICULTY.HARD}
+                    disabled={difficulty !== null}
+                >
+                    Hard
+                </button>
+            </div>
+        );
+    };
 
     const renderNbQuestionBtn = () => {
         if (mode === "create") {
             return (
-                <input
-                    type="number"
-                    min="1"
-                    max="15"
-                    value={nbQuestions}
-                    onChange={handleSetNbQuestions}
-                    className={styles.nbQuestionsInput}
-                />
+                < div className={styles.coolinput} >
+                    <label className={styles.label}>Number of questions</label>
+
+                    <input
+                        type="number"
+                        min="1"
+                        max="15"
+                        placeholder="Number of questions..."
+                        value={nbQuestions}
+                        onChange={handleSetNbQuestions}
+                        className={styles.input}
+                    />
+                </div >
+
             )
+
         }
     }
 
