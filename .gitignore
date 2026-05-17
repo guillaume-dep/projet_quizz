@@ -100,3 +100,5 @@ jspm_packages
 
 # Dossier perso
 docs_perso/
+dev-dist
+dist
