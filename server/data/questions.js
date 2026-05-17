@@ -58,7 +58,7 @@ const questions = [
             "Java",
             "Javascript",
             "PHP",
-            "Pyhton"
+            "Python"
         ],
         correctIndex: 1,
         value: 1,
