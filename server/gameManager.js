@@ -186,7 +186,7 @@ export default class GameManager {
      * @returns {boolean}
      */
     isLastQuestion() {
-        return this.#current_question_index >= this.#numberOfQuestionsToPlayWith - 1;
+        return this.#current_question_index >= this.getNumberOfQuestions() - 1;
     }
 
     /**

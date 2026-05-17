@@ -9,7 +9,7 @@ const ResultHostView = ({ question, gameCode, isLastQuestion, questionNumber, to
         socket.emit(SK.REQUEST_NEW_QUESTION, gameCode);
     };
 
-    const label = isLastQuestion ? "final result" : "next question";
+    const label = isLastQuestion ? "Final result" : "Next question";
 
     return (
         <div className={styles.hostView}>

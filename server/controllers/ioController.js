@@ -23,7 +23,7 @@ export default class IOController {
     }
 
     setupListeners(socket) {
-        socket.on(SK.CREATE_GAME, (player_data) => this.handleCreateGame(socket, player_data))
+        socket.on(SK.CREATE_GAME, (data) => this.handleCreateGame(socket, data))
         socket.on(SK.JOIN_GAME, (player_data, code) => this.handleJoinGame(socket, player_data, code))
         socket.on(SK.REQUEST_LEAVE_GAME, (code) => this.handleLeaveGame(socket, code))
         socket.on(SK.START_GAME, (code) => this.handleStartGame(socket, code))
@@ -35,15 +35,16 @@ export default class IOController {
 
     /* ----- Creation of the game ----- */
 
-    handleCreateGame(socket, player_data) {
+    handleCreateGame(socket, data) {
 
-        const { name, domain, difficulty } = player_data;
+        const { name, domain, difficulty, nbQuestions } = data;
         const code = generateCode();
-        const gameManager = new GameManager(questions, questions.length)
+        const gameManager = new GameManager(questions, nbQuestions, difficulty)
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, name, domain);
         this.#rooms.set(code, gameManager)
+
         console.log("\n Creation of the game :")
         console.log("Rooms", this.#rooms)
 
