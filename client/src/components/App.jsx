@@ -94,6 +94,21 @@ const App = () => {
   /* Last question or not */
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
+  /* ----- Reset ----- */
+  const resetGameState = () => {
+    setDifficulty(null);
+    setRole(null);
+    setGameCode("");
+    setPlayers([]);
+    setScores([]);
+    setAnswer(null);
+    setHasAnswered(false);
+    setQuestion(null);
+    setQuestionNumber(0);
+    setTotalQuestion(null);
+    setIsLastQuestion(false);
+  };
+
   /* ---------- Routing ---------- */
 
   /* ----- Game ----- */
@@ -103,7 +118,7 @@ const App = () => {
   That's why there's no dependencies ([])
   */
   useEffect(() => {
-    const handleGameCreated = ({ code, difficulty }) => {
+    const handleGameCreated = ({ code }) => {
       setView(VIEWS.LOBBY);
       console.log(`Code depuis app : ${code}`)
       console.log("Host is joining the game !")
@@ -122,6 +137,7 @@ const App = () => {
     const handleGameOver = (scores) => {
       setScores(scores);
       setView(VIEWS.FINAL_RESULT);
+      setDifficulty(null);
     }
 
     socket.on(SK.GAME_CREATED, handleGameCreated)
@@ -154,13 +170,17 @@ const App = () => {
     const handleHostLeft = ({ message }) => {
       console.log("HOST_LEFT reçu :", message);
 
+      /*
       setPlayers([]);
       setScores([]);
       setGameCode("");
       setRole(null);
       setQuestionNumber(0);
       setTotalQuestion(null);
+      setDifficulty(null)
+      */
 
+      resetGameState()
       setView(VIEWS.HOME);
     }
 
@@ -178,15 +198,19 @@ const App = () => {
   const handleLeaveGame = (gameCode) => {
     socket.emit(SK.REQUEST_LEAVE_GAME, gameCode);
 
+    /*
     setQuestion(null);
     setPlayers([]);
     setScores([]);
     setAnswer(null);
     setHasAnswered(false);
     setIsLastQuestion(false);
-
-    setView(VIEWS.HOME);
     setGameCode("");
+    setDifficulty(null)
+    */
+
+    resetGameState();
+    setView(VIEWS.HOME);
   };
 
   const renderButton = () => {
