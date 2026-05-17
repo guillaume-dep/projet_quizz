@@ -5,6 +5,7 @@
     justify-content: center;
     width: 100%;
     min-width: 0;
+    font-size: var(--text-xl);
 
     gap: var(--space-3);
 
@@ -63,6 +64,8 @@
     .choiceView {
         gap: var(--space-2);
     }
+
+
 
     .choiceView button {
         width: 100%;

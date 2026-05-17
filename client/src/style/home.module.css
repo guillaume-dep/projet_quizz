@@ -18,7 +18,7 @@
 }
 
 .title {
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
     margin-bottom: var(--space-1);
     font-weight: 700;
     letter-spacing: 0.1em;
