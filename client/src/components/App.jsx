@@ -53,6 +53,9 @@ const App = () => {
   /* The role of the player, either host or player*/
   const [role, setRole] = useState(null);
 
+  /* Game difficulty */
+  const [difficulty, setDifficulty] = useState(null);
+
   /* Players in game */
   const [players, setPlayers] = useState([])
 
@@ -100,7 +103,7 @@ const App = () => {
   That's why there's no dependencies ([])
   */
   useEffect(() => {
-    const handleGameCreated = ({ code }) => {
+    const handleGameCreated = ({ code, difficulty }) => {
       setView(VIEWS.LOBBY);
       console.log(`Code depuis app : ${code}`)
       console.log("Host is joining the game !")
@@ -295,6 +298,8 @@ const App = () => {
           setView={setView}
           canInstall={canInstall}
           handleInstall={handleInstall}
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
         />
 
       case VIEWS.LOBBY:

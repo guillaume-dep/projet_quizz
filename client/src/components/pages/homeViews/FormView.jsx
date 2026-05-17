@@ -1,4 +1,5 @@
 import { STUDY_DOMAIN } from "../../../../../server/utils/studyDomain";
+import { DIFFICULTY } from "../../utils/difficulty.js"
 import styles from "../../../style/formView.module.css";
 
 const FormView = ({
@@ -13,7 +14,9 @@ const FormView = ({
     handleJoinGame,
     errorMessage,
     setErrorMessage,
-    setMode
+    setMode,
+    difficulty,
+    setDifficulty
 }) => {
 
     const isNameValid = name.trim().length > 0;
@@ -42,6 +45,10 @@ const FormView = ({
         setName("");
         setDomain("");
     };
+
+    const handleSetDifficulty = (event) => {
+        setDifficulty(event.target.value)
+    }
 
     const renderJoinFields = () => {
         if (mode !== "join") return null;
@@ -119,6 +126,38 @@ const FormView = ({
         return null;
     };
 
+    const renderDifficultyBtn = () => {
+        if (mode === "create") {
+            return (
+                <>
+                    <button
+                        className={styles.btnDifficulty}
+                        onClick={handleSetDifficulty}
+                        value={DIFFICULTY.EASY}
+                        disabled={difficulty !== null}>
+                        Easy
+                    </button>
+
+                    <button
+                        className={styles.btnDifficulty}
+                        onClick={handleSetDifficulty}
+                        value={DIFFICULTY.MEDIUM}
+                        disabled={difficulty !== null}>
+                        Medium
+                    </button>
+
+                    <button
+                        className={styles.btnDifficulty}
+                        onClick={handleSetDifficulty}
+                        value={DIFFICULTY.HARD}
+                        disabled={difficulty !== null}>
+                        Hard
+                    </button>
+                </>
+            )
+        }
+    }
+
     const renderError = () => {
         if (!errorMessage) return null;
 
@@ -168,6 +207,7 @@ const FormView = ({
 
             {renderError()}
 
+            {renderDifficultyBtn()}
             <div className={styles.buttonBloc}>
                 {renderSubmitButton()}
             </div>

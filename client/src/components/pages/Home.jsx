@@ -15,7 +15,14 @@ import styles from "../../style/home.module.css";
  * You can choose between joining or creating a game
  * Then you have to enter your information 
  */
-const Home = ({ setRole, canInstall, handleInstall, errorMessage, setErrorMessage, setView }) => {
+const Home = ({ setRole,
+    canInstall,
+    handleInstall,
+    errorMessage,
+    setErrorMessage,
+    difficulty,
+    setDifficulty
+}) => {
 
     /* --- Data of the home page --- */
 
@@ -29,7 +36,8 @@ const Home = ({ setRole, canInstall, handleInstall, errorMessage, setErrorMessag
         setRole(ROLE.HOST)
         console.log("Pseudo host:", name);
         console.log("Domain host:", domain);
-        socket.emit(SK.CREATE_GAME, { name, domain })
+        console.log("Difficulty:", difficulty)
+        socket.emit(SK.CREATE_GAME, { name, domain, difficulty })
     }
 
     const handleJoinGame = () => {
@@ -86,6 +94,8 @@ const Home = ({ setRole, canInstall, handleInstall, errorMessage, setErrorMessag
                         errorMessage={errorMessage}
                         setErrorMessage={setErrorMessage}
                         setMode={setMode}
+                        difficulty={difficulty}
+                        setDifficulty={setDifficulty}
                     />
                 }
             </div>
