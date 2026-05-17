@@ -349,6 +349,7 @@ const App = () => {
           isLastQuestion={isLastQuestion}
           questionNumber={questionNumber}
           totalQuestion={totalQuestion}
+          answerProgress={answerProgress}
 
         />
 

@@ -274,11 +274,9 @@ export default class IOController {
 
         this.#io.to(code).emit(SK.ANSWER_PROGRESS, { numberOfPlayerNotAnswered, numberOfPlayer })
 
-        /*
         if (gameManager.hasEveryPlayerAnswered()) {
             this.handleShowResults(gameManager, code);
         }
-        */
     }
 
     /* ----- Result ----- */

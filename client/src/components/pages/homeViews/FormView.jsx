@@ -46,6 +46,7 @@ const FormView = ({
         setInputGameCode("");
         setName("");
         setDomain("");
+        setDifficulty(null)
     };
 
     const handleSetDifficulty = (event) => {
@@ -105,7 +106,7 @@ const FormView = ({
             return (
                 <button
                     onClick={handleCreateGame}
-                    disabled={!isNameValid}
+                    disabled={!isNameValid || difficulty === null}
                     className={styles.submitButton}
                 >
                     Create game
@@ -140,7 +141,8 @@ const FormView = ({
                         className={styles.btnDifficulty}
                         onClick={handleSetDifficulty}
                         value={DIFFICULTY.EASY}
-                        disabled={difficulty !== null}>
+                        disabled={difficulty !== null}
+                        required>
                         Easy
                     </button>
 

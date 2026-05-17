@@ -210,7 +210,7 @@ export default class GameManager {
      * @return {boolean} true if every player has answered else false
      */
     hasEveryPlayerAnswered() {
-        return [...this.#players_map.values()].every(player => player.hasAnswered())
+        return this.getNumberPlayersNotAnswered() === 1 /* Host doesn't answer */
     }
 
     /**

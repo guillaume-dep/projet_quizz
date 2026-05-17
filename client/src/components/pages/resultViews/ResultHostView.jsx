@@ -2,8 +2,16 @@ import QuestionDisplay from "../QuestionDisplay.jsx";
 import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
 import styles from "../../../style/host_view.module.css";
+import { useEffect, useRef } from "react";
 
-const ResultHostView = ({ question, gameCode, isLastQuestion, questionNumber, totalQuestion }) => {
+const ResultHostView = ({
+    question,
+    gameCode,
+    isLastQuestion,
+    questionNumber,
+    totalQuestion,
+    answerProgress
+}) => {
 
     const handleNewQuestion = () => {
         socket.emit(SK.REQUEST_NEW_QUESTION, gameCode);

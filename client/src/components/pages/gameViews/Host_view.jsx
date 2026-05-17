@@ -9,7 +9,6 @@ const Host_view = ({ question, gameCode, answerProgress }) => {
         console.log("Demande des résultats de la question !")
         socket.emit(SK.REQUEST_SHOW_RESULTS, gameCode);
     }
-
     return (
         <div className={styles.hostView}>
 
