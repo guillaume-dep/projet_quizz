@@ -206,6 +206,19 @@ export default class GameManager {
 
     /* ----- Submitting ----- */
 
+    static invalidAnswer(player = null) {
+        return {
+            valid: false,
+            status: AnswerStatus.NO_ANSWER,
+            answerIndex: null,
+            correctIndex: null,
+            isCorrect: false,
+            pointsGained: 0,
+            previousScore: player?.score ?? 0,
+            totalScore: player?.score ?? 0
+        };
+    }
+
     /**
      * @return {Number} remaining number of player to play
     */
@@ -227,13 +240,13 @@ export default class GameManager {
      * @return {Object} the object with the informations of the answer state
      */
     submitAnswer(socket_id, answerIndex) {
-        if (this.#game_state !== GAME_STATE.QUESTION) return { valid: false };
+        if (this.#game_state !== GAME_STATE.QUESTION) return GameManager.invalidAnswer();
 
         const question = this.getCurrentQuestion(); /* Can't be null due to state verification */
         const player = this.#players_map.get(socket_id);
 
-        if (!player) return { valid: false };
-        if (player.hasAnswered()) return { valid: false }
+        if (!player) return GameManager.invalidAnswer();
+        if (player.hasAnswered()) return GameManager.invalidAnswer(player);
         const previousScore = player.score;
 
         player.markAnswered();

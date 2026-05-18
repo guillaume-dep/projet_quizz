@@ -2,6 +2,7 @@ import GameManager from "../gameManager.js"
 import questions from "../data/questions.js"
 import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
+import { AnswerStatus } from "../utils/answerStatus.js"
 import generateCode from "../utils/utils.js"
 
 /**
@@ -251,17 +252,14 @@ export default class IOController {
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
 
+        const answer = gameManager.submitAnswer(socket.id, answerIndex);
+
         if (gameManager.isHost(socket.id)) {
-            socket.emit(SK.ERROR, { message: "Host cannot answer !" })
+            socket.emit(SK.SUBMITTED_ANSWER, answer)
             return;
         }
         console.log(`Answer sent by ${socket.id}`)
 
-        const answer = gameManager.submitAnswer(socket.id, answerIndex);
-        if (!answer.valid) {
-            socket.emit(SK.ERROR, { message: "Invalid answer." });
-            return;
-        }
         console.log(answer)
 
         const numberOfPlayer = gameManager.getNumberOfPlayers()

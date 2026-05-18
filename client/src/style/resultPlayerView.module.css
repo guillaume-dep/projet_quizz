@@ -41,10 +41,13 @@
 /* STATES */
 .correctBanner {
     background: #1aa34a;
+    background-color: var(--success);
 }
 
 .wrongBanner {
     background: #d93025;
+    background-color: var(--error);
+
 }
 
 .noAnswerBanner {
@@ -108,6 +111,10 @@
     text-transform: uppercase;
     color: var(--greyText);
     letter-spacing: 0.06em;
+}
+
+.domain {
+    color: var(--bg)
 }
 
 .info {
