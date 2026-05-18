@@ -1,27 +1,50 @@
-const ResultPlayerView = ({ answer }) => {
+/* --- CSS --- */
+import styles from "../../../style/resultPlayerView.module.css"
+
+const ResultPlayerView = ({ question, answer }) => {
 
     console.log("Reponse du joueur : ", answer)
 
+    const isNoAnswer = (answer === null);
+    const isCorrect = (!isNoAnswer && question.correctIndex === answer)
+    let maxPoints = question.value * question.coef
+
     const renderAnswer = () => {
-        if (answer === null) {
-            return "No answer given !"
-        }
-        return answer.correct ? "Right answer !" : "Bad answer !"
+        if (isNoAnswer) return "No answer given..."
+        return isCorrect ? "Correct !" : "wrong !";
     }
 
     const renderScore = () => {
-        if (answer === null) {
-            return "0 point"
-        }
-        return `Actual number of points : ${answer.score}`
+        if (isNoAnswer) return "+ 0 pts";
+        return isCorrect ? `+ ${maxPoints} pts` : "+ 0 pts";
     }
 
     return (
-        <div className="ResultPlayerView">
-            <h2>{renderAnswer()}</h2>
-            <p>{renderScore()}</p>
+        <div className={styles.card}>
+
+            <div className={styles.header}>
+                <span className={styles.status}>
+                    {renderAnswer()}
+                </span>
+
+                <span className={isCorrect ? styles.correct : styles.wrong}>
+                    {renderScore()}
+                </span>
+            </div>
+
+            <div className={styles.informationGroup}>
+
+                <div className={styles.section}>
+                    <div className={styles.label}>Fun fact</div>
+                    <div className={styles.info}>
+                        {question.information}
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-    )
+    );
 }
 
 export default ResultPlayerView;

@@ -30,7 +30,10 @@ const Result = ({ role,
         }
 
         console.log("Affichage résultat du player")
-        return <ResultPlayerView question={question} gameCode={gameCode} answer={answer} />
+        return <ResultPlayerView
+            question={question}
+            answer={answer}
+        />
     }
 
     return (

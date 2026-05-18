@@ -15,7 +15,8 @@ const questions = [
         correctIndex: 0,
         value: 1,
         coef: 2,
-        difficulty: DIFFICULTY.EASY
+        difficulty: DIFFICULTY.EASY,
+        information: "PHP voulait auparavant dire Personal Home Page, crée par Rasmus Lerdorf en 1994 pour suivre les visites sur son site"
     },
 
     {
@@ -68,3 +69,7 @@ const questions = [
 ];
 
 export default questions;
+
+/*
+Avec quelle ville Paris est jumelée | ROME
+*/
