@@ -55,12 +55,13 @@ const ResultPlayerView = ({ question, answer }) => {
 
                 <div className={styles.body}>
 
-                    <div className={styles.scoreBox}>
+                    {answer !== null && (<div className={styles.scoreBox}>
                         <span>Total score </span>
                         <span className={styles.totalScore}>
                             {answer?.totalScore ?? 0}  pts
                         </span>
-                    </div>
+                    </div>)}
+
 
                     <div className={styles.informationGroup}>
 
