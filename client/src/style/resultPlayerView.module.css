@@ -1,128 +1,138 @@
-.card {
-    position: relative;
+.resultPlayerView {
+    padding: 0 var(--space-2);
+}
 
+.card {
     width: 100%;
-    max-width: 520px;
+    max-width: 600px;
 
     margin: 0 auto;
+
+    border-radius: var(--radius-lg);
 
     background: var(--onWhitePanel);
     color: var(--blackText);
 
-    border-radius: var(--radius-lg);
-
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-
-    padding: var(--space-4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
 
     overflow: hidden;
-    transition: transform 0.2s ease;
 }
 
-.card:hover {
-    transform: translateY(-2px);
+/* ========================= */
+/* STATUS BANNER */
+/* ========================= */
+
+.banner {
+    padding: var(--space-3);
+
+    font-weight: 800;
+    font-size: var(--text-lg);
+
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* HEADER */
-.header {
+/* STATES */
+.correctBanner {
+    background: #1aa34a;
+}
+
+.wrongBanner {
+    background: #d93025;
+}
+
+.noAnswerBanner {
+    background: #6b7280;
+}
+
+/* SCORE IN BANNER */
+.bannerScore {
+    font-size: var(--text-md);
+    font-weight: 700;
+    opacity: 0.95;
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+.body {
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--space-4);
+    gap: var(--space-3);
+}
+
+/* SCORE BLOCK */
+.scoreBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    gap: var(--space-2);
+    padding: var(--space-2);
 
-    padding-bottom: var(--space-2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* STATUS TEXT */
-.status {
-    font-size: var(--text-md);
-    font-weight: 700;
-}
-
-/* SCORE (gagné/perdu) */
-.correct {
-    color: #1aa34a;
-    /* vert */
-    font-weight: 800;
-}
-
-.wrong {
-    color: #d93025;
-    /* rouge */
-    font-weight: 800;
-}
-
-/* TOTAL SCORE */
-.totalScore {
-    font-size: var(--text-sm);
-    font-weight: 700;
-
-    padding: var(--space-1) var(--space-2);
+    background: rgba(0, 0, 0, 0.04);
     border-radius: var(--radius-md);
-
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--blackText);
 }
 
-/* BODY */
+.totalScore {
+    font-weight: 800;
+}
+
+/* ========================= */
+/* INFORMATION SECTION */
+/* ========================= */
+
 .informationGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-2);
 }
 
-/* SECTION */
 .section {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
 }
 
-/* LABEL */
 .label {
     font-size: var(--text-xs);
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-
     color: var(--greyText);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
 }
 
-/* CONTENT */
 .info {
     font-size: var(--text-md);
+    line-height: 1.5;
     font-weight: 500;
-    line-height: 1.4;
-
-    color: var(--blackText);
 }
 
-/* FUN FACT BLOCK EMPHASIS */
-.section:first-of-type .info {
+/* Fun fact highlight */
+.section:first-child .info {
     padding: var(--space-2);
-    border-radius: var(--radius-md);
-
     background: rgba(0, 0, 0, 0.04);
+    border-radius: var(--radius-md);
 }
 
+/* ========================= */
 /* RESPONSIVE */
+/* ========================= */
+
 @media (max-width: 768px) {
     .card {
+        max-width: 100%;
+    }
+
+    .body {
         padding: var(--space-3);
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .totalScore {
-        align-self: flex-end;
     }
 }

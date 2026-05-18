@@ -20,7 +20,7 @@ const ResultPlayerView = ({ question, answer }) => {
 
     const renderAnswer = () => {
         if (isNoAnswer) return "No answer given..."
-        return answer.isCorrect ? "Correct !" : "wrong !";
+        return answer.isCorrect ? "Correct !" : "Wrong !";
     }
 
     const renderScore = () => {
@@ -29,33 +29,49 @@ const ResultPlayerView = ({ question, answer }) => {
     }
 
     return (
-        <div className={styles.card}>
+        <div className={styles.resultPlayerView}>
+            <div className={styles.card}>
 
-            <div className={styles.header}>
-                <span className={styles.status}>
-                    {renderAnswer()}
-                </span>
+                <div
+                    className={[
+                        styles.banner,
+                        answer.isCorrect
+                            ? styles.correctBanner
+                            : answer.answerIndex === null
+                                ? styles.noAnswerBanner
+                                : styles.wrongBanner
+                    ].join(" ")}
+                >
+                    <span>
+                        {renderAnswer()}
+                    </span>
 
-                <span className={answer.isCorrect ? styles.correct : styles.wrong}>
-                    {renderScore()}
-                </span>
-
-                <span className={styles.totalScore}>
-                    {answer.totalScore}
-                </span>
-            </div>
-
-            <div className={styles.informationGroup}>
-
-                <div className={styles.section}>
-                    <div className={styles.label}>Fun fact</div>
-                    <div className={styles.info}>
-                        {question.information}
-                    </div>
+                    <span className={styles.bannerScore}>
+                        + {answer.pointsGained} pts
+                    </span>
                 </div>
 
-            </div>
+                <div className={styles.body}>
 
+                    <div className={styles.scoreBox}>
+                        <span>Score total</span>
+                        <span className={styles.totalScore}>
+                            {answer.totalScore}
+                        </span>
+                    </div>
+
+                    <div className={styles.informationGroup}>
+
+                        <div className={styles.section}>
+                            <div className={styles.label}>Fun fact</div>
+                            <div className={styles.info}>
+                                {question.information}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
