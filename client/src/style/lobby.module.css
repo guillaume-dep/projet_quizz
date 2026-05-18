@@ -118,7 +118,7 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
 
 .playerName {
     font-weight: 700;
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
 }
 
 .playerDomain {
@@ -189,14 +189,14 @@ Sur mobile on affiche que le Code en haut de l'écran; on affiche les joueurs co
     .gameCode {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: fit-content;
         text-align: center;
 
-        font-size: 1.5rem;
+        font-size: var(--text-xl);
     }
 
     .gameCode .titleGameCode {
-        font-size: var(--text-sm);
+        font-size: var(--text-lg);
         color: var(--blackText);
         font-style: italic;
     }

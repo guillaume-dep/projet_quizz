@@ -6,12 +6,10 @@ import { motion } from "framer-motion"
 
 /* --- CSS --- */
 import styles from "../../style/navbar.module.css"
-import { div } from "framer-motion/client";
-
 
 const NavBar = ({ gameCode, resetGameState, view, setView }) => {
 
-    const handleLeaveGame = (gameCode) => {
+    const handleLeaveGame = () => {
         socket.emit(SK.REQUEST_LEAVE_GAME, gameCode);
         resetGameState();
         setView(VIEWS.HOME);
@@ -21,7 +19,7 @@ const NavBar = ({ gameCode, resetGameState, view, setView }) => {
         if (view !== VIEWS.HOME) {
             return <button
                 className={styles.leaveButton}
-                onClick={() => handleLeaveGame(gameCode)}
+                onClick={handleLeaveGame}
             >
                 <svg
                     className={styles.icon}
