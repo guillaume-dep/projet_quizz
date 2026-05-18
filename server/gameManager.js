@@ -3,6 +3,7 @@
 import Player from "./utils/player.js"
 import { GAME_STATE } from "./utils/gameState.js"
 import { DIFFICULTY } from "../client/src/components/utils/difficulty.js";
+import { AnswerStatus } from "./utils/answerStatus.js"
 
 /**
  * GameManager manages the state according to the rules of the quizz game
@@ -233,6 +234,7 @@ export default class GameManager {
 
         if (!player) return { valid: false };
         if (player.hasAnswered()) return { valid: false }
+        const previousScore = player.score;
 
         player.markAnswered();
         const isCorrect = this.isRightAnswer(answerIndex, question)
@@ -240,10 +242,25 @@ export default class GameManager {
             player.incrementScoreDomain(question.value, question.coef, question.theme);
         }
 
+        const status =
+            answerIndex === null
+                ? AnswerStatus.NO_ANSWER
+                : isCorrect
+                    ? AnswerStatus.CORRECT
+                    : AnswerStatus.WRONG;
+
+        let pointsGained = player.score - previousScore
+
         return {
             valid: true,
-            correct: isCorrect,
-            score: player.score
+            answerIndex: answerIndex,
+            correctIndex: question.correctIndex,
+            isCorrect: isCorrect,
+            status: status,
+            pointsGained: pointsGained,
+            totalScore: player.score,
+            previousScore: previousScore
+
         }
     }
 

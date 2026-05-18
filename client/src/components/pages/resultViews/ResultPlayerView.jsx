@@ -5,18 +5,27 @@ const ResultPlayerView = ({ question, answer }) => {
 
     console.log("Reponse du joueur : ", answer)
 
+    /* Answer of the player
+            valid
+            answerIndex
+            correctIndex
+            isCorrect
+            status
+            pointsGained
+            totalScore
+            previousScore          
+  */
+
     const isNoAnswer = (answer === null);
-    const isCorrect = (!isNoAnswer && question.correctIndex === answer)
-    let maxPoints = question.value * question.coef
 
     const renderAnswer = () => {
         if (isNoAnswer) return "No answer given..."
-        return isCorrect ? "Correct !" : "wrong !";
+        return answer.isCorrect ? "Correct !" : "wrong !";
     }
 
     const renderScore = () => {
         if (isNoAnswer) return "+ 0 pts";
-        return isCorrect ? `+ ${maxPoints} pts` : "+ 0 pts";
+        return answer.isCorrect ? `+ ${answer.pointsGained} pts` : "+ 0 pts";
     }
 
     return (
@@ -27,8 +36,12 @@ const ResultPlayerView = ({ question, answer }) => {
                     {renderAnswer()}
                 </span>
 
-                <span className={isCorrect ? styles.correct : styles.wrong}>
+                <span className={answer.isCorrect ? styles.correct : styles.wrong}>
                     {renderScore()}
+                </span>
+
+                <span className={styles.totalScore}>
+                    {answer.totalScore}
                 </span>
             </div>
 

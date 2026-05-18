@@ -24,9 +24,9 @@ const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAn
 
     /* Useful to retrieve the result from an answer */
     useEffect(() => {
-        const handleSubmittedAnswer = (result) => {
-            console.log("Reponse reçu du serveur à la question : ", result);
-            setAnswer(result)
+        const handleSubmittedAnswer = (answer) => {
+            console.log("Reponse reçu du serveur à la question : ", answer);
+            setAnswer(answer)
         }
 
         socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)

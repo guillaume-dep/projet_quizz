@@ -255,21 +255,20 @@ export default class IOController {
             socket.emit(SK.ERROR, { message: "Host cannot answer !" })
             return;
         }
-
-        const result = gameManager.submitAnswer(socket.id, answerIndex);
-
         console.log(`Answer sent by ${socket.id}`)
 
-
-        if (!result.valid) {
+        const answer = gameManager.submitAnswer(socket.id, answerIndex);
+        if (!answer.valid) {
             socket.emit(SK.ERROR, { message: "Invalid answer." });
             return;
         }
+        console.log(answer)
 
-        console.log(result)
         const numberOfPlayer = gameManager.getNumberOfPlayers()
         const numberOfPlayerNotAnswered = gameManager.getNumberPlayersNotAnswered()
-        socket.emit(SK.SUBMITTED_ANSWER, result)
+
+        socket.emit(SK.SUBMITTED_ANSWER, answer)
+
         console.log("number of players  :", numberOfPlayer - 1)
         console.log("number of players that have to answer :", numberOfPlayerNotAnswered - 1)
 

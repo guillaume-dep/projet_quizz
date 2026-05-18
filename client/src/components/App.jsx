@@ -73,7 +73,16 @@ const App = () => {
   /* View to display */
   const [view, setView] = useState(VIEWS.HOME);
 
-  /* Answer of the player, an index between 0 - numberOfAnswers */
+  /* Answer of the player
+            valid
+            answerIndex
+            correctIndex
+            isCorrect
+            status
+            pointsGained
+            totalScore
+            previousScore          
+  */
   const [answer, setAnswer] = useState(null);
 
   /* Useful to know if a player hasAnswered */
