@@ -80,6 +80,7 @@ export default class IOController {
 
         gameManager.startGame(socket.id);
         this.#socket_to_room.set(socket.id, code);
+        console.log(gameManager.getCurrentQuestion())
         this.#io.to(code).emit(SK.GAME_STARTED, { questionFromServer: gameManager.getCurrentQuestion(), totalNumberQuestion: gameManager.getNumberOfQuestions() });
 
         console.log(`Envoie de la première question à ${code}`)

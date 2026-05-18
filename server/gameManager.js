@@ -17,19 +17,25 @@ export default class GameManager {
     #difficulty;
 
     constructor(questions, numberOfQuestionsToPlayWith, difficulty) {
+
         this.#game_state = GAME_STATE.LOBBY;
         this.#host_id = null;
 
-        const safeNbQuestions = Math.min(
-            numberOfQuestionsToPlayWith ?? questions.length,
-            questions.length
-        );
+        const safeNbQuestions = Math.min(numberOfQuestionsToPlayWith ?? questions.length, questions.length);
 
-        const filteredQuestions = questions.filter(
-            (q) => q.difficulty === difficulty
-        );
+        const filteredQuestions = questions
+            .filter((question) => question.difficulty === difficulty);
 
-        this.#questions = filteredQuestions.slice(0, safeNbQuestions);
+        if (filteredQuestions.length === 0) {
+            console.warn(`Aucune question pour la difficulté : ${difficulty}`);
+            this.#questions = questions.slice(0, safeNbQuestions);
+        } else {
+            this.#questions = filteredQuestions.slice(0, safeNbQuestions);
+        }
+
+        console.log("Difficulty reçue :", difficulty);
+        console.log("Questions disponibles :", questions.map(q => q.difficulty));
+        console.log("Questions filtrées :", filteredQuestions.length);
 
         this.#players_map = new Map();
         this.#current_question_index = 0;

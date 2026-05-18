@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 
 /* CSS */
 import styles from "../../style/home.module.css";
+import { DIFFICULTY } from "../utils/difficulty.js";
 
 /**
  * Display the home of the game
@@ -43,7 +44,13 @@ const Home = ({ setRole,
         nbQuestionsValid = Math.max(1, Math.min(20, nbQuestionsValid));
         console.log("Number of questions:", nbQuestionsValid);
 
-        socket.emit(SK.CREATE_GAME, { name, domain, difficulty, nbQuestionsValid })
+        if (difficulty === null) {
+            console.log("Difficulty is null")
+            socket.emit(SK.CREATE_GAME, { name, domain, difficulty: DIFFICULTY.EASY, nbQuestions: nbQuestionsValid })
+            return;
+        }
+
+        socket.emit(SK.CREATE_GAME, { name, domain, difficulty, nbQuestions: nbQuestionsValid })
     }
 
     const handleJoinGame = () => {
