@@ -1,6 +1,7 @@
 .navbar {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+    width: 100%;
     padding: var(--space-2);
 }
 
@@ -23,4 +24,16 @@
 
 .leaveButton:hover {
     transform: scale(0.95);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    .icon {
+        width: 22px;
+        height: 22px;
+    }
 }
