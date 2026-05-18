@@ -1,18 +1,17 @@
 .navbar {
-    background-color: aqua;
-    height: 100px;
+    display: flex;
+    justify-content: end;
+    padding: var(--space-2);
 }
 
 .leaveButton {
-    position: fixed;
-    top: var(--space-3);
-    right: var(--space-3);
 
     padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-md);
 
     background: var(--error);
     color: var(--whiteText);
+    font-size: var(--text-lg);
     border: none;
 
     cursor: pointer;
