@@ -240,9 +240,9 @@ export default class IOController {
         const result = this.removePlayerFromGame(socket, code);
         if (!result) return;
 
-        const { gameManager: gm, player } = result;
-        this.handleLeavingGameState(player, code, gm);
-        this.afterPlayerRemoval(gm, code);
+        const { gameManager: resultGameManager, player } = result;
+        this.handleLeavingGameState(player, code, resultGameManager);
+        this.afterPlayerRemoval(resultGameManager, code);
     }
 
     /* ----- Submit an answer of a player ----- */
