@@ -6,12 +6,14 @@ export default class Player {
     #score
     #domain
     #hasAnswered
+    #lastAnswer
 
     constructor(name, domain) {
         this.#name = name;
         this.#score = 0;
         this.#domain = domain;
         this.#hasAnswered = false;
+        this.#lastAnswer = null;
     }
 
     /* ----- Player ----- */
@@ -26,32 +28,33 @@ export default class Player {
 
     resetAnswered() {
         this.#hasAnswered = false;
+        this.#lastAnswer = null;
     }
 
     hasAnswered() {
         return this.#hasAnswered;
     }
 
-    /**
-     * Increment the score of a player
-     * @param {Number} value to increment the score with
-     */
+    getLastAnswer() {
+        return this.#lastAnswer;
+    }
+
+    setLastAnswer(answer) {
+        this.#lastAnswer = answer;
+    }
+
+    /* ----- Score ----- */
+
     incrementScore(value) {
         this.#score += value;
     }
 
-    /**
-     * Increment the score of a player according to a domain
-     * @param {Number} value to increment the score with
-     * @param {Number} coef the coef of the question
-     * @param {string} domain the domain of the question
-     */
     incrementScoreDomain(value, coef, domain) {
         if (this.domain === domain) {
             this.incrementScore(value);
             return;
         }
 
-        this.incrementScore(value * coef)
+        this.incrementScore(value * coef);
     }
 }
