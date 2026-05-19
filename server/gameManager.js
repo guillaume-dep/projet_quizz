@@ -25,7 +25,8 @@ export default class GameManager {
         const safeNbQuestions = Math.min(numberOfQuestionsToPlayWith ?? questions.length, questions.length);
 
         const filteredQuestions = questions
-            .filter((question) => question.difficulty === difficulty);
+            .filter((question) => question.difficulty === difficulty)
+            .shuffle();
 
         if (filteredQuestions.length === 0) {
             console.warn(`Aucune question pour la difficulté : ${difficulty}`);
