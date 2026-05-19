@@ -31,6 +31,7 @@
     display: flex;
     width: fit-content;
     padding: var(--space-1) var(--space-2);
+    font-size: var(--text-lg);
     border-radius: var(--radius-md);
     background: var(--choice1);
     color: var(--whiteText);

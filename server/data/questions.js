@@ -59,12 +59,12 @@ const questions = [
         text: "Qu'est-ce que la cuniculiculture ?",
         theme: STUDY_DOMAIN.SCIENCES,
         answers: [
-            "L'élevage de lapins",
             "La culture de concombres",
             "L'élevage d'escargots",
-            "La culture du riz"
+            "La culture du riz",
+            "L'élevage de lapins"
         ],
-        correctIndex: 0,
+        correctIndex: 3,
         value: 1,
         coef: 2,
         difficulty: DIFFICULTY.EASY,
@@ -117,7 +117,102 @@ const questions = [
         coef: 2,
         difficulty: DIFFICULTY.EASY,
         information: "Le terme 'hallux' est utilisé en anatomie pour désigner le gros orteil, aussi appelé premier orteil du pied."
-    }
+    },
+
+    {
+        id: 7,
+        text: "Avec quelle ville Paris est-elle jumelée ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: [
+            "Londres",
+            "Tokyo",
+            "Berne",
+            "Rome"
+        ],
+        correctIndex: 3,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Paris est jumelée avec plusieurs grandes villes du monde, mais Rome est l'une des plus symboliques en raison des liens culturels et historiques entre la France et l'Italie."
+    },
+    {
+        id: 8,
+        text: "Quel est le prénom le plus donné pour un chat ou un chien en France ?",
+        theme: STUDY_DOMAIN.NATURE,
+        answers: [
+            "Simba",
+            "Nala",
+            "Pepito",
+            "Rio"
+        ],
+        correctIndex: 3,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Les noms d’animaux de compagnie suivent souvent des tendances culturelles, et certains prénoms se retrouvent aussi bien chez les chats que chez les chiens."
+    },
+    {
+        id: 9,
+        text: "Combien de pays utilisent un drapeau non rectangulaire ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: [
+            "5",
+            "3",
+            "2",
+            "4"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Le Népal possède un drapeau non rectangulaire unique au monde, tandis que la Suisse et le Vatican ont des drapeaux carrés."
+    },
+    {
+        id: 10,
+        text: "Les monuments présents sur les billets de banque en euros sont-ils réels ?",
+        theme: STUDY_DOMAIN.ARTS,
+        answers: [
+            "Vrai",
+            "Faux"
+        ],
+        correctIndex: 1,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Les ponts et monuments des billets en euros sont des représentations fictives inspirées de styles architecturaux européens, et non des bâtiments existants."
+    },
+    {
+        id: 11,
+        text: "Quel inventeur français a donné son nom à l'écriture en relief pour les aveugles ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: [
+            "Louis Braille",
+            "Aimé Paris",
+            "Jean-François Champollion",
+            "David Guetta"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Louis Braille a inventé le système d'écriture tactile en 1824 à l'âge de 15 ans."
+    },
+    {
+        id: 12,
+        text: "Jean-Baptiste Poquelin est-il un grand dramaturge français ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: [
+            "Vrai",
+            "Faux"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Jean-Baptiste Poquelin est le véritable nom de Molière, l’un des plus grands auteurs du théâtre français classique."
+    },
+
+
 
     /* ---------- END-EASY ---------- */
 
