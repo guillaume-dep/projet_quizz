@@ -240,19 +240,31 @@ export default class GameManager {
      * @return {Object} the object with the informations of the answer state
      */
     submitAnswer(socket_id, answerIndex) {
-        if (this.#game_state !== GAME_STATE.QUESTION) return GameManager.invalidAnswer();
+        if (this.#game_state !== GAME_STATE.QUESTION)
+            return GameManager.invalidAnswer();
 
-        const question = this.getCurrentQuestion(); /* Can't be null due to state verification */
+        const question = this.getCurrentQuestion();
         const player = this.#players_map.get(socket_id);
 
-        if (!player) return GameManager.invalidAnswer();
-        if (player.hasAnswered()) return GameManager.invalidAnswer(player);
+        if (!player)
+            return GameManager.invalidAnswer();
+
+        if (player.hasAnswered()) {
+            return player.getLastAnswer();
+        }
+
         const previousScore = player.score;
 
         player.markAnswered();
-        const isCorrect = this.isRightAnswer(answerIndex, question)
+
+        const isCorrect = this.isRightAnswer(answerIndex, question);
+
         if (isCorrect) {
-            player.incrementScoreDomain(question.value, question.coef, question.theme);
+            player.incrementScoreDomain(
+                question.value,
+                question.coef,
+                question.theme
+            );
         }
 
         const status =
@@ -262,19 +274,20 @@ export default class GameManager {
                     ? AnswerStatus.CORRECT
                     : AnswerStatus.WRONG;
 
-        let pointsGained = player.score - previousScore
-
-        return {
+        const answer = {
             valid: true,
-            answerIndex: answerIndex,
+            answerIndex,
             correctIndex: question.correctIndex,
-            isCorrect: isCorrect,
-            status: status,
-            pointsGained: pointsGained,
+            isCorrect,
+            status,
+            pointsGained: player.score - previousScore,
             totalScore: player.score,
-            previousScore: previousScore
+            previousScore
+        };
 
-        }
+        player.setLastAnswer(answer);
+
+        return answer;
     }
 
     /* ----- Connection ----- */

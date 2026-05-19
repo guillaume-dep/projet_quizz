@@ -11,10 +11,9 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
         styles.yellow
     ];
 
-    const handleClick = (event) => {
+    const handleClick = (index) => {
         if (hasAnswered) return;
 
-        const index = Number(event.target.value);
         console.log("Envoie de ma réponse : ", index)
         onAnswer(index)
     }
@@ -25,7 +24,7 @@ const Player_view = ({ question, hasAnswered, onAnswer }) => {
                 key={index}
                 disabled={hasAnswered}
                 className={`${styles.answerBtn} ${colors[index]}`}
-                onClick={handleClick}
+                onClick={() => handleClick(index)}
             >
                 <span>{answer}</span>
             </button>
