@@ -31,7 +31,7 @@ export default class GameManager {
             console.warn(`Aucune question pour la difficulté : ${difficulty}`);
             this.#questions = questions.slice(0, safeNbQuestions);
         } else {
-            this.#questions = filteredQuestions.slice(0, safeNbQuestions);
+            this.#questions = filteredQuestions.slice(0, safeNbQuestions).shuffle();
         }
 
         console.log("Difficulty reçue :", difficulty);
