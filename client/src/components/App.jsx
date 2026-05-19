@@ -195,6 +195,28 @@ const App = () => {
     }
   }, [])
 
+  /* ----- Answer ----- */
+
+  /* Useful to retrieve the result from an answer */
+  useEffect(() => {
+    const handleSubmittedAnswer = (answer) => {
+      console.log("Reponse reçu du serveur à la question : ", answer);
+      setAnswer(answer)
+    }
+
+    socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
+
+    return () => {
+      socket.off(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
+    }
+  }, [])
+
+  /* If there's a new question we have to state back to false the hasAnswered field */
+  useEffect(() => {
+    setAnswer(null);
+    setHasAnswered(false);
+  }, [question]);
+
   /* ----- Question ----- */
 
   useEffect(() => {
