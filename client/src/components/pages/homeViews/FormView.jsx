@@ -72,10 +72,10 @@ const FormView = ({
                         onChange={handleSetDomain}
                     >
                         <option value="" disabled>
-                            Choose a domain...
+                            Choose your favorite domain...
                         </option>
 
-                        {domainOptions.map((domainOption) => (
+                        {[...domainOptions].sort().map((domainOption) => (
                             <option
                                 key={domainOption}
                                 value={domainOption}

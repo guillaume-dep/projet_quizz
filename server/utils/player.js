@@ -49,8 +49,8 @@ export default class Player {
         this.#score += value;
     }
 
-    incrementScoreDomain(value, coef, domain) {
-        if (this.domain === domain) {
+    incrementScoreDomain(value, coef, questionDomain) {
+        if (this.domain !== questionDomain) {
             this.incrementScore(value);
             return;
         }
