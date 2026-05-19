@@ -4,6 +4,7 @@ import Player from "./utils/player.js"
 import { GAME_STATE } from "./utils/gameState.js"
 import { DIFFICULTY } from "../client/src/components/utils/difficulty.js";
 import { AnswerStatus } from "./utils/answerStatus.js"
+import { shuffle } from "./utils/utils.js";
 
 /**
  * GameManager manages the state according to the rules of the quizz game
@@ -18,32 +19,53 @@ export default class GameManager {
     #difficulty;
 
     constructor(questions, numberOfQuestionsToPlayWith, difficulty) {
-
         this.#game_state = GAME_STATE.LOBBY;
         this.#host_id = null;
 
-        const safeNbQuestions = Math.min(numberOfQuestionsToPlayWith ?? questions.length, questions.length);
-
-        const filteredQuestions = questions
-            .filter((question) => question.difficulty === difficulty)
-            .shuffle();
-
-        if (filteredQuestions.length === 0) {
-            console.warn(`Aucune question pour la difficulté : ${difficulty}`);
-            this.#questions = questions.slice(0, safeNbQuestions);
-        } else {
-            this.#questions = filteredQuestions.slice(0, safeNbQuestions).shuffle();
-        }
-
-        console.log("Difficulty reçue :", difficulty);
-        console.log("Questions disponibles :", questions.map(q => q.difficulty));
-        console.log("Questions filtrées :", filteredQuestions.length);
-
-        this.#players_map = new Map();
+        this.#players_map = new Map(); /* socket_id: Player*/
         this.#current_question_index = 0;
 
-        this.#numberOfQuestionsToPlayWith = safeNbQuestions;
         this.#difficulty = difficulty;
+        this.#numberOfQuestionsToPlayWith = this.computeSafeNbQuestions(
+            numberOfQuestionsToPlayWith,
+            questions
+        );
+
+        this.#questions = this.buildQuestions(questions, difficulty);
+    }
+
+    /* ----- Questions ----- */
+
+
+    computeSafeNbQuestions(numberOfQuestionsToPlayWith, questions) {
+        return Math.min(
+            numberOfQuestionsToPlayWith ?? questions.length,
+            questions.length
+        );
+    }
+
+    filterByDifficulty(questions, difficulty) {
+        return questions.filter(
+            (question) => question.difficulty === difficulty
+        );
+    }
+
+    fallbackQuestions(questions) {
+        return shuffle(questions
+            .slice(0, this.#numberOfQuestionsToPlayWith))
+    }
+
+    buildQuestions(questions, difficulty) {
+        const filtered = shuffle(this.filterByDifficulty(questions, difficulty))
+
+        if (filtered.length === 0) {
+            console.warn(`Aucune question pour la difficulté : ${difficulty}`);
+            return this.fallbackQuestions(questions);
+        }
+
+        return shuffle(filtered
+            .slice(0, this.#numberOfQuestionsToPlayWith))
+
     }
 
     /* ----- State ----- */
