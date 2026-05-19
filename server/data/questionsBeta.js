@@ -33,5 +33,43 @@ const questions = [
         value: 1,
         coef: 1,
         difficulty: DIFFICULTY.EASY
-    }
-]
+    },
+
+    {
+        id: 1,
+        text: "Quel est le meilleur langage pour déprimer ?",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
+        answers: [
+            "Python",
+            "C++",
+            "PHP",
+            "COQ"
+        ],
+        correctIndex: 2,
+        value: 1,
+        coef: 1,
+        difficulty: DIFFICULTY.MEDIUM
+    },
+
+    {
+        id: 1,
+        text: "Quel est le meilleur langage pour le backend ?",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
+        answers: [
+            "Java",
+            "Javascript",
+            "PHP",
+            "Python"
+        ],
+        correctIndex: 1,
+        value: 1,
+        coef: 1,
+        difficulty: DIFFICULTY.HARD
+    },
+];
+
+export default questions;
+
+/*
+Avec quelle ville Paris est jumelée | ROME
+*/
