@@ -1,4 +1,8 @@
+/* --- CSS --- */
+import styles from "../../style/finalResult.module.css"
+
 const FinalResult = ({ scores }) => {
+
 
     const renderFinalResult = scores
         .filter(player => player.domain !== "")
