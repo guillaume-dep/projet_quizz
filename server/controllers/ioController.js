@@ -34,6 +34,7 @@ export default class IOController {
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
+        socket.on(SK.REQUEST_SHOW_LEADERBOARD, (code) => this.handleShowLeaderboard(code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -326,6 +327,13 @@ export default class IOController {
             numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
             numberOfPlayer: gameManager.getNumberOfPlayers()
         });
+    }
+
+    handleRequestShowLeaderboard(socket, code) {
+        const gameManager = this.getGameOrEmitError(socket, code);
+        if (!gameManager) return;
+        if (!gameManager.isHost(socket.id)) return;
+        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD);
     }
 
     handleShowLeaderboard(gameManager, eventName) {
