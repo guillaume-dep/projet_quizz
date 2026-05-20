@@ -8,6 +8,9 @@ export const VIEWS = {
     /* Game screen with the question */
     GAME: "GAME",
 
+    /* Leaderboard of the game */
+    LEADERBOARD: "LEADERBOARD",
+
     /* Game result view */
     RESULT: "RESULT",
 
