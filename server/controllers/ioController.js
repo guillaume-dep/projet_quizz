@@ -6,7 +6,6 @@ import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
 import { AnswerStatus } from "../utils/answerStatus.js"
 import generateCode from "../utils/utils.js"
-import { g } from "framer-motion/m"
 
 /**
  * IOController class to manage the game connections 
@@ -44,7 +43,7 @@ export default class IOController {
 
         const { name, domain, difficulty, nbQuestions } = data;
         const code = generateCode();
-        const gameManager = new GameManager(questions, nbQuestions, difficulty)
+        const gameManager = new GameManager(questionsEnLigne, nbQuestions, difficulty)
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, name, domain);
