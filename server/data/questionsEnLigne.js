@@ -138,14 +138,14 @@ const questions = [
     },
     {
         id: 11,
-        text: "Quel est le nom de l’hôtel dans The Shining ?",
+        text: "Quel est le vrai nom de Heisenberg dans Breaking bad ?",
         theme: STUDY_DOMAIN.CINEMA,
-        answers: ["Overlook Hotel", "Bates Motel", "Stanley Inn", "Grady Hotel"],
+        answers: ["Walter White", "Jimmy McGill", "Tuco Salamanca", "Gus Fring"],
         correctIndex: 0,
         value: 1,
         coef: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "Le film est adapté du roman de Stephen King."
+        information: "Walt a emprunté son pseudonyme « Heisenberg » au physicien Werner Heisenberg, lauréat du prix Nobel et chimiste à qui on a diagnostiqué un cancer du poumon."
     },
     {
         id: 12,

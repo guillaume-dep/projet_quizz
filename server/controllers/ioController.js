@@ -1,5 +1,7 @@
 import GameManager from "../gameManager.js"
 import questions from "../data/questions.js"
+import questionsEnLigne from "../data/questionsEnLigne.js"
+
 import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
 import { AnswerStatus } from "../utils/answerStatus.js"
