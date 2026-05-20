@@ -13,7 +13,7 @@ const Result = ({ role,
     isLastQuestion,
     questionNumber,
     totalQuestion,
-    answerProgress
+    answerProgress,
 }) => {
 
     const renderView = () => {

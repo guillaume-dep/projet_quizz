@@ -8,6 +8,7 @@ import Game from "./pages/Game.jsx"
 import Lobby from "./pages/Lobby.jsx"
 import Home from "./pages/Home.jsx"
 import FinalResult from "./pages/FinalResult.jsx";
+import Leaderboard from "./pages/Leaderboard.jsx";
 import Footer from "../components/pages/Footer.jsx";
 import Navbar from "./pages/Navbar.jsx"
 
@@ -18,6 +19,7 @@ import styles from "../style/app.module.css";
  * Every player have their own app which decides the view to display
  */
 const App = () => {
+
 
   /* ================================== */
   /* PWA INSTALL STATE (NEW) - AI MADE  */
@@ -91,6 +93,9 @@ const App = () => {
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
+  /* Global scores to show */
+  const [scoresToShow, setScoresToShow] = useState([])
+
   /* Error message to show from the server */
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -145,7 +150,9 @@ const App = () => {
       setView(VIEWS.GAME);
     }
 
-    const handleGameOver = (scores) => {
+    const handleGameOver = ({ scores, scoresToShow }) => {
+      console.log("Game over")
+      setScoresToShow(scoresToShow)
       setScores(scores);
       setView(VIEWS.FINAL_RESULT);
       setDifficulty(null);
@@ -257,11 +264,26 @@ const App = () => {
     };
   }, []);
 
+  /* ----- Leaderboard ----- */
+
+  useEffect(() => {
+    const handleShowLeaderboard = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
+      console.log("Leaderboard reçu :", scores, scoresToShow);
+      setScoresToShow(scoresToShow);
+    }
+
+    socket.on(SK.SHOWN_LEADERBOARD, handleShowLeaderboard)
+
+    return () => {
+      socket.off(SK.SHOWN_LEADERBOARD, handleShowLeaderboard)
+    }
+  }, [])
+
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({ playerScore, isLastQuestion }) => {
-      setScores(playerScore)
+    const handleShowResults = ({ playersScore, isLastQuestion }) => {
+      setScores(playersScore)
       setIsLastQuestion(isLastQuestion)
       setView(VIEWS.RESULT)
       console.log("Vu des résultats")
@@ -319,6 +341,7 @@ const App = () => {
           question={question}
         />
 
+      /* Ajouter un bouton ou une action pour afficher le leaderboard | setView ? */
       case VIEWS.RESULT:
         return <Result
           role={role}
@@ -329,11 +352,15 @@ const App = () => {
           questionNumber={questionNumber}
           totalQuestion={totalQuestion}
           answerProgress={answerProgress}
-
         />
 
+      case VIEWS.LEADERBOARD:
+        /* [{name, domain, score}...]*/
+        return <Leaderboard scoresToShow={scoresToShow} />
+
+
       case VIEWS.FINAL_RESULT:
-        return <FinalResult scores={scores} />
+        return <FinalResult scores={scores} scoresToShow={scoresToShow} />
     }
   }
 

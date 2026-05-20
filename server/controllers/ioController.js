@@ -34,7 +34,7 @@ export default class IOController {
         socket.on(SK.SUBMIT_ANSWER, (answerIndex, code) => this.handleSubmitAnswer(socket, answerIndex, code))
         socket.on(SK.REQUEST_NEW_QUESTION, (code) => this.handleNextQuestion(socket, code))
         socket.on(SK.REQUEST_SHOW_RESULTS, (code) => this.handleRequestShowResults(socket, code))
-        socket.on(SK.REQUEST_SHOW_LEADERBOARD, (code) => this.handleShowLeaderboard(code))
+        socket.on(SK.REQUEST_SHOW_LEADERBOARD, (code) => this.handleRequestShowLeaderboard(socket, code))
         socket.on(SK.DISCONNECT, () => this.handleDisconnect(socket))
     }
 
@@ -294,9 +294,8 @@ export default class IOController {
         gameManager.setResultState()
         console.log("Envoie des résultats de la question, partie : ", code)
 
-        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD);
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
-            playerScore: gameManager.getScores(), /* [{name, score, domain} */
+            playersScore: gameManager.getScores(), /* [{name, score, domain} */
             isLastQuestion: gameManager.isLastQuestion(),
             questionIndex: gameManager.getCurrentQuestionIndex()
         })
@@ -317,7 +316,8 @@ export default class IOController {
 
         const question = gameManager.getNextQuestion();
         if (!question) {
-            this.handleShowLeaderboard(gameManager, SK.GAME_OVER);
+            console.log("Envoie du leaderboard a Game over")
+            this.handleShowLeaderboard(gameManager, SK.GAME_OVER, code);
             return;
         }
 
@@ -333,21 +333,19 @@ export default class IOController {
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
         if (!gameManager.isHost(socket.id)) return;
-        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD);
+        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD, code);
     }
 
-    handleShowLeaderboard(gameManager, eventName) {
-        const scores = gameManager.getScores()
+    handleShowLeaderboard(gameManager, eventName, code) {
+        const scores = gameManager.getScores();
+        console.log("Scores dans handleShowLeaderboard :", scores);
+        console.log("ScoresToShow :", scores.slice(0, 5));
 
-        for (const [playerId, player] of gameManager.getPlayersMap()) {
-            const rank = scores.findIndex((player) => player.id === playerId) + 1
-            this.#io.to(playerId).emit(eventName, {
-                scores: scores,
-                scoresToShow: scores.slice(0, 5),
-                currentPlayerScore: player.score,
-                currentPlayerRank: rank ?? -1
-            });
-        }
+        this.#io.to(code).emit(eventName, {
+            scores: scores,
+            scoresToShow: scores.slice(0, 5),
+        });
+        console.log("Emitting", eventName, "to code", code);
     }
 
 

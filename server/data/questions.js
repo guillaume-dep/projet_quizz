@@ -137,7 +137,7 @@ const questions = [
     },
     {
         id: 8,
-        text: "Quel est le prénom le plus donné pour un chat ou un chien en France ?",
+        text: "Quel est le prénom le plus donné pour un chat et un chien en France ?",
         theme: STUDY_DOMAIN.NATURE,
         answers: [
             "Simba",
@@ -145,11 +145,11 @@ const questions = [
             "Pepito",
             "Rio"
         ],
-        correctIndex: 3,
+        correctIndex: 1,
         value: 1,
         coef: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "Les noms d’animaux de compagnie suivent souvent des tendances culturelles, et certains prénoms se retrouvent aussi bien chez les chats que chez les chiens."
+        information: "Le nom Nala est le nom le plus donné chez les chats et les chiens."
     },
     {
         id: 9,

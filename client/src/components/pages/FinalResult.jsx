@@ -1,10 +1,12 @@
 /* --- CSS --- */
 import styles from "../../style/finalResult.module.css"
 
-const FinalResult = ({ scores }) => {
+const FinalResult = ({ scores, scoresToShow }) => {
 
+    console.log(scoresToShow);
+    console.log(scores)
 
-    const renderFinalResult = scores
+    const renderFinalResult = scoresToShow
         .filter(player => player.domain !== "")
         .map(({ name, score, domain }, index) => (
             <div key={index}>
