@@ -292,7 +292,8 @@ export default class IOController {
     handleShowResults(gameManager, code) {
         gameManager.setResultState()
         console.log("Envoie des résultats de la question, partie : ", code)
-        this.handleSendScores(gameManager, SK.SHOWN_RESULTS)
+
+        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD);
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playerScore: gameManager.getScores(), /* [{name, score, domain} */
             isLastQuestion: gameManager.isLastQuestion(),
@@ -336,10 +337,9 @@ export default class IOController {
                 scores: scores,
                 scoresToShow: scores.slice(0, 5),
                 currentPlayerScore: player.score,
-                currentPlayerRank: rank
+                currentPlayerRank: rank ?? -1
             });
         }
-
     }
 
 
