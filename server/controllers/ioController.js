@@ -6,6 +6,7 @@ import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
 import { AnswerStatus } from "../utils/answerStatus.js"
 import generateCode from "../utils/utils.js"
+import { g } from "framer-motion/m"
 
 /**
  * IOController class to manage the game connections 
@@ -291,6 +292,7 @@ export default class IOController {
     handleShowResults(gameManager, code) {
         gameManager.setResultState()
         console.log("Envoie des résultats de la question, partie : ", code)
+        this.handleSendScores(gameManager, SK.SHOWN_RESULTS)
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playerScore: gameManager.getScores(), /* [{name, score, domain} */
             isLastQuestion: gameManager.isLastQuestion(),
@@ -313,8 +315,7 @@ export default class IOController {
 
         const question = gameManager.getNextQuestion();
         if (!question) {
-            this.#io.to(code).emit(SK.GAME_OVER, gameManager.getScores());
-            /* this.#rooms.delete(code); */
+            this.handleShowLeaderboard(gameManager, SK.GAME_OVER);
             return;
         }
 
@@ -324,6 +325,21 @@ export default class IOController {
             numberOfPlayerNotAnswered: gameManager.getNumberPlayersNotAnswered(),
             numberOfPlayer: gameManager.getNumberOfPlayers()
         });
+    }
+
+    handleShowLeaderboard(gameManager, eventName) {
+        const scores = gameManager.getScores()
+
+        for (const [playerId, player] of gameManager.getPlayersMap()) {
+            const rank = scores.findIndex((player) => player.id === playerId) + 1
+            this.#io.to(playerId).emit(eventName, {
+                scores: scores,
+                scoresToShow: scores.slice(0, 5),
+                currentPlayerScore: player.score,
+                currentPlayerRank: rank
+            });
+        }
+
     }
 
 
