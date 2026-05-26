@@ -86,10 +86,6 @@ export default class GameManager {
         return this.#players_map.get(socket_id)
     }
 
-    getPlayerScore(socket_id) {
-        return this.#players_map.get(socket_id).getScore()
-    }
-
     removePlayer(socket_id) {
         this.#players_map.delete(socket_id);
     }
@@ -114,7 +110,7 @@ export default class GameManager {
     addPlayer(socket_id, name, player_domain) {
         if (this.#players_map.has(socket_id) || this.#game_state !== GAME_STATE.LOBBY) return;
 
-        this.#players_map.set(socket_id, new Player(name, player_domain))
+        this.#players_map.set(socket_id, new Player(name, player_domain, socket_id))
     }
 
     /* ----- Game ----- */
@@ -336,11 +332,14 @@ export default class GameManager {
     /* ----- Scores ----- */
 
     getScores() {
-        return [...this.#players_map.values()].map(player => ({
-            name: player.name,
-            score: player.score,
-            domain: player.domain
-        })).sort((a, b) => b.score - a.score)
+        return [...this.#players_map.values()]
+            .filter(player => !this.isHost(player.id))
+            .map(player => ({
+                id: player.id,
+                name: player.name,
+                score: player.score,
+                domain: player.domain
+            })).sort((a, b) => b.score - a.score)
     }
 
 }

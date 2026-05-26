@@ -7,11 +7,13 @@ export default class Player {
     #domain
     #hasAnswered
     #lastAnswer
+    #id
 
-    constructor(name, domain) {
+    constructor(name, domain, id) {
         this.#name = name;
         this.#score = 0;
         this.#domain = domain;
+        this.#id = id;
         this.#hasAnswered = false;
         this.#lastAnswer = null;
     }
@@ -21,6 +23,7 @@ export default class Player {
     get name() { return this.#name; }
     get score() { return this.#score; }
     get domain() { return this.#domain; }
+    get id() { return this.#id }
 
     markAnswered() {
         this.#hasAnswered = true;
