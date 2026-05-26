@@ -86,6 +86,10 @@ export default class GameManager {
         return this.#players_map.get(socket_id)
     }
 
+    getPlayerScore(socket_id) {
+        return this.#players_map.get(socket_id).getScore()
+    }
+
     removePlayer(socket_id) {
         this.#players_map.delete(socket_id);
     }
