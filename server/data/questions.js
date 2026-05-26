@@ -295,7 +295,7 @@ const questions = [
     },
     {
         id: 25,
-        text: "Quelle est l'origine historique de la fabrication de la bière ?",
+        text: "Quel pays est à l'origine de la fabrication de la bière ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: ["La Mésopotamie", "L'Égypte", "La Chine", "La Grèce"],
         correctIndex: 0,
