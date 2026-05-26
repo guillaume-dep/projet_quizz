@@ -418,7 +418,206 @@ const questions = [
         coef: 2,
         difficulty: DIFFICULTY.MEDIUM,
         information: "Marie Myriam a remporté l’Eurovision en 1977 avec la chanson « L’Oiseau et l’Enfant »."
+    },
+
+    // ADAPTER LES ID :
+    {
+        id: 1,
+        text: "Qui a été la première femme à recevoir un prix Nobel en 1903 ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: [
+            "Marie Curie",
+            "Rosalind Franklin",
+            "Ada Lovelace",
+            "Lise Meitner"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Marie Curie est la seule personne à avoir reçu deux prix Nobel dans deux sciences différentes (physique et chimie)."
+    },
+    {
+        id: 2,
+        text: "En quelle année le mur de Berlin est-il tombé ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["1985", "1987", "1989", "1991"],
+        correctIndex: 2,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "La chute du mur de Berlin marque symboliquement la fin de la guerre froide."
+    },
+    {
+        id: 3,
+        text: "Quel est l’élément dont le symbole chimique est Au ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Argent", "Or", "Aluminium", "Cuivre"],
+        correctIndex: 1,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Le symbole Au vient du latin 'aurum', signifiant or brillant."
+    },
+
+    {
+        id: 6,
+        text: "Quel événement a déclenché la Première Guerre mondiale en 1914 ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: [
+            "L’assassinat de l’archiduc François-Ferdinand",
+            "La crise de Cuba",
+            "La révolution russe",
+            "La bataille de Verdun"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "L’attentat de Sarajevo a été réalisé par Gavrilo Princip."
+    }, {
+        id: 11,
+        text: "Quel est le vrai nom de Heisenberg dans Breaking bad ?",
+        theme: STUDY_DOMAIN.CINEMA,
+        answers: ["Walter White", "Jimmy McGill", "Tuco Salamanca", "Gus Fring"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Walt a emprunté son pseudonyme « Heisenberg » au physicien Werner Heisenberg, lauréat du prix Nobel et chimiste à qui on a diagnostiqué un cancer du poumon."
+    },
+    {
+        id: 12,
+        text: "Quelle est la capitale de l’Inde ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Mumbai", "New Delhi", "Bangalore", "Calcutta"],
+        correctIndex: 1,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "New Delhi est officiellement la capitale depuis 1911."
+    },
+    {
+        id: 13,
+        text: "Quels États américains partagent le plus de frontières avec d’autres États ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Tennessee et Missouri", "Texas et Californie", "New York et Nevada", "Floride et Utah"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Le Tennessee et le Missouri ont chacun 8 États voisins."
+    },
+    {
+        id: 32,
+        text: "En quelle année le premier iPhone est-il sorti ?",
+        theme: STUDY_DOMAIN.INFORMATIQUE,
+        answers: ["2005", "2006", "2007", "2008"],
+        correctIndex: 2,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Présenté par Steve Jobs en janvier 2007."
+    },
+    {
+        id: 33,
+        text: "Quel mammifère est le plus mortel pour l’homme ?",
+        theme: STUDY_DOMAIN.NATURE,
+        answers: ["Hippopotame", "Lion", "Requin blanc", "Loup"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "L’hippopotame est extrêmement territorial."
+    },
+    {
+        id: 34,
+        text: "Quel est l’animal le plus mortel au monde ?",
+        theme: STUDY_DOMAIN.NATURE,
+        answers: ["Moustique", "Serpent", "Chien", "Crocodile"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Le moustique transmet le paludisme."
+    },
+    {
+        id: 35,
+        text: "Dans quel pays est né Che Guevara ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["Argentine", "Cuba", "Mexique", "Chili"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Il est né à Rosario."
+    },
+    {
+        id: 37,
+        text: "Quel est le plus petit pays du monde ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Vatican", "Monaco", "Malte", "Liechtenstein"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Il fait 44 hectares."
+    },
+    {
+        id: 42,
+        text: "Quel pays a inventé la bière ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["Mésopotamie", "Égypte", "Chine", "Grèce"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Les Sumériens sont les premiers producteurs connus."
+    },
+    {
+        id: 43,
+        text: "Quelle est la guerre la plus courte de l’histoire ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: [
+            "Guerre Anglo-Zanzibar",
+            "Guerre des Six Jours",
+            "Guerre de Crimée",
+            "Guerre de Corée"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Elle a duré 38 minutes."
+    },
+    {
+        id: 44,
+        text: "Quel est le seul métal liquide à température ambiante ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Mercure", "Plomb", "Bromine", "Gallium"],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.EASY,
+        information: "Le mercure est toxique et lourd."
+    },
+    {
+        id: 45,
+        text: "Quel est le plus profond point connu des océans ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: [
+            "Fosse des Mariannes",
+            "Fosse de Tonga",
+            "Mer des Philippines",
+            "Dorsale médio-atlantique"
+        ],
+        correctIndex: 0,
+        value: 1,
+        coef: 2,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Le point le plus profond est le Challenger Deep."
     }
+
     /* ---------- END-EASY ---------- */
 
     /* ---------- MEDIUM ---------- */
