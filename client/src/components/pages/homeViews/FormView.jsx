@@ -232,6 +232,7 @@ const FormView = ({
                     className={styles.input}
                     type="text"
                     placeholder="..."
+                    maxLength={10}
                     value={name}
                     onChange={handleSetName}
                 />

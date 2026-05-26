@@ -194,11 +194,11 @@ const questions = [
         text: "Quel est le nom le plus donné en France qui est en tête du classement à la fois pour un chat et pour un chien ?",
         theme: STUDY_DOMAIN.NATURE,
         answers: ["Simba", "Nala", "Pépito", "Rio"],
-        correctIndex: 3,
+        correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
         value: 1,
         coef: 2,
-        information: "Incroyable mais vrai, Rio occupe simultanément la première place des noms les plus attribués aux chiens et aux chats."
+        information: "Incroyable mais vrai, Nala occupe simultanément la première place des noms les plus attribués aux chiens et aux chats."
     },
     {
         id: 17,
