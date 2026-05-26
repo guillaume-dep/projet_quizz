@@ -1,42 +1,88 @@
-/* --- CSS --- */
 import styles from "../../style/finalResult.module.css"
 
 const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
 
-    console.log(scoresToShow);
-    console.log(scores)
-    console.log(currentPlayerRank)
-    console.log("score", currentPlayerScore)
-
-    /* RANK : 0 pour HOST */
-
-    const renderFinalResult = scoresToShow
-        .filter(player => player.domain !== "")
-        .map(({ name, score, domain }, index) => (
-            <div key={index}>
-                <p>Name : {name}</p>
-                <p>score : {score}</p>
-                <p>domain : {domain}</p>
-            </div>
-        ))
+    const top3 = scoresToShow.slice(0, 3);
+    const others = scoresToShow.slice(3);
 
     return (
         <div className={styles.finalResult}>
-            Final results :
-            {renderFinalResult}
+
+            <h1>Final Results</h1>
+
+            {/* MOBILE */}
+            <div className={styles.mobile}>
+                <div className={styles.mobileCard}>
+
+                    <div className={styles.mobileSide}>
+                        <div className={styles.mobileLabel}>Rank</div>
+                        <div className={styles.mobileValue}>
+                            {currentPlayerRank ? `#${currentPlayerRank}` : "—"}
+                        </div>
+                    </div>
+
+                    <div className={styles.mobileDivider} />
+
+                    <div className={styles.mobileSide}>
+                        <div className={styles.mobileLabel}>Score</div>
+                        <div className={styles.mobileValue}>{currentPlayerScore ?? "—"}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* PODIUM */}
+            <div className={styles.podium}>
+
+                {/* 2nd */}
+                {top3[1] && (
+                    <div className={styles.podiumItem}>
+                        <div className={styles.label}>
+                            <span className={styles.playerName}>{top3[1].name}</span>
+                            <span className={styles.playerScore}>{top3[1].score} pts</span>
+                        </div>
+                        <div className={`${styles.block} ${styles.second}`}>2</div>
+                    </div>
+                )}
+
+                {/* 1st */}
+                {top3[0] && (
+                    <div className={styles.podiumItem}>
+                        <div className={styles.label}>
+                            <span className={styles.playerName}>{top3[0].name}</span>
+                            <span className={styles.playerScore}>{top3[0].score} pts</span>
+                        </div>
+                        <div className={`${styles.block} ${styles.first}`}>1</div>
+                    </div>
+                )}
+
+                {/* 3rd */}
+                {top3[2] && (
+                    <div className={styles.podiumItem}>
+                        <div className={styles.label}>
+                            <span className={styles.playerName}>{top3[2].name}</span>
+                            <span className={styles.playerScore}>{top3[2].score} pts</span>
+                        </div>
+                        <div className={`${styles.block} ${styles.third}`}>3</div>
+                    </div>
+                )}
+            </div>
+
+            {/* OTHERS */}
+            {others.length > 0 && (
+                <div className={styles.others}>
+                    {others.map((p, i) => (
+                        <div key={i} className={styles.otherRow}>
+                            <span>#{i + 4}</span>
+                            <span>{p.name}</span>
+                            <span>{p.score} pts</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+
         </div>
-    )
+    );
 }
 
-export default FinalResult
-
-/*
-J'ai besoin de réaliser l'écran des résultats finaux.
-Il doit être sous la forme de podium: 
-    - un podium avec 3 personnes: des rectangles qui vont du bas vers le haut, plus petit pour le 3eme, plus grand que le 3e mais plus petit que le premier pour le 2e
-    - Pour le premier un plus grand rectangle. Même largeur pour les 3 la hauteur change. En haut du rectangle (pas dedans mais au dessus du bord haut, le nom et le score du joueur.)
-    - Pour le 4e et 5e simplement le nom en bas de l'écran.
-    - Pour le reste des joueurs afficher le rang de chacun dans un rectangle (vertical) à droite et montrer le rang de chacun.
-
-Pour les écrans sur téléphone simplement afficher le score total du joueur et si possible son rang personnel.
-*/
+export default FinalResult;
