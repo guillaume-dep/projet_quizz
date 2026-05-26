@@ -1,10 +1,7 @@
 import { io } from "socket.io-client";
 
-const URL =
-    import.meta.env.VITE_SERVER_URL ||
-    window.location.origin;
+/* Ip and localhost connection */
+let URL = import.meta.env.VITE_SERVER_URL;
+if (!URL) URL = `http://${window.location.hostname}:8080`;
 
-export const socket = io(URL, {
-    path: "/socket.io",
-    transports: ["websocket", "polling"]
-});
+export const socket = io(URL);

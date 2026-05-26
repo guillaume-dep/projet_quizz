@@ -3,7 +3,7 @@ import { STUDY_DOMAIN } from "../utils/studyDomain.js";
 
 const questions = [
 
-    /* ===================== EASY (15) ===================== */
+    /* ===================== EASY ===================== */
 
     {
         id: 0,
@@ -12,15 +12,19 @@ const questions = [
         answers: ["PHP", "Java", "Kotlin", "Haskell"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
+        value: 1,
+        coef: 2,
         information: "PHP est un langage serveur créé en 1994 par Rasmus Lerdorf."
     },
     {
         id: 1,
         text: "Qu'est-ce qu'un choupisson ?",
         theme: STUDY_DOMAIN.NATURE,
-        answers: ["Un bébé hérisson", "Une cucurbitacée", "Une recette", "Un Pokémon"],
+        answers: ["Un bébé hérisson", "Une variété de cucurbitacée", "Une recette de chou farci", "Un Pokémon"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
+        value: 1,
+        coef: 2,
         information: "Terme informel popularisé sur Internet pour désigner un bébé hérisson."
     },
     {
@@ -30,29 +34,31 @@ const questions = [
         answers: ["1914", "1945", "1974", "1789"],
         correctIndex: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "La majorité civile est passée de 21 à 18 ans en 1974."
+        value: 1,
+        coef: 2,
+        information: "La majorité civile est passée de 21 à 18 ans en 1974 sous la présidence de Valéry Giscard d'Estaing."
     },
     {
         id: 3,
         text: "Qu'est-ce que la cuniculiculture ?",
         theme: STUDY_DOMAIN.SCIENCES,
-        answers: ["Concombres", "Escargots", "Riz", "Lapins"],
-        correctIndex: 3,
+        answers: ["L'élevage de lapins", "La culture de concombre", "L'élevage d'escargots", "La culture de riz"],
+        correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
-        information: "Élevage de lapins, du latin cuniculus qui signifie lapin."
+        information: "C'est l'élevage de lapins domestiques. Le mot vient du latin cuniculus qui signifie lapin."
     },
     {
         id: 4,
         text: "Quelle est la tranche d'âge d'un nourrisson ?",
         theme: STUDY_DOMAIN.CORPS_HUMAIN,
-        answers: ["0-28 jours", "1-3 mois", "1-24 mois", "1-36 mois"],
+        answers: ["De 0 à 28 jours", "De 1 à 3 mois", "De 1 à 24 mois", "De 1 à 36 mois"],
         correctIndex: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "La période nourrisson couvre généralement jusqu’à 24 mois. De 0-28 jours c'est un nouveau-né."
+        information: "La période du nourrisson couvre généralement l'enfant de 1 mois à 2 ans (24 mois). Avant 28 jours, c'est un nouveau-né."
     },
     {
         id: 5,
-        text: "Quelle est la suite de la Marseillaise : « Ils viennent jusque dans vos bras égorger... » ?",
+        text: "Dans la Marseillaise officielle, quelle suite de cette phrase est correcte : « Ils viennent jusque dans vos bras égorger... » ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: [
             "vos fils et vos compagnes",
@@ -62,61 +68,61 @@ const questions = [
         ],
         correctIndex: 1,
         difficulty: DIFFICULTY.EASY,
-        information: "Hymne écrit en 1792 par Rouget de Lisle. De nos jours on chante «vos fils et vos compagnes»"
+        information: "Le texte officiel écrit par Rouget de Lisle comporte une virgule : « égorger vos fils, vos compagnes ! » sans le « et »."
     },
     {
         id: 6,
-        text: "Quel est le nom du gros orteil ?",
+        text: "Quel est le nom anatomique du gros orteil ?",
         theme: STUDY_DOMAIN.CORPS_HUMAIN,
-        answers: ["Hallux", "Callux", "Gros jules", "Doigt du pied"],
+        answers: ["L'hallux", "Le callux", "Le gros jules", "Le gros doigt de pied"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
-        information: "En anatomie, le gros orteil est appelé hallux."
+        information: "En anatomie, le gros orteil est appelé hallux. Sa déformation fréquente s'appelle l'hallux valgus."
     },
     {
         id: 7,
-        text: "Quelle ville est jumelée avec Paris ?",
+        text: "Avec quelle ville Paris est-elle jumelée ?",
         theme: STUDY_DOMAIN.GEOGRAPHIE,
         answers: ["Londres", "Tokyo", "Berne", "Rome"],
         correctIndex: 3,
         difficulty: DIFFICULTY.EASY,
-        information: "Paris est jumelée avec Rome depuis 1956."
+        information: "Paris n'est jumelée qu'avec Rome depuis 1956 avec le slogan : « Seule Paris est digne de Rome ; seule Rome est digne de Paris »."
     },
     {
         id: 8,
-        text: "Les monuments sur les billets en euros sont-ils réels ?",
+        text: "Les monuments présents sur les billets de banque en euros existent-ils réellement ?",
         theme: STUDY_DOMAIN.ARTS,
         answers: ["Vrai", "Faux"],
         correctIndex: 1,
         difficulty: DIFFICULTY.EASY,
-        information: "Les monuments sont fictifs et inspirés de styles architecturaux européens."
+        information: "Faux. Les ponts et monuments sont fictifs pour éviter les jalousies entre pays, représentant simplement des styles architecturaux."
     },
     {
         id: 9,
-        text: "Qui a inventé l’écriture en relief pour les aveugles ?",
+        text: "Quel inventeur français a donné son nom à une écriture en relief pour les aveugles ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Louis Braille", "Aimé Paris", "Champollion", "David Guetta"],
+        answers: ["Louis Braille", "Aimé Paris", "Jean-François Champollion", "David Guetta"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
-        information: "Louis Braille a développé son système en 1824."
+        information: "Louis Braille a développé son système de points en relief en 1824 alors qu'il était lui-même aveugle."
     },
     {
         id: 10,
-        text: "Jean-Baptiste Poquelin est-il un célèbre dramaturge français ?",
+        text: "Jean-Baptiste Poquelin est-il un grand dramaturge français ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: ["Vrai", "Faux"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
-        information: "Jean-Baptiste Poquelin est le vrai nom de Molière."
+        information: "Vrai. Jean-Baptiste Poquelin est le véritable nom de Molière."
     },
     {
         id: 11,
-        text: "Combien d'os a-t-on à l'âge adulte ?",
+        text: "Combien d'os possède un être humain à l'âge adulte ?",
         theme: STUDY_DOMAIN.CORPS_HUMAIN,
         answers: ["250", "280", "270", "206"],
         correctIndex: 3,
         difficulty: DIFFICULTY.EASY,
-        information: "De nombreux os fusionnent pendant la croissance."
+        information: "Nous naissons avec environ 270 os, mais beaucoup fusionnent durant la croissance pour n'en laisser que 206 à l'âge adulte."
     },
     {
         id: 12,
@@ -125,7 +131,7 @@ const questions = [
         answers: ["1985", "1987", "1989", "1991"],
         correctIndex: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "La chute du mur de Berlin a lieu en 1989."
+        information: "La chute du mur de Berlin a eu lieu le 9 novembre 1989."
     },
     {
         id: 13,
@@ -134,76 +140,94 @@ const questions = [
         answers: ["Ag", "Au", "Al", "Go"],
         correctIndex: 1,
         difficulty: DIFFICULTY.EASY,
-        information: "Le symbole Au vient du latin aurum."
+        information: "Le symbole Au vient du latin aurum qui signifie « aurore brillante »."
     },
     {
         id: 14,
-        text: "Quel est le vrai nom de Heisenberg dans Breaking Bad ?",
+        text: "Quel est le vrai nom de Heisenberg dans la série Breaking Bad ?",
         theme: STUDY_DOMAIN.CINEMA,
         answers: ["Walter White", "Jimmy McGill", "Tuco Salamanca", "Gus Fring"],
         correctIndex: 0,
         difficulty: DIFFICULTY.EASY,
-        information: "Son pseudonyme fait référence au physicien Werner Heisenberg."
+        information: "Son pseudonyme fait référence au célèbre physicien allemand Werner Heisenberg."
     },
 
     /* ===================== MEDIUM ===================== */
 
     {
         id: 15,
-        text: "Qui a prononcé la phrase « Paris vaut bien une messe » ?",
+        text: "Qui a prononcé la célèbre phrase « Paris vaut bien une messe » ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Henri IV", "Charles de Gaulle", "Louis XIV", "Napoléon Bonaparte"],
+        answers: ["Henri IV", "Charles de Gaulle", "Louis XIV", "Napoléon Ier"],
         correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Henri IV s’est converti au catholicisme pour devenir roi de France."
+        information: "Attribuée à Henri IV, cette phrase justifie sa conversion au catholicisme en 1593 pour pouvoir accéder au trône de France."
     },
     {
         id: 16,
-        text: "Qu'est-ce qu'un kakapo ?",
+        text: "Quel est le nom le plus donné en France qui est en tête du classement à la fois pour un chat et pour un chien ?",
         theme: STUDY_DOMAIN.NATURE,
-        answers: ["Perroquet", "Fiente", "Lézard", "Singe"],
-        correctIndex: 0,
+        answers: ["Simba", "Nala", "Pépito", "Rio"],
+        correctIndex: 3,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Perroquet nocturne incapable de voler, originaire de Nouvelle-Zélande."
+        information: "Incroyable mais vrai, Rio occupe simultanément la première place des noms les plus attribués aux chiens et aux chats."
     },
     {
         id: 17,
-        text: "Qu'est-ce qu'une saïga ?",
-        theme: STUDY_DOMAIN.NATURE,
-        answers: ["Plaine", "Antilope", "Liane", "Tempête"],
-        correctIndex: 1,
+        text: "Combien de pays dans le monde ont un drapeau officiel qui n'est pas rectangulaire ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["5", "3", "2", "1"],
+        correctIndex: 3,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Antilope reconnaissable à son nez filtrant la poussière."
+        information: "Seul le Népal possède un drapeau non quadrilatère (deux triangles empilés)."
     },
     {
         id: 18,
-        text: "Que signifie la nomophobie ?",
-        theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: ["Solitude", "Public", "Critique", "Téléphone"],
-        correctIndex: 3,
+        text: "Qu'est-ce qu'un Kakapo ?",
+        theme: STUDY_DOMAIN.NATURE,
+        answers: ["Un perroquet", "Une fiente d'oiseau", "Un lézard", "Un singe"],
+        correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Peur d’être séparé de son téléphone mobile."
+        information: "Le kakapo est un grand perroquet nocturne originaire de Nouvelle-Zélande qui a la particularité de ne pas savoir voler."
     },
     {
         id: 19,
-        text: "Qui a été la première femme Première ministre française ?",
-        theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Journaliste", "Première ministre", "Piaf", "Eurovision"],
+        text: "Qu'est-ce qu'une saïga ?",
+        theme: STUDY_DOMAIN.NATURE,
+        answers: ["Une grande plaine", "Une antilope", "Une grande liane", "Un type de tempête"],
         correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Édith Cresson devient Première ministre en 1991."
+        information: "La saïga est une antilope eurasienne reconnaissable à son museau long et gonflé qui filtre la poussière."
     },
     {
         id: 20,
-        text: "Qui a remporté la dernière victoire française à l’Eurovision ?",
+        text: "Qu'est-ce que la nomophobie ?",
+        theme: STUDY_DOMAIN.PSYCHOLOGIE,
+        answers: ["La peur d'être seul", "La peur de parler en public", "La peur d'être critiqué", "La peur d'être séparé de son téléphone"],
+        correctIndex: 3,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Contraction de 'no mobile phobia', elle désigne la peur ou l'anxiété excessive à l'idée d'être séparé de son smartphone."
+    },
+    {
+        id: 21,
+        text: "Qui est Édith Cresson ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["Une journaliste politique", "La première femme Première ministre en France", "Le vrai nom d'Édith Piaf", "La première française à gagner l'Eurovision"],
+        correctIndex: 1,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Édith Cresson est nommée Première ministre par François Mitterrand en 1991, devenant la première femme à occuper ce poste en France."
+    },
+    {
+        id: 22,
+        text: "Qui est la dernière artiste à avoir remporté l'Eurovision pour la France ?",
         theme: STUDY_DOMAIN.MUSIQUE,
         answers: ["France Gall", "Marie Myriam", "Édith Piaf", "Barbara Pravi"],
         correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Marie Myriam gagne en 1977."
+        information: "La dernière victoire de la France remonte à 1977 avec la chanson 'L'Oiseau et l'Enfant' interprétée par Marie Myriam."
     },
     {
-        id: 21,
+        id: 23,
         text: "Quel événement a déclenché la Première Guerre mondiale ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: [
@@ -214,118 +238,127 @@ const questions = [
         ],
         correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "L’assassinat de l’archiduc François-Ferdinand à Sarajevo en 1914 a déclenché la guerre."
-    },
-    {
-        id: 22,
-        text: "Quel État américain a le plus de frontières avec d'autres États ?",
-        theme: STUDY_DOMAIN.GEOGRAPHIE,
-        answers: ["Tennessee", "New Jersey", "Texas", "New York"],
-        correctIndex: 0,
-        difficulty: DIFFICULTY.MEDIUM,
-        information: "Le Tennessee et le Missouri ont chacun 8 États voisins, le plus grand nombre aux États-Unis."
-    },
-    {
-        id: 23,
-        text: "Quelle est l'origine de la bière ?",
-        theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Mésopotamie", "Égypte", "Chine", "Grèce"],
-        correctIndex: 0,
-        difficulty: DIFFICULTY.MEDIUM,
-        information: "Les Sumériens sont les premiers producteurs connus."
+        information: "L’assassinat de l’archiduc François-Ferdinand à Sarajevo en 1914 a déclenché l'engrenage des alliances."
     },
     {
         id: 24,
-        text: "Quelle est la guerre la plus courte de l’histoire ?",
-        theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Six Jours", "Anglo-Zanzibar", "Crimée", "Corée"],
-        correctIndex: 1,
+        text: "Quel État américain a le plus de frontières avec d'autres États ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Le Tennessee", "Le New Jersey", "Le Texas", "Le New York"],
+        correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Elle a duré 38 minutes."
+        information: "Le Tennessee et le Missouri possèdent chacun 8 États voisins, le record absolu aux États-Unis."
     },
     {
         id: 25,
-        text: "Quelle est la fosse la plus profonde des océans ?",
-        theme: STUDY_DOMAIN.SCIENCES,
-        answers: ["Tonga", "Philippines", "Mariannes", "Atlantique"],
-        correctIndex: 2,
+        text: "Quelle est l'origine historique de la fabrication de la bière ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["La Mésopotamie", "L'Égypte", "La Chine", "La Grèce"],
+        correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Le Challenger Deep est le point le plus profond."
+        information: "Les Sumériens en Mésopotamie buvaient déjà de la bière (appelée sikaru) il y a plus de 5 000 ans."
     },
     {
         id: 26,
-        text: "Dans quel pays est né Che Guevara ?",
+        text: "Quelle est la guerre la plus courte de l’histoire ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Cuba", "Mexique", "Chili", "Argentine"],
-        correctIndex: 3,
+        answers: ["La guerre des Six Jours", "La guerre anglo-zanzibarienne", "La guerre de Crimée", "La guerre de Corée"],
+        correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Né à Rosario en Argentine."
+        information: "En 1896, la guerre anglo-zanzibarienne a duré entre 38 et 45 minutes avant la reddition de Zanzibar."
     },
     {
         id: 27,
-        text: "Quelle est la capitale de l’Inde ?",
-        theme: STUDY_DOMAIN.GEOGRAPHIE,
-        answers: ["Mumbai", "New Delhi", "Bangalore", "Calcutta"],
-        correctIndex: 1,
+        text: "Quelle est la fosse océanique la plus profonde du monde ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["La fosse des Tonga", "La fosse des Philippines", "La fosse des Mariannes", "La fosse de Porto Rico"],
+        correctIndex: 2,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "New Delhi est la capitale officielle depuis 1911."
+        information: "La fosse des Mariannes descend à près de 11 000 mètres de profondeur dans l'océan Pacifique."
     },
     {
         id: 28,
-        text: "En quelle année la peine de mort a-t-elle été abolie en France ?",
+        text: "En quelle année la peine de mort a-t-elle été officiellement abolie en France ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: ["1979", "1981", "1985", "2000"],
         correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Abolition portée par Robert Badinter."
+        information: "L'abolition a été votée le 30 septembre 1981, portée par le garde des Sceaux Robert Badinter."
+    },
+    {
+        id: 29,
+        text: "Qui a écrit le célèbre recueil de poèmes « Les Fleurs du Mal » ?",
+        theme: STUDY_DOMAIN.ARTS,
+        answers: ["Émile Zola", "Charles Baudelaire", "Voltaire", "Honoré de Balzac"],
+        correctIndex: 1,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "Publié en 1857, ce chef-d'œuvre de Baudelaire valut à son auteur un procès pour outrage aux bonnes mœurs."
+    },
+    {
+        id: 30,
+        text: "De quel conte traditionnel provient la réplique : « Tire la chevillette, la bobinette cherra » ?",
+        theme: STUDY_DOMAIN.ARTS,
+        answers: ["Alice au pays des merveilles", "Blanche-Neige", "Cendrillon", "Le Petit Chaperon rouge"],
+        correctIndex: 3,
+        difficulty: DIFFICULTY.MEDIUM,
+        information: "C'est la phrase que dit le loup déguisé en grand-mère au Petit Chaperon rouge dans le conte de Charles Perrault."
     },
 
     /* ===================== HARD ===================== */
 
     {
-        id: 29,
-        text: "Un clavilogiste est un amateur de ?",
+        id: 31,
+        text: "Qu'est-ce qu'un clavilogiste ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Clavier", "Vin", "Clés anciennes", "Clavicule"],
+        answers: ["Un réparateur de claviers", "Un collectionneur de vins", "Un collectionneur de clés anciennes", "Un médecin spécialiste"],
         correctIndex: 2,
         difficulty: DIFFICULTY.HARD,
-        information: "Du latin clavis signifiant clé."
-    },
-    {
-        id: 30,
-        text: "Un arénophile aime ?",
-        theme: STUDY_DOMAIN.SCIENCES,
-        answers: ["Jeux anciens", "Sable", "Gladiator", "Arêtes"],
-        correctIndex: 1,
-        difficulty: DIFFICULTY.HARD,
-        information: "Collectionneur de sables du monde entier."
-    },
-    {
-        id: 31,
-        text: "Quel est l’animal le plus mortel pour l’homme ?",
-        theme: STUDY_DOMAIN.NATURE,
-        answers: ["Hippopotame", "Lion", "Requin", "Moustique"],
-        correctIndex: 3,
-        difficulty: DIFFICULTY.HARD,
-        information: "Le moustique transmet le paludisme."
+        information: "Du latin 'clavis' (clé), le clavilogiste est une personne qui collectionne les clés anciennes."
     },
     {
         id: 32,
-        text: "Quel est le plus petit pays du monde ?",
-        theme: STUDY_DOMAIN.GEOGRAPHIE,
-        answers: ["Vatican", "Monaco", "Malte", "Liechtenstein"],
-        correctIndex: 0,
+        text: "Qu'est-ce qu'un arénophile ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Un amateur de jeux anciens", "Un collectionneur de sable", "Un fan du film Gladiator", "Un collectionneur d'arêtes de poissons"],
+        correctIndex: 1,
         difficulty: DIFFICULTY.HARD,
-        information: "Le Vatican fait environ 44 hectares."
+        information: "L'arénophile est un collectionneur de sables issus de différentes plages ou déserts du monde."
     },
     {
         id: 33,
-        text: "La coulrophobie est la peur de ?",
+        text: "La coulrophobie désigne la peur irrationnelle de quel élément ?",
         theme: STUDY_DOMAIN.PSYCHOLOGIE,
-        answers: ["Clowns", "Eau", "Courir", "Miroirs"],
+        answers: ["Des clowns", "De l'eau qui coule", "De courir en public", "Des miroirs"],
         correctIndex: 0,
         difficulty: DIFFICULTY.HARD,
-        information: "Peur des clowns."
+        information: "La coulrophobie est la peur panique et persistante des clowns, très courante chez les enfants et certains adultes."
+    },
+    {
+        id: 34,
+        text: "Est-ce qu'un kilo de plumes est plus lourd qu'un kilo de plomb au sommet du Mont Saint-Michel ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Vrai", "Faux"],
+        correctIndex: 1,
+        difficulty: DIFFICULTY.HARD,
+        information: "Faux. Un kilo reste un kilo. (Note : À cause de la poussée d'Archimède dans l'air, le plomb paraîtrait un minuscule poil plus lourd sur une balance standard, mais leur masse reste identique : 1 kg)."
+    },
+    {
+        id: 35,
+        text: "Dans quel pays est né le révolutionnaire Che Guevara ?",
+        theme: STUDY_DOMAIN.HISTOIRE,
+        answers: ["Cuba", "Mexique", "Chili", "Argentine"],
+        correctIndex: 3,
+        difficulty: DIFFICULTY.HARD,
+        information: "Ernesto Guevara est né à Rosario, en Argentine, avant de rejoindre la révolution cubaine."
+    },
+    {
+        id: 36,
+        text: "Quelle est la capitale officielle de l’Inde ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Mumbai", "New Delhi", "Bangalore", "Calcutta"],
+        correctIndex: 1,
+        difficulty: DIFFICULTY.HARD,
+        information: "New Delhi est la capitale administrative du pays, bien que Mumbai soit la plus grande ville."
     }
 ];
 

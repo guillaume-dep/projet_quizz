@@ -1,42 +1,30 @@
-import http from "http";
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import { Server as IOServer } from "socket.io";
-
-import IOController from "./controllers/ioController.js";
+import http from 'http';
+import IOController from './controllers/ioController.js';
+import { Server as IOServer } from 'socket.io';
+import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, '../dist')));
 
-/* HTTP */
-const server = http.createServer(app);
+const server = http.createServer(app); // ← app ici
 
-/* SOCKET.IO */
 const io = new IOServer(server, {
     cors: {
         origin: true,
-        credentials: true,
         methods: ["GET", "POST"]
-    },
-    transports: ["websocket", "polling"]
+    }
 });
 
 const ioController = new IOController(io);
-
-io.on("connection", (socket) => {
-    console.log("CONNECT:", socket.id);
+io.on('connection', (socket) => {
     ioController.registerSocket(socket);
-});
-
-/* Debug utile */
-io.engine.on("connection_error", (err) => {
-    console.log("SOCKET ERROR:", err.code, err.message);
+    console.log("CONNECT:", socket.id);
 });
 
 server.listen(8080, () => {
-    console.log("Server running on http://localhost:8080");
+    console.log("Server running on 8080");
 });
