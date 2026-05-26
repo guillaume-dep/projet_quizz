@@ -43,7 +43,7 @@ export default class IOController {
 
         const { name, domain, difficulty, nbQuestions } = data;
         const code = generateCode();
-        const gameManager = new GameManager(questionsEnLigne, nbQuestions, difficulty)
+        const gameManager = new GameManager(questions, nbQuestions, difficulty)
 
         gameManager.setHost(socket.id);
         gameManager.addPlayer(socket.id, name, domain);
