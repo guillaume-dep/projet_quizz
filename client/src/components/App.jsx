@@ -90,6 +90,10 @@ const App = () => {
   /* Useful to know if a player hasAnswered */
   const [hasAnswered, setHasAnswered] = useState(false);
 
+  const [currentPlayerScore, setCurrentPlayerScore] = useState(0)
+
+  const [currentPlayerRank, setCurrentPlayerRank] = useState(0)
+
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
@@ -150,10 +154,13 @@ const App = () => {
       setView(VIEWS.GAME);
     }
 
-    const handleGameOver = ({ scores, scoresToShow }) => {
+    const handleGameOver = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
       console.log("Game over")
       setScoresToShow(scoresToShow)
       setScores(scores);
+      console.log(currentPlayerScore)
+      setCurrentPlayerScore(currentPlayerScore)
+      setCurrentPlayerRank(currentPlayerRank)
       setView(VIEWS.FINAL_RESULT);
       setDifficulty(null);
     }
@@ -270,6 +277,8 @@ const App = () => {
     const handleShowLeaderboard = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
       console.log("Leaderboard reçu :", scores, scoresToShow);
       setScoresToShow(scoresToShow);
+      setCurrentPlayerScore(currentPlayerScore)
+      setCurrentPlayerRank(currentPlayerRank)
     }
 
     socket.on(SK.SHOWN_LEADERBOARD, handleShowLeaderboard)
@@ -360,7 +369,13 @@ const App = () => {
 
 
       case VIEWS.FINAL_RESULT:
-        return <FinalResult scores={scores} scoresToShow={scoresToShow} />
+        return <FinalResult
+          scores={scores}
+          scoresToShow={scoresToShow}
+          currentPlayerScore={currentPlayerScore}
+          currentPlayerRank={currentPlayerRank}
+        />
+
     }
   }
 

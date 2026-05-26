@@ -316,7 +316,7 @@ export default class IOController {
         const question = gameManager.getNextQuestion();
         if (!question) {
             console.log("Envoie du leaderboard a Game over")
-            this.handleShowLeaderboard(gameManager, SK.GAME_OVER, code);
+            this.handleShowLeaderboard(gameManager, SK.GAME_OVER);
             return;
         }
 
@@ -332,21 +332,27 @@ export default class IOController {
         const gameManager = this.getGameOrEmitError(socket, code);
         if (!gameManager) return;
         if (!gameManager.isHost(socket.id)) return;
-        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD, code);
+        this.handleShowLeaderboard(gameManager, SK.SHOWN_LEADERBOARD);
     }
 
-    handleShowLeaderboard(gameManager, eventName, code) {
+    handleShowLeaderboard(gameManager, eventName) {
         const scores = gameManager.getScores();
-        console.log("Scores dans handleShowLeaderboard :", scores);
-        console.log("ScoresToShow :", scores.slice(0, 5));
 
-        this.#io.to(code).emit(eventName, {
-            scores: scores,
-            scoresToShow: scores.slice(0, 5),
-        });
-        console.log("Emitting", eventName, "to code", code);
+        for (const [socket_id, player] of gameManager.getPlayersMap()) {
+
+            const rank = scores.findIndex(p => p.id === socket_id) + 1;
+
+            console.log(player.score)
+            console.log("rank from server", rank)
+
+            this.#io.to(socket_id).emit(eventName, {
+                scores,
+                scoresToShow: scores.slice(0, 5),
+                currentPlayerScore: player.score,
+                currentPlayerRank: rank
+            });
+        }
     }
-
 
     /* ----- Error handler ----- */
 
