@@ -39,7 +39,7 @@ const questions = [
         answers: ["Concombres", "Escargots", "Riz", "Lapins"],
         correctIndex: 3,
         difficulty: DIFFICULTY.EASY,
-        information: "Élevage de lapins, du latin cuniculus."
+        information: "Élevage de lapins, du latin cuniculus qui signifie lapin."
     },
     {
         id: 4,
@@ -48,7 +48,7 @@ const questions = [
         answers: ["0-28 jours", "1-3 mois", "1-24 mois", "1-36 mois"],
         correctIndex: 2,
         difficulty: DIFFICULTY.EASY,
-        information: "La période nourrisson couvre généralement jusqu’à 24 mois selon les classifications médicales."
+        information: "La période nourrisson couvre généralement jusqu’à 24 mois. De 0-28 jours c'est un nouveau-né."
     },
     {
         id: 5,
@@ -62,7 +62,7 @@ const questions = [
         ],
         correctIndex: 1,
         difficulty: DIFFICULTY.EASY,
-        information: "Hymne écrit en 1792 par Rouget de Lisle."
+        information: "Hymne écrit en 1792 par Rouget de Lisle. De nos jours on chante «vos fils et vos compagnes»"
     },
     {
         id: 6,
@@ -93,7 +93,7 @@ const questions = [
     },
     {
         id: 9,
-        text: "Qui a inventé l’écriture Braille ?",
+        text: "Qui a inventé l’écriture en relief pour les aveugles ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: ["Louis Braille", "Aimé Paris", "Champollion", "David Guetta"],
         correctIndex: 0,
@@ -131,7 +131,7 @@ const questions = [
         id: 13,
         text: "Quel est le symbole chimique de l’or ?",
         theme: STUDY_DOMAIN.SCIENCES,
-        answers: ["Argent", "Au", "Aluminium", "Cuivre"],
+        answers: ["Ag", "Au", "Al", "Go"],
         correctIndex: 1,
         difficulty: DIFFICULTY.EASY,
         information: "Le symbole Au vient du latin aurum."
@@ -206,19 +206,24 @@ const questions = [
         id: 21,
         text: "Quel événement a déclenché la Première Guerre mondiale ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Sarajevo", "Cuba", "Russie", "Verdun"],
+        answers: [
+            "L’attentat de Sarajevo",
+            "La crise des missiles de Cuba",
+            "La révolution russe",
+            "La bataille de Verdun"
+        ],
         correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "L’attentat de Sarajevo en 1914 déclenche la guerre."
+        information: "L’assassinat de l’archiduc François-Ferdinand à Sarajevo en 1914 a déclenché la guerre."
     },
     {
         id: 22,
-        text: "Quels États américains ont le plus de frontières avec d'autres États ?",
+        text: "Quel État américain a le plus de frontières avec d'autres États ?",
         theme: STUDY_DOMAIN.GEOGRAPHIE,
-        answers: ["Tennessee & Missouri", "Texas", "New York", "Floride"],
+        answers: ["Tennessee", "New Jersey", "Texas", "New York"],
         correctIndex: 0,
         difficulty: DIFFICULTY.MEDIUM,
-        information: "Tennessee et Missouri ont chacun 8 États voisins."
+        information: "Le Tennessee et le Missouri ont chacun 8 États voisins, le plus grand nombre aux États-Unis."
     },
     {
         id: 23,
@@ -233,8 +238,8 @@ const questions = [
         id: 24,
         text: "Quelle est la guerre la plus courte de l’histoire ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Anglo-Zanzibar", "Six Jours", "Crimée", "Corée"],
-        correctIndex: 0,
+        answers: ["Six Jours", "Anglo-Zanzibar", "Crimée", "Corée"],
+        correctIndex: 1,
         difficulty: DIFFICULTY.MEDIUM,
         information: "Elle a duré 38 minutes."
     },
@@ -242,8 +247,8 @@ const questions = [
         id: 25,
         text: "Quelle est la fosse la plus profonde des océans ?",
         theme: STUDY_DOMAIN.SCIENCES,
-        answers: ["Mariannes", "Tonga", "Philippines", "Atlantique"],
-        correctIndex: 0,
+        answers: ["Tonga", "Philippines", "Mariannes", "Atlantique"],
+        correctIndex: 2,
         difficulty: DIFFICULTY.MEDIUM,
         information: "Le Challenger Deep est le point le plus profond."
     },
@@ -251,8 +256,8 @@ const questions = [
         id: 26,
         text: "Dans quel pays est né Che Guevara ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Argentine", "Cuba", "Mexique", "Chili"],
-        correctIndex: 0,
+        answers: ["Cuba", "Mexique", "Chili", "Argentine"],
+        correctIndex: 3,
         difficulty: DIFFICULTY.MEDIUM,
         information: "Né à Rosario en Argentine."
     },
@@ -279,16 +284,16 @@ const questions = [
 
     {
         id: 29,
-        text: "Qu'est-ce qu'un clavilogiste ?",
+        text: "Un clavilogiste est un amateur de ?",
         theme: STUDY_DOMAIN.HISTOIRE,
-        answers: ["Clavier", "Vin", "Clés anciennes", "Médecin"],
+        answers: ["Clavier", "Vin", "Clés anciennes", "Clavicule"],
         correctIndex: 2,
         difficulty: DIFFICULTY.HARD,
         information: "Du latin clavis signifiant clé."
     },
     {
         id: 30,
-        text: "Qu'est-ce qu'un arénophile ?",
+        text: "Un arénophile aime ?",
         theme: STUDY_DOMAIN.SCIENCES,
         answers: ["Jeux anciens", "Sable", "Gladiator", "Arêtes"],
         correctIndex: 1,
@@ -315,7 +320,7 @@ const questions = [
     },
     {
         id: 33,
-        text: "Que signifie la coulrophobie ?",
+        text: "La coulrophobie est la peur de ?",
         theme: STUDY_DOMAIN.PSYCHOLOGIE,
         answers: ["Clowns", "Eau", "Courir", "Miroirs"],
         correctIndex: 0,
