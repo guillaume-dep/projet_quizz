@@ -1,7 +1,14 @@
 import { ROLE } from "../../../../shared/utils/role.js";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
+
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+
+/* --- CSS --- */
+
 import styles from "../../style/lobby.module.css";
+import { VIEWS } from "../utils/views.js";
 
 const Lobby = ({ players, gameCode, role }) => {
 
@@ -55,7 +62,11 @@ const Lobby = ({ players, gameCode, role }) => {
 
 
     return (
-        <div className={styles.lobby}>
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className={styles.lobby} >
 
             <div className={styles.topBar}>
                 <div className={styles.gameTitle}>
@@ -84,7 +95,7 @@ const Lobby = ({ players, gameCode, role }) => {
 
             {renderStartButton()}
 
-        </div>
+        </motion.div >
     );
 };
 

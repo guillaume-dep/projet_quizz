@@ -1,4 +1,5 @@
 import styles from "../../../style/choiceView.module.css"
+import { motion } from "framer-motion";
 
 const ChoiceView = ({ setMode, canInstall, handleInstall }) => {
 
@@ -21,9 +22,10 @@ const ChoiceView = ({ setMode, canInstall, handleInstall }) => {
     }
 
     return (
-        <div className={styles.choiceView}>
+        <motion.div
+            className={styles.choiceView}>
             {renderButtonInstallation()}
-        </div>
+        </motion.div>
     )
 }
 

@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents.js";
 import { ROLE } from "../../../../shared/utils/role.js";
+import { AnimatePresence, motion } from "framer-motion"
+import { VIEWS } from "../utils/views.js";
+
 
 const Result = ({ role,
     question,
@@ -39,9 +42,22 @@ const Result = ({ role,
     }
 
     return (
-        <div className="Result">
-            {renderView()}
-        </div>
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={VIEWS.RESULT}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 160,
+                    damping: 10
+                }}
+                className="Result"
+            >
+                {renderView()}
+            </motion.div>
+        </AnimatePresence>
     )
 }
 

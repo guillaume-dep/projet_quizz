@@ -2,6 +2,7 @@ import { socket } from "../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
 import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
@@ -398,6 +399,10 @@ const App = () => {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      key={view}
       className={styles.app}
     >
       <Navbar

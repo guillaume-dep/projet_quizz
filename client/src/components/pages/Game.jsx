@@ -5,7 +5,7 @@ import { ROLE } from "../../../../shared/utils/role.js";
 import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 
 const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAnswered, question }) => {
@@ -49,7 +49,12 @@ const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAn
     }
 
     return (
-        <motion.div>
+        <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 30 }}
+            transition={{ duration: 0.3 }}
+        >
             {renderWaitingOrQuestionView()}
         </motion.div>
     )

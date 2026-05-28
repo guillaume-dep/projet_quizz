@@ -1,4 +1,6 @@
 import styles from "../../style/finalResult.module.css"
+import { motion } from "framer-motion"
+
 
 const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
 
@@ -6,7 +8,12 @@ const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRa
     const others = scoresToShow.slice(3);
 
     return (
-        <div className={styles.finalResult}>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className={styles.finalResult}
+        >
 
             <h1>Final Results</h1>
 
@@ -31,46 +38,65 @@ const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRa
                 </div>
             </div>
 
-            {/* PODIUM */}
             <div className={styles.podium}>
 
                 {/* 2nd */}
                 {top3[1] && (
-                    <div className={styles.podiumItem}>
+                    <motion.div
+                        className={styles.podiumItem}
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.5, type: "spring", stiffness: 200, damping: 20 }}
+                    >
                         <div className={styles.label}>
                             <span className={styles.playerName}>{top3[1].name}</span>
                             <span className={styles.playerScore}>{top3[1].score} pts</span>
                         </div>
                         <div className={`${styles.block} ${styles.second}`}>2</div>
-                    </div>
+                    </motion.div>
                 )}
 
                 {/* 1st */}
                 {top3[0] && (
-                    <div className={styles.podiumItem}>
+                    <motion.div
+                        className={styles.podiumItem}
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 2.5, type: "spring", stiffness: 200, damping: 20 }}
+                    >
                         <div className={styles.label}>
                             <span className={styles.playerName}>{top3[0].name}</span>
                             <span className={styles.playerScore}>{top3[0].score} pts</span>
                         </div>
                         <div className={`${styles.block} ${styles.first}`}>1</div>
-                    </div>
+                    </motion.div>
                 )}
 
                 {/* 3rd */}
                 {top3[2] && (
-                    <div className={styles.podiumItem}>
+                    <motion.div
+                        className={styles.podiumItem}
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 20 }}
+                    >
                         <div className={styles.label}>
                             <span className={styles.playerName}>{top3[2].name}</span>
                             <span className={styles.playerScore}>{top3[2].score} pts</span>
                         </div>
                         <div className={`${styles.block} ${styles.third}`}>3</div>
-                    </div>
+                    </motion.div>
                 )}
             </div>
 
             {/* OTHERS */}
             {others.length > 0 && (
-                <div className={styles.others}>
+                <motion.div
+                    className={styles.others}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 4, duration: 0.3 }}
+                >
                     {others.map((p, i) => (
                         <div key={i} className={styles.otherRow}>
                             <span>#{i + 4}</span>
@@ -78,10 +104,10 @@ const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRa
                             <span>{p.score} pts</span>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             )}
 
-        </div>
+        </motion.div>
     );
 }
 
