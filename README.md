@@ -14,6 +14,36 @@
 
 - L'app est installable en tant que PWA grâce à l'utilisation d'un tunnel HTTPS via ngrok pour les contraintes de sécurité. Le manifest et le service worker sont gérés avec VitePWA.
 
+### Installation des dépendances, lancement du serveur et de vite pour dev
+
+```bash
+npm install
+nodemon server/main.js
+npm run dev -- --host 
+```
+
+- `npm run dev -- --host` : transmettre les arguments et exposer sur le réseau
+
+### Mode production du projet :
+
+```bash
+npm run build
+nodemon server/main.js
+ngrok http 8080
+```
+
+### Formatter les fichiers
+
+```bash
+npx prettier --write .
+```
+
+### Verifier le code
+
+```bash
+npx eslint .
+```
+
 ### Points forts 
 
 - Découpage des communications entre client et serveur modulaire et propice à des extensions (musique, leaderboard...)
@@ -52,36 +82,8 @@
 
 ### IA - projet
 
+- Assistance sur le découpage entre client et serveur (découvert via ce projet)
+- Assistance dans la mise en place des premières communications
+- Assistance sur certaines structures de composants React 
 - Aide à la génération du process d'installation de la PWA
 - Génération de certaines parties du CSS
-- Assistances sur certaines structures de composants React
-
-### Installation des dépendances, lancement du serveur et de vite pour dev
-
-```bash
-npm install
-nodemon server/main.js
-npm run dev -- --host 
-```
-
-- `npm run dev -- --host` : transmettre les arguments et exposer sur le réseau
-
-### Mode production du projet :
-
-```bash
-npm run build
-nodemon server/main.js
-ngrok http 8080
-```
-
-### Formatter les fichiers
-
-```bash
-npx prettier --write .
-```
-
-### Verifier le code
-
-```bash
-npx eslint .
-```
