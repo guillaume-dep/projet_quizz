@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-const server = http.createServer(app); // ← app ici
+const server = http.createServer(app);
 
 const io = new IOServer(server, {
     cors: {
