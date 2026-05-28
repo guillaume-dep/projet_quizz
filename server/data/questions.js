@@ -463,7 +463,7 @@ const questions = [
     },
     {
         id: 40,
-        text: "Temps de développement de l'application ?",
+        text: "Quel est le temps de développement de l'application ?",
         theme: STUDY_DOMAIN.PSYCHOLOGIE,
         answers: ["50h", "10h", "40h", "60h"],
         correctIndex: 3,
@@ -472,16 +472,61 @@ const questions = [
         coef: 2,
         information: "Réalisé en 60 heures de développement pendant 14 jours, le projet avait pour but d'apprendre les communications en temps réel avec WebSocket et d'utiliser React. CSS principalement générée par IA mais maquetté au préalable, merci Claude."
     },
-
-    /* 
-    Constructeur de pneu : LEGO 
-    Pays appelé PAYS DES MILLE LACS : FINLANDE/suede/norvège/danemark
-    premier avion lgine commerciale Avion supersonique  : Tupolev TU-144 / concorde/boeing 747/oceanic
-    femme raymond scene de menage : HUGUETTE
-    
-    
-    */
-
+    {
+        id: 41,
+        text: "Quel est le plus grand constructeur mondial de pneus en termes de volume ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Michelin", "Bridgestone", "LEGO", "Goodyear"],
+        correctIndex: 2,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "LEGO produit plus de 300 millions de mini-pneus par an pour ses kits, devançant tous les fabricants automobiles."
+    },
+    {
+        id: 42,
+        text: "Quel pays européen est couramment surnommé le « Pays des mille lacs » ?",
+        theme: STUDY_DOMAIN.GEOGRAPHIE,
+        answers: ["Finlande", "Suède", "Norvège", "Danemark"],
+        correctIndex: 0,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "La Finlande compte environ 188 000 lacs sur son territoire."
+    },
+    {
+        id: 43,
+        text: "Quel aéronef fut le premier avion supersonique à effectuer un vol de ligne commerciale ?",
+        theme: STUDY_DOMAIN.SCIENCES,
+        answers: ["Concorde", "Tupolev TU-144", "Boeing 747", "Oceanic"],
+        correctIndex: 1,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "Le Tupolev TU-144 soviétique a commencé ses vols commerciaux réguliers en décembre 1975, quelques semaines avant le Concorde."
+    },
+    {
+        id: 44,
+        text: "Dans « Retour vers le futur », comment s'appellent les deux enfants de Doc Brown et Clara ?",
+        theme: STUDY_DOMAIN.CINEMA,
+        answers: ["Jules et Verne", "Marty et George", "Albert et Isaac", "Arthur et Charles"],
+        correctIndex: 0,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "Ils ont été nommés ainsi en hommage à l'écrivain de science-fiction préféré du couple, Jules Verne."
+    },
+    {
+        id: 45,
+        text: "Dans Scènes de ménages, comment s'appelle la femme de Raymond ?",
+        theme: STUDY_DOMAIN.CINEMA,
+        answers: ["Liliane", "Marion", "Huguette", "Emma"],
+        correctIndex: 2,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "Huguette et Raymond incarnaient le couple de retraités grincheux de la série."
+    }
 ];
 
 export default questions;
