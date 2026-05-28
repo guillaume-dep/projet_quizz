@@ -1,5 +1,7 @@
 # Architecture du projet
 
+- Architecture basique du projet (incomplète)
+
 ## Serveur
 
 - Controlleurs gérant l'état du jeu à présenter

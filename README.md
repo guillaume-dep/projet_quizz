@@ -30,6 +30,9 @@
 - UI/UX propice pour être joué que ce soit sur téléphone ou ordinateur tout en restant intuitive.
 - Utilisation de librairies/frameworks modernes (React, Socket.IO, Node.js).
 - Gestion du projet avec Git, commits réguliers et cohérents.
+- Variable d'environnements pour le déquveloppement et la production
+- Analyse du code avec Eslint
+- Formatage automatique du code avec Prettier
 
 ### Points à améliorer
 
