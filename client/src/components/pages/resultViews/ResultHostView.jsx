@@ -81,6 +81,7 @@ const ResultHostView = ({
                 question={question}
                 showResults={true}
                 selectedAnswer={question.correctIndex}
+                answerDetails={answerDetails}
             />
 
         </div>

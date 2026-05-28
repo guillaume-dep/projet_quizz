@@ -1,6 +1,6 @@
 import styles from "../../style/questionDisplay.module.css"
 
-const QuestionDisplay = ({ question, showResults, selectedAnswer }) => {
+const QuestionDisplay = ({ question, showResults, selectedAnswer, answerDetails }) => {
 
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = [
@@ -9,6 +9,8 @@ const QuestionDisplay = ({ question, showResults, selectedAnswer }) => {
         styles.green,
         styles.yellow
     ];
+
+    const total = answerDetails?.reduce((acc, v) => acc + v, 0) ?? 0;
 
 
     const setAnswerClass = (index) => {
@@ -32,12 +34,42 @@ const QuestionDisplay = ({ question, showResults, selectedAnswer }) => {
     };
 
     const renderAnswers = () => {
-        return answers.map((answer, index) => (
-            <div key={index} className={setAnswerClass(index)}>
-                {answer}
+        return answers.map((answer, index) => {
+
+            if (showResults) {
+                return renderResultAnswer(answer, index);
+            }
+
+            return (
+                <div key={index} className={setAnswerClass(index)}>
+                    {answer}
+                </div>
+            );
+        });
+    };
+
+    const renderResultAnswer = (answer, index) => {
+        const count = answerDetails?.[index] ?? 0;
+        const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+        const isCorrect = index === correctIndex;
+
+        return (
+            <div key={index} className={`${styles.answerCard} ${colors[index]} ${isCorrect ? styles.correct : styles.faded}`}>
+
+                <span className={styles.answerText}>{answer}</span>
+
+                <div className={styles.barContainer}>
+                    <div
+                        className={styles.barFill}
+                        style={{ height: `${percent}%` }}
+                    />
+                </div>
+
+                <span className={styles.percent}>{percent}%</span>
+
             </div>
-        ));
-    }
+        );
+    };
 
     return (
         <div className={styles.answersGrid}>

@@ -1,31 +1,22 @@
 .answersGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-
     gap: var(--space-3);
-
     width: 100%;
-    min-width: 0;
 }
 
 /* ---------- ANSWERS ---------- */
 
 .answerCard {
     min-height: 160px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: var(--space-3);
-
     border-radius: var(--radius-lg);
-
     color: var(--whiteText);
-
     font-size: var(--text-xl);
     font-weight: 700;
-
     text-align: center;
 }
 
@@ -47,33 +38,76 @@
     background: var(--choice4);
 }
 
-/* ---------- RESULTS ---------- */
+/* ---------- RESULTS (player view) ---------- */
 
 .correct {
-    color: var(--whiteText);
-    background-color: var(--success);
+    outline: 3px solid var(--whiteText);
+    opacity: 1;
 }
 
 .wrong {
-    color: var(--blackText);
-    background-color: var(--error);
-
+    opacity: 0.4;
 }
 
 .faded {
-    opacity: 0.3;
+    opacity: 0.4;
+}
+
+/* ---------- RESULTS (host view) ---------- */
+
+.resultCard {
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+}
+
+.answerText {
+    flex: 1;
+    font-size: var(--text-2xl);
+}
+
+.barContainer {
+    width: 8px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    display: flex;
+    margin: var(--space-2);
+    align-items: flex-end;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.barFill {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 4px;
+    transition: height 0.4s ease;
+}
+
+.percent {
+    width: 48px;
+    text-align: right;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
 /* ---------- MOBILE ---------- */
 
 @media (max-width: 768px) {
-
     .answersGrid {
         grid-template-columns: 1fr;
     }
 
     .answerCard {
-        min-height: 100px;
+        min-height: 80px;
         font-size: var(--text-lg);
+    }
+
+    .resultCard {
+        min-height: 70px;
     }
 }
