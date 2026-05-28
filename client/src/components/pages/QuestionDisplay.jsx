@@ -1,6 +1,6 @@
 import styles from "../../style/questionDisplay.module.css"
 
-const QuestionDisplay = ({ question, showResults, selectedAnswer, answerDetails }) => {
+const QuestionDisplay = ({ question, showResults, selectedAnswer, answerDetails, answerProgress }) => {
 
     const { id, text, theme, answers, correctIndex, value, coef } = question;
     const colors = [
@@ -10,7 +10,7 @@ const QuestionDisplay = ({ question, showResults, selectedAnswer, answerDetails 
         styles.yellow
     ];
 
-    const total = answerDetails?.reduce((acc, v) => acc + v, 0) ?? 0;
+    const total = answerProgress?.total - 1
 
 
     const setAnswerClass = (index) => {
@@ -65,7 +65,7 @@ const QuestionDisplay = ({ question, showResults, selectedAnswer, answerDetails 
                     />
                 </div>
 
-                <span className={styles.percent}>{percent}%</span>
+                <span className={styles.answerCount}>{count} / {total}</span>
 
             </div>
         );

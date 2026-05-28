@@ -65,7 +65,7 @@
 
 .answerText {
     flex: 1;
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
 }
 
 .barContainer {
@@ -87,7 +87,7 @@
     transition: height 0.4s ease;
 }
 
-.percent {
+.answerCount {
     width: 48px;
     text-align: right;
     font-size: var(--text-lg);
@@ -109,5 +109,10 @@
 
     .resultCard {
         min-height: 70px;
+    }
+
+    .answerText {
+        flex: 1;
+        font-size: var(--text-md);
     }
 }

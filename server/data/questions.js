@@ -89,7 +89,7 @@ const questions = [
     },
     {
         id: 7,
-        text: "Avec quelle seule et unique ville Paris est-elle jumelée ?",
+        text: "Avec quelle ville Paris est-elle jumelée ?",
         theme: STUDY_DOMAIN.GEOGRAPHIE,
         answers: ["Londres", "Tokyo", "Berne", "Rome"],
         correctIndex: 3,
@@ -144,7 +144,7 @@ const questions = [
     },
     {
         id: 12,
-        text: "En quelle année le mur de Berlin is-il tombé ?",
+        text: "En quelle année le mur de Berlin est-il tombé ?",
         theme: STUDY_DOMAIN.HISTOIRE,
         answers: ["1985", "1987", "1989", "1991"],
         correctIndex: 2,
