@@ -20,7 +20,6 @@ import styles from "../style/app.module.css";
  */
 const App = () => {
 
-
   /* ================================== */
   /* PWA INSTALL STATE (NEW) - AI MADE  */
   /* ================================== */
@@ -155,13 +154,13 @@ const App = () => {
     }
 
     const handleGameStarted = ({ questionFromServer, totalNumberQuestion }) => {
-      console.log("Nous sommes sur l'écran de partie")
-      console.log(`Question reçu dans game start: ${text}`)
 
       setQuestion(questionFromServer);
       setTotalQuestion(totalNumberQuestion);
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
       setView(VIEWS.GAME);
+      console.log("Nous sommes sur l'écran de partie")
+      console.log(`Question reçu dans game start: ${text}`)
     }
 
     const handleGameOver = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
@@ -222,26 +221,28 @@ const App = () => {
 
   /* ----- Answer ----- */
 
-  /* Useful to retrieve the result from an answer */
   useEffect(() => {
     const handleSubmittedAnswer = (answer) => {
-      console.log("Reponse reçu du serveur à la question : ", answer);
-      setAnswer(answer)
-      setAnswerDetails(prev => prev[answer] += 1)
-    }
+      setAnswer(answer);
+    };
 
-    socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
+    socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer);
 
     return () => {
-      socket.off(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
-    }
-  }, [])
+      socket.off(SK.SUBMITTED_ANSWER, handleSubmittedAnswer);
+    };
+  }, [answerDetails]);
+
+
 
   /* If there's a new question we have to state back to false the hasAnswered field */
+  /*
   useEffect(() => {
+    if (!question) return;
     setAnswer(null);
     setHasAnswered(false);
   }, [question]);
+  */
 
   /* ----- Question ----- */
 
@@ -249,12 +250,14 @@ const App = () => {
     const handleQuestionSent = ({ questionFromServer, questionIndex, numberOfPlayerNotAnswered, numberOfPlayer }) => {
       setView(VIEWS.GAME)
       setAnswer(null);
+      setHasAnswered(false);
       setQuestion(questionFromServer);
       setQuestionNumber(questionIndex)
       setAnswerProgress({
         remaining: numberOfPlayerNotAnswered,
         total: numberOfPlayer
       })
+      setAnswerDetails(Array(questionFromServer.answers.length).fill(0));
 
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
       console.log(`Question reçu dans question: ${text}`)
@@ -303,9 +306,10 @@ const App = () => {
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({ playersScore, isLastQuestion }) => {
+    const handleShowResults = ({ playersScore, isLastQuestion, questionIndex, answerDetails }) => {
       setScores(playersScore)
       setIsLastQuestion(isLastQuestion)
+      setAnswerDetails(answerDetails)
       setView(VIEWS.RESULT)
       console.log("Vu des résultats")
     }

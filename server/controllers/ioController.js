@@ -296,7 +296,8 @@ export default class IOController {
         this.#io.to(code).emit(SK.SHOWN_RESULTS, {
             playersScore: gameManager.getScores(), /* [{name, score, domain} */
             isLastQuestion: gameManager.isLastQuestion(),
-            questionIndex: gameManager.getCurrentQuestionIndex()
+            questionIndex: gameManager.getCurrentQuestionIndex(),
+            answerDetails: gameManager.getAnswerDetails()
         })
     }
 

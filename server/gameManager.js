@@ -313,6 +313,17 @@ export default class GameManager {
         return answer;
     }
 
+    getAnswerDetails() {
+        const details = Array(this.getCurrentQuestion().answers.length).fill(0)
+        this.#players_map.forEach(player => {
+            let lastAnswer = player.getLastAnswer()
+            if (lastAnswer !== null && lastAnswer.answerIndex !== null) {
+                details[lastAnswer.answerIndex] = (details[lastAnswer.answerIndex] ?? 0) + 1;
+            }
+        })
+        return details
+    }
+
     /* ----- Connection ----- */
 
     /**
