@@ -43,6 +43,8 @@
 .correct {
     outline: 3px solid var(--whiteText);
     opacity: 1;
+    background-color: var(--success);
+
 }
 
 .wrong {
@@ -50,6 +52,7 @@
 }
 
 .faded {
+    background-color: grey;
     opacity: 0.4;
 }
 

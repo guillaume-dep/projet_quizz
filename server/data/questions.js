@@ -473,6 +473,14 @@ const questions = [
         information: "Réalisé en 60 heures de développement pendant 14 jours, le projet avait pour but d'apprendre les communications en temps réel avec WebSocket et d'utiliser React. CSS principalement générée par IA mais maquetté au préalable, merci Claude."
     },
 
+    /* 
+    Constructeur de pneu : LEGO 
+    Pays appelé PAYS DES MILLE LACS : FINLANDE/suede/norvège/danemark
+    premier avion lgine commerciale Avion supersonique  : Tupolev TU-144 / concorde/boeing 747/oceanic
+    femme raymond scene de menage : HUGUETTE
+    
+    
+    */
 
 ];
 
