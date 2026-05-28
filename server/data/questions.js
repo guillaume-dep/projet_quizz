@@ -460,7 +460,20 @@ const questions = [
         value: 1,
         coef: 2,
         information: "Du grec ancien, un agélaste désigne une personne qui est incapable de rire ou qui refuse de le faire."
-    }
+    },
+    {
+        id: 40,
+        text: "Temps de développement de l'application ?",
+        theme: STUDY_DOMAIN.PSYCHOLOGIE,
+        answers: ["50h", "10h", "40h", "60h"],
+        correctIndex: 3,
+        difficulty: DIFFICULTY.HARD,
+        value: 1,
+        coef: 2,
+        information: "Réalisé en 60 heures de développement pendant 14 jours, le projet avait pour but d'apprendre les communications en temps réel avec WebSocket et d'utiliser React. CSS principalement générée par IA mais maquetté au préalable, merci Claude."
+    },
+
+
 ];
 
 export default questions;
