@@ -42,22 +42,20 @@ const Result = ({ role,
     }
 
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
-                key={VIEWS.RESULT}
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 160,
-                    damping: 10
-                }}
-                className="Result"
-            >
-                {renderView()}
-            </motion.div>
-        </AnimatePresence>
+        <motion.div
+            key={VIEWS.RESULT}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{
+                type: "spring",
+                stiffness: 160,
+                damping: 10
+            }}
+            className="Result"
+        >
+            {renderView()}
+        </motion.div>
     )
 }
 
