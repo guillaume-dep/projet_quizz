@@ -53,37 +53,20 @@ const App = () => {
 
   /* ================================== */
 
+  /* --- Player --- */
 
   /* The role of the player, either host or player*/
   const [role, setRole] = useState(null);
 
-  /* Game difficulty */
-  const [difficulty, setDifficulty] = useState(null);
-
-  /* Players in game */
-  const [players, setPlayers] = useState([])
-
-  /* Number of answers */
-  const [answerProgress, setAnswerProgress] = useState({
-    remaining: 0,
-    total: 0
-  });
-
-  /* The code of the game which the player is in */
-  const [gameCode, setGameCode] = useState("");
-
-  /* View to display */
-  const [view, setView] = useState(VIEWS.HOME);
-
   /* Answer of the player
-            valid
-            answerIndex
-            correctIndex
-            isCorrect
-            status
-            pointsGained
-            totalScore
-            previousScore          
+          valid
+          answerIndex
+          correctIndex
+          isCorrect
+          status
+          pointsGained
+          totalScore
+          previousScore          
   */
   const [answer, setAnswer] = useState(null);
 
@@ -94,14 +77,28 @@ const App = () => {
 
   const [currentPlayerRank, setCurrentPlayerRank] = useState(0)
 
+  /* --- Game --- */
+
+  /* Game difficulty */
+  const [difficulty, setDifficulty] = useState(null);
+
+  /* The code of the game which the player is in */
+  const [gameCode, setGameCode] = useState("");
+
+  /* Players in game */
+  const [players, setPlayers] = useState([])
+
+  /* Number of answers at the question */
+  const [answerProgress, setAnswerProgress] = useState({
+    remaining: 0,
+    total: 0
+  });
+
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
   /* Global scores to show */
   const [scoresToShow, setScoresToShow] = useState([])
-
-  /* Error message to show from the server */
-  const [errorMessage, setErrorMessage] = useState("");
 
   /* Current question */
   const [question, setQuestion] = useState(null);
@@ -113,6 +110,14 @@ const App = () => {
 
   /* Last question or not */
   const [isLastQuestion, setIsLastQuestion] = useState(false);
+
+  /* --- Others --- */
+
+  /* View to display */
+  const [view, setView] = useState(VIEWS.HOME);
+
+  /* Error message to show from the server */
+  const [errorMessage, setErrorMessage] = useState("");
 
   /* ----- Reset ----- */
   const resetGameState = () => {
