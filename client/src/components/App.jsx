@@ -94,6 +94,9 @@ const App = () => {
     total: 0
   });
 
+  /* A list of given answers index */
+  const [answerDetails, setAnswerDetails] = useState([])
+
   /* Global scores of the game */
   const [scores, setScores] = useState([])
 
@@ -145,25 +148,28 @@ const App = () => {
   useEffect(() => {
     const handleGameCreated = ({ code }) => {
       setView(VIEWS.LOBBY);
+      setGameCode(code);
+
       console.log(`Code depuis app : ${code}`)
       console.log("Host is joining the game !")
-      setGameCode(code);
     }
 
     const handleGameStarted = ({ questionFromServer, totalNumberQuestion }) => {
       console.log("Nous sommes sur l'écran de partie")
+      console.log(`Question reçu dans game start: ${text}`)
+
       setQuestion(questionFromServer);
       setTotalQuestion(totalNumberQuestion);
       const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
-      console.log(`Question reçu dans game start: ${text}`)
       setView(VIEWS.GAME);
     }
 
     const handleGameOver = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
       console.log("Game over")
+      console.log(currentPlayerScore)
+
       setScoresToShow(scoresToShow)
       setScores(scores);
-      console.log(currentPlayerScore)
       setCurrentPlayerScore(currentPlayerScore)
       setCurrentPlayerRank(currentPlayerRank)
       setView(VIEWS.FINAL_RESULT);
@@ -221,6 +227,7 @@ const App = () => {
     const handleSubmittedAnswer = (answer) => {
       console.log("Reponse reçu du serveur à la question : ", answer);
       setAnswer(answer)
+      setAnswerDetails(prev => prev[answer] += 1)
     }
 
     socket.on(SK.SUBMITTED_ANSWER, handleSubmittedAnswer)
@@ -366,6 +373,7 @@ const App = () => {
           questionNumber={questionNumber}
           totalQuestion={totalQuestion}
           answerProgress={answerProgress}
+          answerDetails={answerDetails}
         />
 
       case VIEWS.LEADERBOARD:
