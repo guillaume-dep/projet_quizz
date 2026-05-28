@@ -10,7 +10,8 @@ const ResultHostView = ({
     isLastQuestion,
     questionNumber,
     totalQuestion,
-    answerProgress
+    answerProgress,
+    answerDetails
 }) => {
 
     const handleNewQuestion = () => {
@@ -18,6 +19,8 @@ const ResultHostView = ({
     };
 
     const label = isLastQuestion ? "Final result" : "Next question";
+
+    console.log("Answer details from result: ", answerDetails)
 
     return (
         <div className={styles.hostView}>

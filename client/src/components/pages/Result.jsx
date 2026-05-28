@@ -14,6 +14,7 @@ const Result = ({ role,
     questionNumber,
     totalQuestion,
     answerProgress,
+    answerDetails
 }) => {
 
     const renderView = () => {
@@ -26,6 +27,7 @@ const Result = ({ role,
                 questionNumber={questionNumber}
                 totalQuestion={totalQuestion}
                 answerProgress={answerProgress}
+                answerDetails={answerDetails}
             />
         }
 
