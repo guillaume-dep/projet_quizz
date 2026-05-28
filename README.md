@@ -22,6 +22,7 @@
 - Traitement des déconnexions `host`/`player`
 
 - Moteur de jeu `gameManager` gérant la logique du jeu, le serveur utilise le `gameManager` et envoie une réponse au client.
+- Utilisation d'enums pour gérer les états du jeu, rôle des joueurs...
 
 - Maquettage des écrans (voir screenshots)
 - Variables globales pour le CSS (espacements, couleurs, polices...)
