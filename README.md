@@ -14,6 +14,8 @@
 
 - L'app est installable en tant que PWA grâce à l'utilisation d'un tunnel HTTPS via ngrok pour les contraintes de sécurité. Le manifest et le service worker sont gérés avec VitePWA.
 
+---
+
 ### Installation des dépendances, lancement du serveur et de vite pour dev
 
 ```bash
@@ -44,7 +46,9 @@ npx prettier --write .
 npx eslint .
 ```
 
-### Points forts 
+---
+
+## Points forts 
 
 - Découpage des communications entre client et serveur modulaire et propice à des extensions (musique, leaderboard...)
 - Le serveur est le seul à décider ce que voit le joueur, la machine à état du jeu au lieu de routes permet d'empêcher le joueur de contrôler sa vue et donc d'empêcher de faire des actions indésirables.
@@ -66,19 +70,21 @@ npx eslint .
 - Analyse du code avec Eslint
 - Formatage automatique du code avec Prettier
 
-### Points à améliorer
+## Points à améliorer
 
 - La documentation du code du projet est partielle
 - Découpage nécessaire du code dans certaines fonctions
 - Clean global du code à faire
 
-### Points faibles
+## Points faibles
 
 - Des parties du code sont assez lourdes
 - Manque de vision globale sur le projet au départ ayant entraîné des choix problématiques
 - Le découpage entre `host` et `player` mal défini
 - Gestion d'événements react parfois complexe
 - Absence de tests du code
+
+---
 
 ### IA - projet
 
