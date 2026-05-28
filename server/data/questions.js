@@ -14,7 +14,7 @@ const questions = [
         difficulty: DIFFICULTY.EASY,
         value: 1,
         coef: 2,
-        information: "PHP est un langage serveur créé en 1994 par Rasmus Lerdorf."
+        information: "PHP est un langage serveur créé en 1994 par Rasmus Lerdorf qui voulait auparavant dire Personal Home Page. Rasmus a créé ce langage dans le but de traquer les visites sur son site."
     },
     {
         id: 1,
