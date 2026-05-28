@@ -19,6 +19,7 @@
 - Découpage des communications entre client et serveur modulaire et propice à des extensions (musique, leaderboard...)
 - Le serveur est le seul à décider ce que voit le joueur, la machine à état du jeu au lieu de routes permet d'empêcher le joueur de contrôler sa vue et donc d'empêcher de faire des actions indésirables.
 - Mise en place d'une connexion Websocket côté client (`socket.js`) et un serveur Socket.IO côté backend (`main.js`) qui accepte et gère ces connexions. Ainsi le client et le serveur peuvent maintenant communiquer sur cette connexion.
+- Grammaire cohérente pour les communications entre client et serveur.
 - Traitement des déconnexions `host`/`player`
 
 - Moteur de jeu `gameManager` gérant la logique du jeu, le serveur utilise le `gameManager` et envoie une réponse au client.
