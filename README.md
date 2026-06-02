@@ -83,7 +83,7 @@ npx react-doctor@latest
 
 * Variables d'environnements pour le développement et la production
 
-* Analyse du code avec ESLint
+* Analyse du code avec ESLint et reactDoctor
 
 * Formatage automatique du code avec Prettier
 
