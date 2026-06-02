@@ -4,7 +4,7 @@ import questionsEnLigne from "../data/questionsEnLigne.js"
 
 import { GAME_STATE } from "../utils/gameState.js"
 import { SOCKET_EVENTS as SK } from "../../shared/socketEvents.js"
-import { AnswerStatus } from "../utils/answerStatus.js"
+
 import generateCode from "../utils/utils.js"
 
 /**
@@ -88,7 +88,7 @@ export default class IOController {
         this.#io.to(code).emit(SK.GAME_STARTED, { questionFromServer: gameManager.getCurrentQuestion(), totalNumberQuestion: gameManager.getNumberOfQuestions() });
 
         console.log(`Envoie de la première question à ${code}`)
-        const { id, text, theme, answers, correctIndex, value, coef } = gameManager.getCurrentQuestion();
+        const { text } = gameManager.getCurrentQuestion();
         console.log(`Question : ${text}`)
         this.#io.to(code).emit(SK.QUESTION_SENT, {
             questionFromServer: gameManager.getCurrentQuestion(),
@@ -206,7 +206,6 @@ export default class IOController {
             message: `Player ${player.name} has been disconnected during the game`,
             players: gameManager.getPlayers()
         });
-        /* this.handleResultProcess(gameManager, code); */
     }
 
     handlePlayerLeavingResult(player, code, gameManager) {
