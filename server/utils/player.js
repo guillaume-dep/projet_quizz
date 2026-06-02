@@ -52,6 +52,12 @@ export default class Player {
         this.#score += value;
     }
 
+    /**
+     * Increments player score with a coefficient if the question domain matches the player domain
+     * @param {Number} value
+     * @param {Number} coef 
+     * @param {String} questionDomain 
+     */
     incrementScoreDomain(value, coef, questionDomain) {
         if (this.domain !== questionDomain) {
             this.incrementScore(value);
