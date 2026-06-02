@@ -1,9 +1,12 @@
 import http from 'http';
-import IOController from './controllers/ioController.js';
-import { Server as IOServer } from 'socket.io';
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
+
+/* Server controller */
+import IOController from './controllers/ioController.js';
+import { Server as IOServer } from 'socket.io';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
