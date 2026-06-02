@@ -229,19 +229,6 @@ export default class GameManager {
 
     /* ----- Submitting ----- */
 
-    static invalidAnswer(player = null) {
-        return {
-            valid: false,
-            status: AnswerStatus.NO_ANSWER,
-            answerIndex: null,
-            correctIndex: null,
-            isCorrect: false,
-            pointsGained: 0,
-            previousScore: player?.score ?? 0,
-            totalScore: player?.score ?? 0
-        };
-    }
-
     /**
      * @return {Number} remaining number of player to play
     */
@@ -263,14 +250,8 @@ export default class GameManager {
      * @return {Object} the object with the informations of the answer state
      */
     submitAnswer(socket_id, answerIndex) {
-        if (this.#game_state !== GAME_STATE.QUESTION)
-            return GameManager.invalidAnswer();
-
         const question = this.getCurrentQuestion();
         const player = this.#players_map.get(socket_id);
-
-        if (!player)
-            return GameManager.invalidAnswer();
 
         if (player.hasAnswered()) {
             return player.getLastAnswer();
@@ -342,6 +323,9 @@ export default class GameManager {
 
     /* ----- Scores ----- */
 
+    /**
+     * @returns {Array} the array of every player (data) sorted according to their score
+     */
     getScores() {
         return [...this.#players_map.values()]
             .filter(player => !this.isHost(player.id))
