@@ -1,6 +1,7 @@
+import { ROLE } from "../../../../shared/utils/role.js";
+
 import ResultHostView from "./resultViews/ResultHostView";
 import ResultPlayerView from "./resultViews/ResultPlayerView";
-import { ROLE } from "../../../../shared/utils/role.js";
 import { motion } from "framer-motion"
 
 const Result = ({ role,

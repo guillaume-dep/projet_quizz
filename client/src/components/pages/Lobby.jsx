@@ -1,14 +1,11 @@
-import { ROLE } from "../../../../shared/utils/role.js";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents";
 
+import { ROLE } from "../../../../shared/utils/role.js";
 import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
 
 /* --- CSS --- */
-
 import styles from "../../style/lobby.module.css";
-import { VIEWS } from "../utils/views.js";
 
 const Lobby = ({ players, gameCode, role }) => {
 

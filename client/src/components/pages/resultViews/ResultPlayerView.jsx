@@ -1,24 +1,12 @@
-/* --- CSS --- */
 import { AnswerStatus } from "../../../../../server/utils/answerStatus";
+
+/* --- CSS --- */
 import styles from "../../../style/resultPlayerView.module.css"
 
 const ResultPlayerView = ({ question, answer }) => {
-
     console.log("Reponse du joueur : ", answer)
 
-    /* Answer of the player
-            valid
-            answerIndex
-            correctIndex
-            isCorrect
-            status
-            pointsGained
-            totalScore
-            previousScore          
-  */
-
     const status = answer?.status ?? AnswerStatus.NO_ANSWER;
-    const isNoAnswer = !answer || status === AnswerStatus.NO_ANSWER;
 
     const renderAnswer = () => {
         switch (status) {

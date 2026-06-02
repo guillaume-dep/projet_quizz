@@ -1,8 +1,9 @@
 import QuestionDisplay from "../QuestionDisplay.jsx";
 import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
+
+/* --- CSS --- */
 import styles from "../../../style/host_view.module.css";
-import { useEffect, useRef } from "react";
 
 const ResultHostView = ({
     question,

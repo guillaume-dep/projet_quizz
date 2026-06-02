@@ -364,7 +364,6 @@ const App = () => {
           setHasAnswered={setHasAnswered}
           gameCode={gameCode}
           answerProgress={answerProgress}
-          setAnswer={setAnswer}
           question={question}
         />
 
@@ -389,7 +388,6 @@ const App = () => {
 
       case VIEWS.FINAL_RESULT:
         return <FinalResult
-          scores={scores}
           scoresToShow={scoresToShow}
           currentPlayerScore={currentPlayerScore}
           currentPlayerRank={currentPlayerRank}

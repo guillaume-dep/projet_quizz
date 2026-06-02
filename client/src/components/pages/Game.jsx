@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
 import { socket } from "../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../shared/socketEvents.js";
 import { ROLE } from "../../../../shared/utils/role.js";
+
 import Host_view from "./gameViews/Host_view.jsx"
 import Player_view from "./gameViews/Player_view.jsx"
 import WaitingScreen from "./WaitingScreen.jsx";
-import { AnimatePresence, motion } from "framer-motion"
 
+import { motion } from "framer-motion"
 
-const Game = ({ role, gameCode, answerProgress, setAnswer, hasAnswered, setHasAnswered, question }) => {
+const Game = ({ role, gameCode, answerProgress, hasAnswered, setHasAnswered, question }) => {
 
     const isPlayer = role === ROLE.PLAYER;
 

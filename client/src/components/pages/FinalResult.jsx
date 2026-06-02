@@ -1,8 +1,9 @@
-import styles from "../../style/finalResult.module.css"
 import { motion } from "framer-motion"
 
+/* --- CSS --- */
+import styles from "../../style/finalResult.module.css"
 
-const FinalResult = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
+const FinalResult = ({ scoresToShow, currentPlayerScore, currentPlayerRank }) => {
 
     const top3 = scoresToShow.slice(0, 3);
     const others = scoresToShow.slice(3);
