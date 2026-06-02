@@ -1,9 +1,11 @@
 import { socket } from "../socket/socket.js";
+import { useEffect, useState } from "react";
+
 import { SOCKET_EVENTS as SK } from "../../../shared/socketEvents.js";
 import { VIEWS } from "./utils/views.js";
+
 import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+
 import Result from "./pages/Result.jsx"
 import Game from "./pages/Game.jsx"
 import Lobby from "./pages/Lobby.jsx"
@@ -73,8 +75,10 @@ const App = () => {
   /* Useful to know if a player hasAnswered */
   const [hasAnswered, setHasAnswered] = useState(false);
 
+  /* The current score of the player */
   const [currentPlayerScore, setCurrentPlayerScore] = useState(0)
 
+  /* The current rank of the player */
   const [currentPlayerRank, setCurrentPlayerRank] = useState(0)
 
   /* --- Game --- */
@@ -109,6 +113,7 @@ const App = () => {
   /* CurrentIndex question */
   const [questionNumber, setQuestionNumber] = useState(0)
 
+  /* Number of questions to play with */
   const [totalQuestion, setTotalQuestion] = useState(null)
 
   /* Last question or not */
@@ -142,7 +147,7 @@ const App = () => {
   /* ----- Game ----- */
 
   /* 
-  We need to create the link between the server and the app only one time
+  We need register socket event listeners once on mount
   That's why there's no dependencies ([])
   */
   useEffect(() => {
@@ -158,22 +163,23 @@ const App = () => {
 
       setQuestion(questionFromServer);
       setTotalQuestion(totalNumberQuestion);
-      const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
+      const { text } = questionFromServer;
       setView(VIEWS.GAME);
+
       console.log("Nous sommes sur l'écran de partie")
       console.log(`Question reçu dans game start: ${text}`)
     }
 
     const handleGameOver = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
-      console.log("Game over")
-      console.log(currentPlayerScore)
-
       setScoresToShow(scoresToShow)
       setScores(scores);
       setCurrentPlayerScore(currentPlayerScore)
       setCurrentPlayerRank(currentPlayerRank)
       setView(VIEWS.FINAL_RESULT);
       setDifficulty(null);
+
+      console.log("Game over")
+      console.log(currentPlayerScore)
     }
 
     socket.on(SK.GAME_CREATED, handleGameCreated)
@@ -182,7 +188,7 @@ const App = () => {
 
 
     return () => {
-      /* Turning off the listening after the game is create (only for this socket) */
+      /* Turning off the listening after dismounting */
       socket.off(SK.GAME_CREATED, handleGameCreated);
       socket.off(SK.GAME_STARTED, handleGameStarted);
       socket.off(SK.GAME_OVER, handleGameOver);
@@ -200,13 +206,15 @@ const App = () => {
 
     const handlePlayerLeft = ({ message, players }) => {
       setPlayers(players);
+
       console.log(message);
     }
 
     const handleHostLeft = ({ message }) => {
-      console.log("HOST_LEFT reçu :", message);
       resetGameState()
       setView(VIEWS.HOME);
+
+      console.log("HOST_LEFT reçu :", message);
     }
 
     socket.on(SK.PLAYER_JOINED, handlePlayerJoined)
@@ -234,17 +242,6 @@ const App = () => {
     };
   }, [answerDetails]);
 
-
-
-  /* If there's a new question we have to state back to false the hasAnswered field */
-  /*
-  useEffect(() => {
-    if (!question) return;
-    setAnswer(null);
-    setHasAnswered(false);
-  }, [question]);
-  */
-
   /* ----- Question ----- */
 
   useEffect(() => {
@@ -260,7 +257,7 @@ const App = () => {
       })
       setAnswerDetails(Array(questionFromServer.answers.length).fill(0));
 
-      const { id, text, theme, answers, correctIndex, value, coef } = questionFromServer;
+      const { text } = questionFromServer;
       console.log(`Question reçu dans question: ${text}`)
     }
 
@@ -273,11 +270,12 @@ const App = () => {
 
   useEffect(() => {
     const handleProgress = ({ numberOfPlayerNotAnswered, numberOfPlayer }) => {
-      console.log("ANSWER_PROGRESS reçu :", numberOfPlayerNotAnswered, numberOfPlayer);
       setAnswerProgress({
         remaining: numberOfPlayerNotAnswered,
         total: numberOfPlayer
       });
+
+      console.log("ANSWER_PROGRESS reçu :", numberOfPlayerNotAnswered, numberOfPlayer);
     };
 
     socket.on(SK.ANSWER_PROGRESS, handleProgress);
@@ -291,10 +289,11 @@ const App = () => {
 
   useEffect(() => {
     const handleShowLeaderboard = ({ scores, scoresToShow, currentPlayerScore, currentPlayerRank }) => {
-      console.log("Leaderboard reçu :", scores, scoresToShow);
       setScoresToShow(scoresToShow);
       setCurrentPlayerScore(currentPlayerScore)
       setCurrentPlayerRank(currentPlayerRank)
+
+      console.log("Leaderboard reçu :", scores, scoresToShow);
     }
 
     socket.on(SK.SHOWN_LEADERBOARD, handleShowLeaderboard)
@@ -312,6 +311,7 @@ const App = () => {
       setIsLastQuestion(isLastQuestion)
       setAnswerDetails(answerDetails)
       setView(VIEWS.RESULT)
+
       console.log("Vu des résultats")
     }
 
@@ -326,8 +326,9 @@ const App = () => {
 
   useEffect(() => {
     const handleError = ({ message }) => {
-      console.error(message);
       setErrorMessage(message)
+
+      console.error(message);
     };
 
     socket.on(SK.ERROR, handleError)

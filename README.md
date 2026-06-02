@@ -47,8 +47,10 @@ npx prettier --write .
 
 ```bash
 npx eslint .
+npx react-doctor@latest
 ```
-
+* permet de tester la qualité du code Javascript/React
+* 
 ---
 
 ## Points forts
