@@ -36,7 +36,12 @@ export default class GameManager {
 
     /* ----- Questions ----- */
 
-
+    /**
+     * Return the minimum between the length of questions and the number of questions entered
+     * @param {Number} numberOfQuestionsToPlayWith 
+     * @param {Array} questions 
+     * @return {Number} 
+     */
     computeSafeNbQuestions(numberOfQuestionsToPlayWith, questions) {
         return Math.min(
             numberOfQuestionsToPlayWith ?? questions.length,
@@ -44,28 +49,23 @@ export default class GameManager {
         );
     }
 
+    /**
+     * Return the array of questions according to a difficulty
+     * @param {Array} questions 
+     * @param {String} difficulty 
+     * @return {Array} 
+     */
     filterByDifficulty(questions, difficulty) {
         return questions.filter(
             (question) => question.difficulty === difficulty
         );
     }
 
-    fallbackQuestions(questions) {
-        return shuffle(questions
-            .slice(0, this.#numberOfQuestionsToPlayWith))
-    }
-
     buildQuestions(questions, difficulty) {
         const filtered = shuffle(this.filterByDifficulty(questions, difficulty))
 
-        if (filtered.length === 0) {
-            console.warn(`Aucune question pour la difficulté : ${difficulty}`);
-            return this.fallbackQuestions(questions);
-        }
-
         return shuffle(filtered
             .slice(0, this.#numberOfQuestionsToPlayWith))
-
     }
 
     /* ----- State ----- */
