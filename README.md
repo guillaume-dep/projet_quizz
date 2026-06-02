@@ -50,7 +50,7 @@ npx eslint .
 npx react-doctor@latest
 ```
 * permet de tester la qualité du code Javascript/React
-
+* Score de 88/100 avec React Doctor
 ---
 
 ## Points forts
