@@ -306,7 +306,7 @@ const App = () => {
   /* ----- Results ----- */
 
   useEffect(() => {
-    const handleShowResults = ({ playersScore, isLastQuestion, questionIndex, answerDetails }) => {
+    const handleShowResults = ({ playersScore, isLastQuestion, answerDetails }) => {
       setScores(playersScore)
       setIsLastQuestion(isLastQuestion)
       setAnswerDetails(answerDetails)

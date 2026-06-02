@@ -1,8 +1,9 @@
 import { STUDY_DOMAIN } from "../../../../../server/utils/studyDomain";
 import { DIFFICULTY } from "../../utils/difficulty.js"
-import styles from "../../../style/formView.module.css";
 import { motion } from "framer-motion";
 
+/* --- CSS --- */
+import styles from "../../../style/formView.module.css";
 
 const FormView = ({
     mode,

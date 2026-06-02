@@ -1,6 +1,9 @@
-import QuestionDisplay from "../QuestionDisplay";
 import { socket } from "../../../socket/socket.js";
 import { SOCKET_EVENTS as SK } from "../../../../../shared/socketEvents.js";
+
+import QuestionDisplay from "../QuestionDisplay";
+
+/* --- CSS --- */
 import styles from "../../../style/host_view.module.css"
 
 const Host_view = ({ question, gameCode, answerProgress }) => {

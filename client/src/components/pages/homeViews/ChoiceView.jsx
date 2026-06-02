@@ -1,5 +1,7 @@
-import styles from "../../../style/choiceView.module.css"
 import { motion } from "framer-motion";
+
+/* --- CSS --- */
+import styles from "../../../style/choiceView.module.css"
 
 const ChoiceView = ({ setMode, canInstall, handleInstall }) => {
 
