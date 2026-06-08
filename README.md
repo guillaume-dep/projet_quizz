@@ -20,12 +20,20 @@
 ---
 
 ## Vidéo de présentation du jeu
+
+* La vidéo est une présentation d'une partie sur ordinateur avec :
+  * Ecran de l'host de la partie
+  * Ecran du joueur
+ 
 https://github.com/user-attachments/assets/d0ad6dcd-e3e0-46c2-a3c3-3316228cd099
 
-### Ecran d'attente 
+## Ecran d'attente 
+* Ecran d'attente qu'un joueur voit lorsqu'il attend que les autres joueurs repondent
+
 https://github.com/user-attachments/assets/b0532fd2-de99-4ab9-857e-2cd7ad92b873
 
-### Ecran de résulat 
+## Ecran de résulat 
+* Ecran des résultats de la partie
 <img width="2560" height="1322" alt="Image" src="https://github.com/user-attachments/assets/9e6f4b69-dfe9-4286-8a31-623f79e31262" />
 
 ---
