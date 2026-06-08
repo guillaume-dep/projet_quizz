@@ -19,6 +19,17 @@
 
 ---
 
+## Vidéo de présentation du jeu
+https://github.com/user-attachments/assets/d0ad6dcd-e3e0-46c2-a3c3-3316228cd099
+
+### Ecran d'attente 
+https://github.com/user-attachments/assets/b0532fd2-de99-4ab9-857e-2cd7ad92b873
+
+### Ecran de résulat 
+<img width="2560" height="1322" alt="Image" src="https://github.com/user-attachments/assets/9e6f4b69-dfe9-4286-8a31-623f79e31262" />
+
+---
+
 ### Installation des dépendances, lancement du serveur et de vite pour dev
 
 ```bash
